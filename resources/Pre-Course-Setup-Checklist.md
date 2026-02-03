@@ -22,7 +22,7 @@
 ### Step 1: n8n Account Setup
 - [ ] **Created n8n cloud account** at [app.n8n.cloud/register](https://app.n8n.cloud/register)
 - [ ] **Created dedicated workshop project** (named "W&M AI Workshop" or similar)
-- [ ] **Added instructor as user** (cayman@caiyman.ai) to workshop project only
+- [ ] **Added instructor as user** (cayman@agenticassets.ai) to workshop project only
 - [ ] **Verified login** and project access
 
 **❗ Important:** Keep your workshop project separate from personal workflows. The instructor will only access your workshop project.
@@ -96,7 +96,7 @@
 
 ### Backup Plans
 - [ ] **Mobile hotspot** available if needed
-- [ ] **Contact information** saved: cayman@caiyman.ai
+- [ ] **Contact information** saved: cayman@agenticassets.ai
 
 ---
 
@@ -140,7 +140,7 @@
 
 ### Before Workshop
 **Technical Setup Issues:**
-- Email: cayman@caiyman.ai
+- Email: cayman@agenticassets.ai
 - Subject: "W&M Workshop Setup - [Your Name]"
 - Include: Screenshots of error messages
 
@@ -189,6 +189,6 @@
 
 ---
 
-**Questions? Contact:** cayman@caiyman.ai
+**Questions? Contact:** cayman@agenticassets.ai
 
-*© 2026 Caiyman AI LLC. All rights reserved.*
+*© 2026 Agentic Assets LLC. All rights reserved.*

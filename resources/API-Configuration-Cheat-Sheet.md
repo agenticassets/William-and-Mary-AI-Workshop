@@ -427,7 +427,7 @@ Access Token: [Your bot token from BotFather]
 
 - **n8n Community:** https://community.n8n.io/
 - **Documentation:** https://docs.n8n.io/
-- **Course Support:** cayman@caiyman.ai
+- **Course Support:** cayman@agenticassets.ai
 
 ---
 

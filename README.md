@@ -1,7 +1,7 @@
 # AI Agents for Real Estate Professionals: William & Mary Executive Education Program
 
 **Instructor:** Dr. Cayman Seagraves
-**Learn more about:** [Caiyman AI - AI Solutions & Services](https://www.caiyman.ai/) | [Academic Profile & Research](https://www.caymanseagraves.com/)
+**Learn more about:** [Agentic Assets - AI Solutions & Services](https://www.agenticassets.ai/) | [Academic Profile & Research](https://www.caymanseagraves.com/)
 
 ---
 
@@ -74,7 +74,7 @@ By the end of this intensive 3-hour workshop, you will:
    - The instructor will NOT have access to your personal workflows—only this workshop project
 3. **Add course instructor as a user** (optional, for live support):
    - Click the three dots in the bottom left corner → Settings
-   - Go to the Users tab and invite: cayman@caiyman.ai
+   - Go to the Users tab and invite: cayman@agenticassets.ai
 
 ![n8n Project and Credentials Setup](Images/N8N%20Add%20User%20In%20Settings.png)
 
@@ -196,7 +196,7 @@ By the end of this intensive 3-hour workshop, you will:
 - **n8n Community Forum:** [https://community.n8n.io/](https://community.n8n.io/)
 
 ### Instructor & Resources
-- **Caiyman AI Website:** [https://www.caiyman.ai/](https://www.caiyman.ai/)
+- **Agentic Assets Website:** [https://www.agenticassets.ai/](https://www.agenticassets.ai/)
 - **Dr. Seagraves Academic Profile:** [https://www.caymanseagraves.com/](https://www.caymanseagraves.com/)
 
 ---
@@ -234,11 +234,11 @@ After completing this workshop, you'll have the foundational knowledge and worki
 ## 📧 Contact & Support
 
 For questions or technical support before the workshop:
-**Email:** cayman@caiyman.ai
-**Website:** [https://www.caiyman.ai/](https://www.caiyman.ai/)
+**Email:** cayman@agenticassets.ai
+**Website:** [https://www.agenticassets.ai/](https://www.agenticassets.ai/)
 
 ---
 
 *This intensive workshop is designed to launch your AI agent journey. You'll leave with working agents, proven patterns, and the confidence to expand AI across your real estate business.*
 
-© 2025 Caiyman AI LLC. All rights reserved.
+© 2025 Agentic Assets LLC. All rights reserved.

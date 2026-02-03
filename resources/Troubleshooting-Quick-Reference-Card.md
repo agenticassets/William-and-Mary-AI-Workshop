@@ -212,7 +212,7 @@ Anthropic: sk-ant-xxx...
 4. **Mention what you've already tried**
 
 ### Resources for Help
-- **Course Instructor:** cayman@caiyman.ai
+- **Course Instructor:** cayman@agenticassets.ai
 - **n8n Community:** https://community.n8n.io/
 - **n8n Documentation:** https://docs.n8n.io/
 - **Course Forum:** [Link to be provided]
@@ -265,4 +265,4 @@ HTTP Request → IF (success?)
 
 *Keep this card handy during development and always test thoroughly before going live!*
 
-© 2025 Caiyman AI LLC. All rights reserved. 
+© 2025 Agentic Assets LLC. All rights reserved. 

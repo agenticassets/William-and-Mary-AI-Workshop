@@ -71,7 +71,7 @@ This folder contains supporting materials for the **AI Agents for Real Estate Pr
 
 ### Getting Help
 **Pre-Workshop Questions:**
-- Email: cayman@caiyman.ai
+- Email: cayman@agenticassets.ai
 - Subject: "W&M Workshop Prep - [Your Name]"
 - Include: Specific resource questions or technical issues
 
@@ -80,7 +80,7 @@ This folder contains supporting materials for the **AI Agents for Real Estate Pr
 - Real-time Q&A for immediate assistance
 
 **Post-Workshop:**
-- Email: cayman@caiyman.ai
+- Email: cayman@agenticassets.ai
 - Subject: "W&M Workshop Follow-Up - [Your Name]"
 - Include: Questions about workflow implementation or customization
 
@@ -103,6 +103,6 @@ This folder contains supporting materials for the **AI Agents for Real Estate Pr
 
 **📅 Workshop:** William & Mary Executive Education Program
 **⏰ Duration:** 3 hours (1.5 hrs lecture/demo + 1.5 hrs hands-on)
-**👨‍🏫 Instructor:** Dr. Cayman Seagraves, Caiyman AI LLC
+**👨‍🏫 Instructor:** Dr. Cayman Seagraves, Agentic Assets LLC
 
-*© 2026 Caiyman AI LLC. All rights reserved.*
+*© 2026 Agentic Assets LLC. All rights reserved.*

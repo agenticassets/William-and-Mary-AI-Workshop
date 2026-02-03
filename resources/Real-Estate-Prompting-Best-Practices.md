@@ -959,4 +959,4 @@ Provide actionable insights for each scenario.
 
 *Remember: Great prompting is an iterative process. Start with a clear foundation and refine based on results. The complexity of your system prompt should match the complexity of your task - not every prompt needs to be extensive.*
 
-© 2025 Caiyman AI LLC. All rights reserved. 
+© 2025 Agentic Assets LLC. All rights reserved. 
