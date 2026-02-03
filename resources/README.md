@@ -11,7 +11,7 @@ This folder contains supporting materials for the **AI Agents for Real Estate Pr
 - **🔑 API-Configuration-Cheat-Sheet.md** - Detailed setup guide for required services
 - **📋 Pre-Course-Setup-Checklist.md** - Complete preparation checklist for workshop success
 - **🔧 Troubleshooting-Quick-Reference-Card.md** - Emergency fixes and common solutions
-- **🤖 n8n-assistant-system-prompt.md** - System prompt for n8n Multi-Agent Workflow Architect
+- **🤖 N8N-Assistant-System-Prompt.md** - System prompt for n8n Multi-Agent Workflow Architect
 
 ### ✅ Learning Materials
 - **💡 Real-Estate-Prompting-Best-Practices.md** - Advanced prompting techniques using REAL framework

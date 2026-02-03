@@ -27,7 +27,7 @@
 
 **❗ Important:** Keep your workshop project separate from personal workflows. The instructor will only access your workshop project.
 
-![n8n User Settings](../Images/n8n%20add%20user%20in%20settings.png)
+![n8n User Settings](../Images/N8N%20Add%20User%20In%20Settings.png)
 
 ### Step 2: Required API Keys & Service Accounts
 
@@ -69,7 +69,7 @@
 - [ ] **Descriptive names used** (e.g., "OpenRouter Workshop", "Firecrawl Workshop")
 - [ ] **Connection tests passed** for each credential
 
-![n8n Credentials](../Images/n8n%20project%20and%20credentials.png)
+![n8n Credentials](../Images/N8N%20Project%20And%20Credentials.png)
 
 ---
 

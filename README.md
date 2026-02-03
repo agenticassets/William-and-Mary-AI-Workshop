@@ -20,7 +20,7 @@ This focused workshop introduces you to AI agents and their practical applicatio
 ## 👨‍💼 Meet Your Instructor
 
 <div align="center">
-<img src="Images/cayman-seagraves-wide.png" alt="Dr. Cayman Seagraves" width="600" style="border-radius: 10px; margin: 20px 0;">
+<img src="Images/Cayman-Seagraves-Wide.png" alt="Dr. Cayman Seagraves" width="600" style="border-radius: 10px; margin: 20px 0;">
 
 **Dr. Cayman Seagraves**
 *Co-founder, [Agentic Assets LLC](https://www.agenticassets.ai/)*
@@ -76,7 +76,7 @@ By the end of this intensive 3-hour workshop, you will:
    - Click the three dots in the bottom left corner → Settings
    - Go to the Users tab and invite: cayman@caiyman.ai
 
-![n8n Project and Credentials Setup](Images/n8n%20add%20user%20in%20settings.png)
+![n8n Project and Credentials Setup](Images/N8N%20Add%20User%20In%20Settings.png)
 
 **Step 2: API Keys & Credentials Setup**
 
@@ -100,7 +100,7 @@ By the end of this intensive 3-hour workshop, you will:
    - Test each credential to ensure connectivity
    - **Security Note:** Credentials are project-specific and encrypted by n8n
 
-![n8n Project and Credentials Setup](Images/n8n%20project%20and%20credentials.png)
+![n8n Project and Credentials Setup](Images/N8N%20Project%20And%20Credentials.png)
 
 **Important:** Completing this setup before the workshop will ensure you can focus on learning rather than troubleshooting!
 
@@ -159,14 +159,14 @@ By the end of this intensive 3-hour workshop, you will:
 - **"AI Agents: The Real Estate Revolution"** - Comprehensive 15-slide presentation covering AI fundamentals, agent architecture, real estate use cases, and ROI frameworks
 
 ### Resource Library
-**All resources are available in the [resources folder](resources/):**
+**All resources are available in the [Resources folder](Resources/):**
 
 #### Learning & Setup
-- 📋 [**Pre-Course-Setup-Checklist.md**](resources/Pre-Course-Setup-Checklist.md) - Complete preparation checklist
-- 🔑 [**API-Configuration-Cheat-Sheet.md**](resources/API-Configuration-Cheat-Sheet.md) - Setup guide for all required services
-- 💡 [**Real-Estate-Prompting-Best-Practices.md**](resources/Real-Estate-Prompting-Best-Practices.md) - Advanced prompting techniques for optimal agent performance
-- 🔧 [**Troubleshooting-Quick-Reference-Card.md**](resources/Troubleshooting-Quick-Reference-Card.md) - Emergency fixes and common solutions
-- 🤖 [**n8n-assistant-system-prompt.md**](resources/n8n-assistant-system-prompt.md) - System prompt reference for n8n multi-agent workflows
+- 📋 [**Pre-Course-Setup-Checklist.md**](Resources/Pre-Course-Setup-Checklist.md) - Complete preparation checklist
+- 🔑 [**API-Configuration-Cheat-Sheet.md**](Resources/API-Configuration-Cheat-Sheet.md) - Setup guide for all required services
+- 💡 [**Real-Estate-Prompting-Best-Practices.md**](Resources/Real-Estate-Prompting-Best-Practices.md) - Advanced prompting techniques for optimal agent performance
+- 🔧 [**Troubleshooting-Quick-Reference-Card.md**](Resources/Troubleshooting-Quick-Reference-Card.md) - Emergency fixes and common solutions
+- 🤖 [**N8N-Assistant-System-Prompt.md**](Resources/N8N-Assistant-System-Prompt.md) - System prompt reference for n8n multi-agent workflows
 
 ---
 
@@ -225,7 +225,7 @@ After completing this workshop, you'll have the foundational knowledge and worki
 - [ ] (Optional) Set up Google Cloud APIs for email/spreadsheet integration
 - [ ] Test all API credentials in n8n
 - [ ] Download and install Zoom
-- [ ] Review [Pre-Course-Setup-Checklist.md](resources/Pre-Course-Setup-Checklist.md) for detailed instructions
+- [ ] Review [Pre-Course-Setup-Checklist.md](Resources/Pre-Course-Setup-Checklist.md) for detailed instructions
 
 ⚠️ **IMPORTANT:** Complete technical setup before the workshop to maximize your hands-on learning time!
 
