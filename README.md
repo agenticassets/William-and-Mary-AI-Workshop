@@ -6,7 +6,7 @@
 
 **Program:** William & Mary Executive Education Program  
 **Time:** 3 hours total  
-**Format:** Virtual Training - [Google Meet Link](https://meet.google.com/uxp-mtif-cwo) 
+**Format:** Virtual Training - [Google Meet Link](https://meet.google.com/uxp-mtif-cwo)  
 **Platform:** n8n Cloud Platform  
 **Target Audience:** Business professionals
 
