@@ -21,11 +21,11 @@ This focused workshop introduces you to AI agents and their practical applicatio
 
 <div align="center">
 
-![Dr. Cayman Seagraves](Images/Cayman-Seagraves-Wide.png)
+![Dr Cayman Seagraves](Images/Cayman-Seagraves-Wide.png)
 
 **Dr. Cayman Seagraves**
-*Co-founder, [Agentic Assets LLC](https://www.agenticassets.ai/)*
-*Assistant Professor of Finance and Real Estate, The University of Tulsa*
+*Co-founder, [Agentic Assets LLC](https://www.agenticassets.ai/)*  
+*Assistant Professor of Finance and Real Estate, The University of Tulsa*  
 📧 **Contact:** cayman@agenticassets.ai
 
 Specializing in AI transformation for real estate and finance industries, with expertise in multi-agent systems, automation, and strategic AI implementation. Dr. Seagraves brings both academic rigor and practical industry experience to help real estate professionals leverage cutting-edge AI technology for competitive advantage.
