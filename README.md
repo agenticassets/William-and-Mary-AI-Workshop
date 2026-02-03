@@ -6,7 +6,7 @@
 
 **Program:** William & Mary Executive Education Program  
 **Time:** 3 hours total  
-**Format:** Virtual Training via Zoom  
+**Format:** Virtual Training 
 **Platform:** n8n Cloud Platform  
 **Target Audience:** Business professionals
 
@@ -58,7 +58,6 @@ By the end of this intensive 3-hour workshop, you will:
 ### Technical Requirements
 - **Laptop** with a web browser (Chrome, Safari, Firefox, or Edge)
 - **Stable internet connection** (Zoom + n8n platform access)
-- **Zoom** installed ([Download Zoom](https://zoom.us/download))
 
 ### Technical Setup Checklist
 
