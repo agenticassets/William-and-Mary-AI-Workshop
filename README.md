@@ -5,7 +5,7 @@
 ## 📋 Course Overview
 
 **Program:** William & Mary Executive Education Program  
-**Time:** 3 hours total  
+**Date/Time:** Friday, February 6 · 8:30 – 12:00am (EST)  
 **Format:** Virtual Training - [Google Meet Link](https://meet.google.com/uxp-mtif-cwo)  
 **Platform:** n8n Cloud Platform  
 **Target Audience:** Business professionals
