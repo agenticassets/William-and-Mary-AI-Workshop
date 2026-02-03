@@ -1,17 +1,17 @@
 # AI Agents for Real Estate Professionals: William & Mary Executive Education Program
 
-**Instructor:** Dr. Cayman Seagraves
-**Learn more about:** [Agentic Assets - AI Solutions & Services](https://www.agenticassets.ai/) | [Academic Profile & Research](https://www.caymanseagraves.com/)
+**Instructor:** Dr. Cayman Seagraves    
+**Learn more about:** [Agentic Assets](https://www.agenticassets.ai/) | [Academic Profile & Research](https://www.caymanseagraves.com/)  
 
 ---
 
 ## 📋 Course Overview
 
-**Program:** William & Mary Executive Education Program
-**Time:** 3 hours total
-**Format:** Virtual Training via Zoom
-**Platform:** n8n Cloud Platform
-**Target Audience:** Real estate executives, investment professionals, and business leaders
+**Program:** William & Mary Executive Education Program  
+**Time:** 3 hours total  
+**Format:** Virtual Training via Zoom  
+**Platform:** n8n Cloud Platform  
+**Target Audience:** Real estate executives, investment professionals, and business leaders  
 
 This focused workshop introduces you to AI agents and their practical applications in real estate. You'll move from foundational concepts directly to hands-on agent building, culminating in deploying a working Real Estate Market Expert Agent powered by live market data.
 
@@ -22,10 +22,10 @@ This focused workshop introduces you to AI agents and their practical applicatio
 <div align="center">
 <img src="Images/Cayman-Seagraves-Wide.png" alt="Dr. Cayman Seagraves" width="600" style="border-radius: 10px; margin: 20px 0;">
 
-**Dr. Cayman Seagraves**
-*Co-founder, [Agentic Assets LLC](https://www.agenticassets.ai/)*
-*Assistant Professor of Finance and Real Estate, The University of Tulsa*
-📧 **Contact:** cayman@agenticassets.ai
+**Dr. Cayman Seagraves**  
+*Co-founder, [Agentic Assets LLC](https://www.agenticassets.ai/)*  
+*Assistant Professor of Finance and Real Estate, The University of Tulsa*  
+📧 **Contact:** cayman@agenticassets.ai  
 
 Specializing in AI transformation for real estate and finance industries, with expertise in multi-agent systems, automation, and strategic AI implementation. Dr. Seagraves brings both academic rigor and practical industry experience to help real estate professionals leverage cutting-edge AI technology for competitive advantage.
 
@@ -76,7 +76,7 @@ By the end of this intensive 3-hour workshop, you will:
    - Click the three dots in the bottom left corner → Settings
    - Go to the Users tab and invite: cayman@agenticassets.ai
 
-![n8n Project and Credentials Setup](Images/N8N%20Add%20User%20In%20Settings.png)
+![n8n Project and Credentials Setup](Images/n8n-add-user-in-settings.png)
 
 **Step 2: API Keys & Credentials Setup**
 
@@ -100,7 +100,7 @@ By the end of this intensive 3-hour workshop, you will:
    - Test each credential to ensure connectivity
    - **Security Note:** Credentials are project-specific and encrypted by n8n
 
-![n8n Project and Credentials Setup](Images/N8N%20Project%20And%20Credentials.png)
+![n8n Project and Credentials Setup](Images/n8n-project-and-credentials.png)
 
 **Important:** Completing this setup before the workshop will ensure you can focus on learning rather than troubleshooting!
 
@@ -234,8 +234,8 @@ After completing this workshop, you'll have the foundational knowledge and worki
 ## 📧 Contact & Support
 
 For questions or technical support before the workshop:
-**Email:** cayman@agenticassets.ai
-**Website:** [https://www.agenticassets.ai/](https://www.agenticassets.ai/)
+**Email:** cayman@agenticassets.ai  
+**Website:** [https://www.agenticassets.ai/](https://www.agenticassets.ai/)  
 
 ---
 
