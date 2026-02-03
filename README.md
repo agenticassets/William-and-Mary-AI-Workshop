@@ -62,15 +62,19 @@ By the end of this intensive 3-hour workshop, you will:
 
 ### Technical Setup Checklist
 
-**Step 1: n8n Account & Project Setup**  
+**Step 1: n8n Account & Project Setup**
 
-1. **Create n8n cloud account** - [Sign up here](https://app.n8n.cloud/register)
-2. **Create a dedicated project for the workshop:**
+1. **Explore n8n platform** - Get familiar with n8n before creating your account:
+   - [n8n Homepage](https://n8n.io/) - Platform overview and features
+   - [AI Agents Guide](https://n8n.io/ai-agents/) - Understanding AI agent workflows
+   - [n8n Blog](https://blog.n8n.io/) - Tutorials, examples, and best practices
+2. **Create n8n cloud account** - [Sign up here](https://app.n8n.cloud/register)
+3. **Create a dedicated project for the workshop:**
    - Once logged in, create a new project
    - Name it something like "W&M AI Workshop" or "AI Agent Training"
    - This keeps your workshop work organized and separate from personal projects
    - The instructor will NOT have access to your personal workflows—only this workshop project
-3. **Add course instructor as a user** (optional, for live support):
+4. **Add course instructor as a user** (optional, for live support):
    - Click the three dots in the bottom left corner → Settings
    - Go to the Users tab and invite: cayman@agenticassets.ai
 
