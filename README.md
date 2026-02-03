@@ -6,7 +6,7 @@
 
 **Program:** William & Mary Executive Education Program  
 **Time:** 3 hours total  
-**Format:** Virtual Training 
+**Format:** Virtual Training - [Google Meet Link](https://meet.google.com/uxp-mtif-cwo) 
 **Platform:** n8n Cloud Platform  
 **Target Audience:** Business professionals
 
@@ -57,7 +57,7 @@ By the end of this intensive 3-hour workshop, you will:
 
 ### Technical Requirements
 - **Laptop** with a web browser (Chrome, Safari, Firefox, or Edge)
-- **Stable internet connection** (Zoom + n8n platform access)
+- **Stable internet connection** ([Google Meet Link](https://meet.google.com/uxp-mtif-cwo) + n8n platform access)
 
 ### Technical Setup Checklist
 
