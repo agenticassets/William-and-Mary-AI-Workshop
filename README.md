@@ -20,10 +20,9 @@ This focused workshop introduces you to AI agents and their practical applicatio
 ## 👨‍💼 Meet Your Instructor
 
 <div align="center">
+<img src="Images/cayman-seagraves-wide.png" alt="Dr. Cayman Seagraves" width="600" style="border-radius: 10px; margin: 20px 0;">
 
-![Dr Cayman Seagraves](Images/Cayman-Seagraves-Wide.png)
-
-**Dr. Cayman Seagraves**
+**Dr. Cayman Seagraves**  
 *Co-founder, [Agentic Assets LLC](https://www.agenticassets.ai/)*  
 *Assistant Professor of Finance and Real Estate, The University of Tulsa*  
 📧 **Contact:** cayman@agenticassets.ai
