@@ -1,8 +1,5 @@
 # AI Agents for Real Estate Professionals: William & Mary Executive Education Program
 
-**Instructor:** Dr. Cayman Seagraves    
-**Learn more about:** [Agentic Assets](https://www.agenticassets.ai/) | [Academic Profile & Research](https://www.caymanseagraves.com/)  
-
 ---
 
 ## 📋 Course Overview
@@ -86,6 +83,7 @@ By the end of this intensive 3-hour workshop, you will:
    **Required for Workshop:**
    - ✅ [OpenRouter](https://openrouter.ai/) - For LLM access. Create account → Get API key
    - ✅ [Firecrawl](https://www.firecrawl.dev/) - For web scraping market data. Create account → Get API key
+   - ✅ [Tavily](https://tavily.com/) - Web search
 
    **Recommended for Full Functionality:**
    - 🔄 [Google Cloud Console](https://console.cloud.google.com/) - Enable APIs for Gmail, Sheets, Drive (optional, for email/spreadsheet integration)
@@ -93,7 +91,6 @@ By the end of this intensive 3-hour workshop, you will:
    **Optional for Advanced Workflows:**
    - 🔄 [Pinecone](https://www.pinecone.io/) - Vector database for RAG (optional)
    - 🔄 [Perplexity](https://www.perplexity.ai/) - AI research (optional)
-   - 🔄 [Tavily](https://tavily.com/) - Web search (optional)
 
 5. **Add credentials to your workshop project:**
    - Navigate to the "Credentials" tab in your n8n project
@@ -123,18 +120,19 @@ By the end of this intensive 3-hour workshop, you will:
 
 ### Break (15 min)
 
-### Session 3: Build Real Estate Market Expert Agent (60 min)
-- **Real Estate Market Expert Agent:** Hands-on construction
+### Session 3: Real Estate Market Expert Agent Demo (30 min)
+- **Real Estate Market Expert Agent:** Live demonstration
 - Integrating Firecrawl for live Redfin market data scraping
-- Building agent logic: data retrieval → analysis → formatting
-- Testing and debugging your working agent
-- Deploying to production for immediate use
+- Agent logic walkthrough: data retrieval → analysis → formatting
+- Testing and debugging demonstration
+- Understanding deployment for production use
 
-### Session 4: Independent Practice & Q&A (30 min)
+### Session 4: Hands-On Practice & Implementation (60 min)
+- Work independently on Agent Examples workflow
 - Apply learned patterns to your own business challenges
-- Troubleshoot issues with instructor support
-- Discuss implementation strategies and next steps
-- Final Q&A and resource review
+- Build and customize agents with instructor support
+- Troubleshoot issues and debug workflows
+- Final Q&A and next steps discussion
 
 ---
 
