@@ -54,7 +54,7 @@ The agent excels at comprehensive market analysis when provided with:
 - Price range considerations
 - Investment criteria (rental potential, appreciation, etc.)
 
-**Example Queries:**
+**Example Queries:**  
 - "Analyze the residential real estate market in downtown Tulsa within 0.5 miles of the center"
 - "Compare property values in the North Hills area over the last 6 months"
 - "Find investment properties in Chicago with good rental potential under $500k"

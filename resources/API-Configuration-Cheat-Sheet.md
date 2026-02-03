@@ -25,7 +25,7 @@
 **Purpose:** Access to multiple AI models (GPT-4, Claude, Gemini, etc.) through a single API  
 **Cost:** Pay-per-use, typically $0.002-0.06 per 1K tokens  
 **Website:** https://openrouter.ai/  
-**n8n Integration:** ✅ **Works with OpenAI credential** (supports compatible base URL)
+**n8n Integration:** ✅ **Works with OpenAI credential** (supports compatible base URL)  
 
 ### Setup Steps:
 
@@ -64,7 +64,7 @@ Base URL: https://openrouter.ai/api/v1
 **Purpose:** Store and search document embeddings for RAG (Retrieval Augmented Generation)  
 **Cost:** Free tier: 1 index, 100K vectors  
 **Website:** https://www.pinecone.io/  
-**n8n Integration:** ✅ **Official Vector Store nodes** (AI/LangChain integration)
+**n8n Integration:** ✅ **Official Vector Store nodes** (AI/LangChain integration)  
 
 ### Setup Steps:
 
@@ -105,7 +105,7 @@ Environment: [Your environment, e.g., us-east-1-aws]
 **Purpose:** Access Gmail, Drive, Sheets, Docs, Calendar, Tasks  
 **Cost:** Free tier covers most training needs  
 **Website:** https://console.cloud.google.com/  
-**n8n Integration:** ✅ **Official Google Service Account credential** (supports all Google services)
+**n8n Integration:** ✅ **Official Google Service Account credential** (supports all Google services)  
 
 ### Setup Steps:
 
@@ -156,7 +156,7 @@ Private Key: [From JSON file - the entire key including headers]
 **Purpose:** Real-time web search for AI agents  
 **Cost:** Free tier: 1,000 searches/month  
 **Website:** https://tavily.com/  
-**n8n Integration:** ❌ **Requires HTTP Request node** (no official n8n node)
+**n8n Integration:** ❌ **Requires HTTP Request node** (no official n8n node)  
 
 ### Setup Steps:
 
@@ -196,7 +196,7 @@ Body: {
 **Purpose:** AI-powered search and research  
 **Cost:** Free tier: 5 searches/day, Pro: $20/month  
 **Website:** https://www.perplexity.ai/  
-**n8n Integration:** ❌ **Requires HTTP Request node** (no official n8n node)
+**n8n Integration:** ❌ **Requires HTTP Request node** (no official n8n node)  
 
 ### Setup Steps:
 
@@ -227,7 +227,7 @@ Headers:
 **Purpose:** Web scraping and content extraction  
 **Cost:** Free tier: 500 pages/month, Hobby: $16/month (3,000 credits), Standard: $83/month (100,000 credits)  
 **Website:** https://www.firecrawl.dev/  
-**n8n Integration:** ❌ **Requires HTTP Request node** (no official n8n node)
+**n8n Integration:** ❌ **Requires HTTP Request node** (no official n8n node)  
 
 ### Setup Steps:
 
@@ -264,7 +264,7 @@ Headers:
 **Purpose:** Property data, owner information, and lead generation for real estate  
 **Cost:** Pay-as-you-go pricing (no subscription required)  
 **Website:** https://batchdata.com/  
-**n8n Integration:** ❌ **Requires HTTP Request node** (no official n8n node)
+**n8n Integration:** ❌ **Requires HTTP Request node** (no official n8n node)  
 
 ### Setup Steps:
 
@@ -314,7 +314,7 @@ Headers:
 **Purpose:** Create chatbots and notifications  
 **Cost:** Free  
 **Setup:** Through Telegram app  
-**n8n Integration:** ✅ **Official Telegram node** (comprehensive operations support)
+**n8n Integration:** ✅ **Official Telegram node** (comprehensive operations support)  
 
 ### Setup Steps:
 
@@ -386,21 +386,21 @@ Access Token: [Your bot token from BotFather]
 
 #### Google APIs Issues:
 **Problem:** "Access denied" or "File not found"  
-**Solution:**
+**Solution:**  
 - Share Google Sheets/Docs with service account email
 - Ensure all required APIs are enabled
 - Check service account has correct permissions
 
 #### Pinecone Issues:
 **Problem:** "Index not found"  
-**Solution:**
+**Solution:**  
 - Verify index name matches exactly (case-sensitive)
 - Check environment setting matches your Pinecone dashboard
 - Ensure index is in "Ready" state
 
 #### General API Issues:
 **Problem:** Rate limiting or quota exceeded  
-**Solution:**
+**Solution:**  
 - Check your usage in service dashboards
 - Upgrade to paid tiers if needed
 - Implement delays between requests

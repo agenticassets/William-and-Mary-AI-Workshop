@@ -1,8 +1,8 @@
 # Pre-Course Setup Checklist
 ## AI Agents for Real Estate Professionals: William & Mary Executive Education Program
 
-**⏰ Workshop Duration:** 3 hours (1.5 hrs lecture/demo + 1.5 hrs hands-on)
-**👨‍🏫 Instructor:** Dr. Cayman Seagraves
+**⏰ Workshop Duration:** 3 hours (1.5 hrs lecture/demo + 1.5 hrs hands-on)  
+**👨‍🏫 Instructor:** Dr. Cayman Seagraves  
 
 ---
 
@@ -25,7 +25,7 @@
 - [ ] **Added instructor as user** (cayman@agenticassets.ai) to workshop project only
 - [ ] **Verified login** and project access
 
-**❗ Important:** Keep your workshop project separate from personal workflows. The instructor will only access your workshop project.
+**❗ Important:** Keep your workshop project separate from personal workflows. The instructor will only access your workshop project.  
 
 ![n8n User Settings](../Images/n8n-add-user-in-settings.png)
 
@@ -50,11 +50,11 @@
 - [ ] **Service account created** and JSON key downloaded
 - [ ] **Credentials added** to n8n and tested
 
-**Note:** Google APIs enable storing outputs to Sheets and sending email notifications. Not strictly required for the workshop but helpful for full functionality.
+**Note:** Google APIs enable storing outputs to Sheets and sending email notifications. Not strictly required for the workshop but helpful for full functionality.  
 
 ### Step 3: Optional Advanced APIs
 
-**These are NOT required for the 3-hour workshop but can be useful for extended practice:**
+**These are NOT required for the 3-hour workshop but can be useful for extended practice:**  
 
 - **Pinecone** (Vector Database) - [pinecone.io](https://www.pinecone.io/) - For RAG/document search workflows
 - **Perplexity** (AI Search) - [perplexity.ai](https://www.perplexity.ai/) - For enhanced research capabilities
@@ -63,7 +63,7 @@
 
 ### Step 4: n8n Credentials Configuration
 
-**In your workshop project:**
+**In your workshop project:**  
 - [ ] **Required credentials added** (OpenRouter, Firecrawl)
 - [ ] **Optional credentials added** (Google, others)
 - [ ] **Descriptive names used** (e.g., "OpenRouter Workshop", "Firecrawl Workshop")
@@ -139,7 +139,7 @@
 ## 📞 Getting Help
 
 ### Before Workshop
-**Technical Setup Issues:**
+**Technical Setup Issues:**  
 - Email: cayman@agenticassets.ai
 - Subject: "W&M Workshop Setup - [Your Name]"
 - Include: Screenshots of error messages
@@ -168,13 +168,13 @@
 
 ## 📝 Final Pre-Workshop Checklist
 
-**Before Workshop:**
+**Before Workshop:**  
 - [ ] Technical setup completed (n8n + API keys)
 - [ ] All required credentials tested
 - [ ] Workshop materials bookmarked and ready
 - [ ] Questions prepared about your specific use cases
 
-**Day of Workshop:**
+**Day of Workshop:**  
 - [ ] Early login to verify systems
 - [ ] Materials and notes ready
 - [ ] Focused mindset for learning
@@ -189,6 +189,6 @@
 
 ---
 
-**Questions? Contact:** cayman@agenticassets.ai
+**Questions? Contact:** cayman@agenticassets.ai  
 
 *© 2026 Agentic Assets LLC. All rights reserved.*

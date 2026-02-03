@@ -34,14 +34,14 @@ This folder contains supporting materials for the **AI Agents for Real Estate Pr
 ## 📖 Resource Categories
 
 ### 🔧 Technical Setup
-**Purpose:** Ensure successful technical preparation and troubleshooting
+**Purpose:** Ensure successful technical preparation and troubleshooting  
 
 - **API Configuration** - Step-by-step setup for required services (OpenRouter, Firecrawl, Google APIs)
 - **Pre-Course Checklist** - Complete preparation verification
 - **Troubleshooting Guide** - Quick fixes for common issues during hands-on exercises
 
 ### 🎓 Learning Materials
-**Purpose:** Build effective AI prompting and workflow design skills
+**Purpose:** Build effective AI prompting and workflow design skills  
 
 - **Prompting Best Practices** - Advanced techniques for optimal AI agent responses
 - **n8n Assistant System Prompt** - Reference template for building AI workflow assistants
@@ -70,16 +70,16 @@ This folder contains supporting materials for the **AI Agents for Real Estate Pr
 ## 📞 Resource Support
 
 ### Getting Help
-**Pre-Workshop Questions:**
+**Pre-Workshop Questions:**  
 - Email: cayman@agenticassets.ai
 - Subject: "W&M Workshop Prep - [Your Name]"
 - Include: Specific resource questions or technical issues
 
-**During Workshop:**
+**During Workshop:**  
 - Direct instructor support during hands-on sessions
 - Real-time Q&A for immediate assistance
 
-**Post-Workshop:**
+**Post-Workshop:**  
 - Email: cayman@agenticassets.ai
 - Subject: "W&M Workshop Follow-Up - [Your Name]"
 - Include: Questions about workflow implementation or customization
@@ -101,8 +101,8 @@ This folder contains supporting materials for the **AI Agents for Real Estate Pr
 
 **🎯 Ready to learn AI agent automation?** These resources provide everything you need for a successful 3-hour workshop experience.
 
-**📅 Workshop:** William & Mary Executive Education Program
-**⏰ Duration:** 3 hours (1.5 hrs lecture/demo + 1.5 hrs hands-on)
-**👨‍🏫 Instructor:** Dr. Cayman Seagraves, Agentic Assets LLC
+**📅 Workshop:** William & Mary Executive Education Program  
+**⏰ Duration:** 3 hours (1.5 hrs lecture/demo + 1.5 hrs hands-on)  
+**👨‍🏫 Instructor:** Dr. Cayman Seagraves, Agentic Assets LLC  
 
 *© 2026 Agentic Assets LLC. All rights reserved.*

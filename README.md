@@ -62,7 +62,7 @@ By the end of this intensive 3-hour workshop, you will:
 
 ### Technical Setup Checklist
 
-**Step 1: n8n Account & Project Setup**
+**Step 1: n8n Account & Project Setup**  
 
 1. **Create n8n cloud account** - [Sign up here](https://app.n8n.cloud/register)
 2. **Create a dedicated project for the workshop:**
@@ -76,19 +76,19 @@ By the end of this intensive 3-hour workshop, you will:
 
 ![n8n Project and Credentials Setup](Images/n8n-add-user-in-settings.png)
 
-**Step 2: API Keys & Credentials Setup**
+**Step 2: API Keys & Credentials Setup**  
 
 4. **Obtain required API keys** (create accounts first, then retrieve API keys):
 
-   **Required for Workshop:**
+   **Required for Workshop:**  
    - ✅ [OpenRouter](https://openrouter.ai/) - For LLM access. Create account → Get API key
    - ✅ [Firecrawl](https://www.firecrawl.dev/) - For web scraping market data. Create account → Get API key
    - ✅ [Tavily](https://tavily.com/) - Web search
 
-   **Recommended for Full Functionality:**
+   **Recommended for Full Functionality:**  
    - 🔄 [Google Cloud Console](https://console.cloud.google.com/) - Enable APIs for Gmail, Sheets, Drive (optional, for email/spreadsheet integration)
 
-   **Optional for Advanced Workflows:**
+   **Optional for Advanced Workflows:**  
    - 🔄 [Pinecone](https://www.pinecone.io/) - Vector database for RAG (optional)
    - 🔄 [Perplexity](https://www.perplexity.ai/) - AI research (optional)
 
@@ -100,7 +100,7 @@ By the end of this intensive 3-hour workshop, you will:
 
 ![n8n Project and Credentials Setup](Images/n8n-project-and-credentials.png)
 
-**Important:** Completing this setup before the workshop will ensure you can focus on learning rather than troubleshooting!
+**Important:** Completing this setup before the workshop will ensure you can focus on learning rather than troubleshooting!  
 
 ---
 
@@ -158,7 +158,7 @@ By the end of this intensive 3-hour workshop, you will:
 - **"AI Agents: The Real Estate Revolution"** - Comprehensive 15-slide presentation covering AI fundamentals, agent architecture, real estate use cases, and ROI frameworks
 
 ### Resource Library
-**All resources are available in the [Resources folder](Resources/):**
+**All resources are available in the [Resources folder](Resources/):**  
 
 #### Learning & Setup
 - 📋 [**Pre-Course-Setup-Checklist.md**](Resources/Pre-Course-Setup-Checklist.md) - Complete preparation checklist
@@ -207,15 +207,15 @@ After completing this workshop, you'll have the foundational knowledge and worki
 ### Ongoing Support & Collaboration
 **I'm available for additional assistance** to help you expand and optimize your AI agent implementations. Whether you need help with advanced workflows, custom agent development, or strategic AI planning for your business, I'm here to support your continued success.
 
-**Open to Partnership & Innovation:** I welcome opportunities to collaborate on new AI projects and real estate technology ventures. If you have ideas for improving real estate processes through AI, let's explore them together.
+**Open to Partnership & Innovation:** I welcome opportunities to collaborate on new AI projects and real estate technology ventures. If you have ideas for improving real estate processes through AI, let's explore them together.  
 
-**Flexible Engagement Options:** From quick consulting calls to comprehensive business transformations, I offer a variety of support options tailored to your specific needs and goals.
+**Flexible Engagement Options:** From quick consulting calls to comprehensive business transformations, I offer a variety of support options tailored to your specific needs and goals.  
 
 ---
 
 ## 📋 Pre-Workshop Checklist
 
-**To maximize your learning during the workshop, please complete this setup before attending:**
+**To maximize your learning during the workshop, please complete this setup before attending:**  
 
 - [ ] Create n8n cloud account ([https://app.n8n.cloud/register](https://app.n8n.cloud/register))
 - [ ] Create dedicated "W&M Workshop" project in n8n

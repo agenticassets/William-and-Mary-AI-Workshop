@@ -8,9 +8,9 @@ This workflow contains three standalone AI agent templates that showcase differe
 
 ### 1. 🔄 Basic AI Agent Template
 
-**Purpose:** Provides the simplest AI agent implementation with core components for basic conversational AI.
+**Purpose:** Provides the simplest AI agent implementation with core components for basic conversational AI.  
 
-**Components:**
+**Components:**  
 - Workflow trigger for execution
 - Session ID generation for conversation tracking
 - 🧠 Window Buffer Memory for context retention
@@ -18,13 +18,13 @@ This workflow contains three standalone AI agent templates that showcase differe
 - 💭 Think tool for reasoning
 - AI Agent node with customizable system prompt
 
-**Use Cases:**
+**Use Cases:**  
 - 💬 Simple Q&A systems
 - 🔍 Basic decision-making
 - Single-purpose conversational agents
 - Introductory AI agent implementations
 
-**Best Practices:**
+**Best Practices:**  
 - Keep system prompts concise and focused on a single domain
 - Use the Think tool to break down complex reasoning steps
 - Start with smaller context windows (4-8) for better performance
@@ -32,20 +32,20 @@ This workflow contains three standalone AI agent templates that showcase differe
 
 ### 2. 📊 AI Agent with Structured Output
 
-**Purpose:** Extends the basic agent with structured output capabilities, enabling consistent data formatting.
+**Purpose:** Extends the basic agent with structured output capabilities, enabling consistent data formatting.  
 
-**Components:**
+**Components:**  
 - All components from the Basic Agent
 - 📋 Structured Output Parser for enforcing JSON schema
 - Enhanced system prompt with output format instructions
 
-**Use Cases:**
+**Use Cases:**  
 - 📝 Data extraction from unstructured text
 - 📋 Form filling and validation
 - 🏷️ Categorization and classification tasks
 - 🔌 API integration where consistent output format is required
 
-**Best Practices:**
+**Best Practices:**  
 - Define clear JSON schemas with required fields and types
 - Include example outputs in system prompts
 - Use the Think tool to plan structured responses before generating
@@ -54,22 +54,22 @@ This workflow contains three standalone AI agent templates that showcase differe
 
 ### 3. 🌐 Advanced AI Agent with HTTP Tools
 
-**Purpose:** Comprehensive agent with external data access capabilities, allowing real-time information retrieval and processing.
+**Purpose:** Comprehensive agent with external data access capabilities, allowing real-time information retrieval and processing.  
 
-**Components:**
+**Components:**  
 - All components from previous templates
 - 🔗 HTTP Request tool for external API calls
 - 🔍 Web search capabilities
 - Enhanced memory management
 - Multi-step reasoning capabilities
 
-**Use Cases:**
+**Use Cases:**  
 - ⏱️ Real-time data analysis
 - 🔎 Web research automation
 - 📄 Dynamic content generation
 - 🧩 Complex decision-making with external information
 
-**Best Practices:**
+**Best Practices:**  
 - 🔒 Carefully scope API access permissions
 - ⏱️ Use rate limiting to prevent excessive API calls
 - 💾 Implement caching for frequently accessed data

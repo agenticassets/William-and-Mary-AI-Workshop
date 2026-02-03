@@ -53,13 +53,13 @@ Provide your analysis in the following format:
 
 #### Example Using REAL Framework:
 ```markdown
-**Role:** You are a senior real estate investment advisor specializing in rental properties.
+**Role:** You are a senior real estate investment advisor specializing in rental properties.  
 
-**Evidence:** Property: 123 Main St, 3BR/2BA, $350,000, built 1995, neighborhood median rent $2,800/month, cap rate 7.2%, property taxes $4,200/year.
+**Evidence:** Property: 123 Main St, 3BR/2BA, $350,000, built 1995, neighborhood median rent $2,800/month, cap rate 7.2%, property taxes $4,200/year.  
 
-**Action:** Evaluate this property's investment potential and generate a comprehensive investment analysis.
+**Action:** Evaluate this property's investment potential and generate a comprehensive investment analysis.  
 
-**Limits:** Response must be under 300 words, include specific ROI calculations, and end with a clear Buy/Hold/Pass recommendation.
+**Limits:** Response must be under 300 words, include specific ROI calculations, and end with a clear Buy/Hold/Pass recommendation.  
 ```
 
 ---
@@ -527,12 +527,12 @@ Note: This is for initial analysis only. Professional appraisal required for fin
 
 ### GPT-4o / GPT-4o-mini Optimization
 
-**Strengths to Leverage:**
+**Strengths to Leverage:**  
 - Excellent at following complex instructions
 - Strong reasoning capabilities
 - Good with structured outputs
 
-**Best Practices:**
+**Best Practices:**  
 ```markdown
 # SYSTEM PROMPT
 You are a certified real estate appraiser with 20 years experience.
@@ -555,12 +555,12 @@ Provide your analysis in this exact JSON format:
 
 ### Claude 3.5 Sonnet Optimization
 
-**Strengths to Leverage:**
+**Strengths to Leverage:**  
 - Excellent analytical thinking
 - Strong with nuanced communication
 - Good at handling complex scenarios
 
-**Best Practices:**
+**Best Practices:**  
 ```markdown
 # SYSTEM PROMPT
 You are a real estate investment advisor with expertise in complex market analysis.
@@ -577,12 +577,12 @@ Consider the ethical implications of this pricing strategy and provide a balance
 
 ### Gemini Optimization
 
-**Strengths to Leverage:**
+**Strengths to Leverage:**  
 - Good with multimodal inputs
 - Strong factual accuracy
 - Excellent code generation
 
-**Best Practices:**
+**Best Practices:**  
 ```markdown
 # SYSTEM PROMPT
 You are a real estate data analyst specializing in market trends and property valuation.
@@ -603,7 +603,7 @@ Generate a JavaScript function that calculates mortgage payments including PMI, 
 
 ### Token Management Strategies
 
-**Minimize Input Tokens:**
+**Minimize Input Tokens:**  
 ```markdown
 # SYSTEM PROMPT
 You are a real estate analyst providing concise property assessments.
@@ -615,7 +615,7 @@ Address: 123 Main St | Price: $450K | BR: 3 | BA: 2 | SqFt: 1800
 Lead from website form, interested in 3BR homes, budget $400K, timeline 6 months
 ```
 
-**Optimize Output Length:**
+**Optimize Output Length:**  
 ```markdown
 # OUTPUT CONSTRAINTS
 Provide a concise analysis in exactly 150 words.
@@ -667,19 +667,19 @@ Apply TEMPLATE_ID to this property: {{ $json.property_data }}
 
 ### A/B Testing Your Prompts
 
-**Version A - Direct Approach:**
+**Version A - Direct Approach:**  
 ```markdown
 # SYSTEM PROMPT
 Analyze this property listing and recommend if my client should make an offer.
 ```
 
-**Version B - Structured Approach:**
+**Version B - Structured Approach:**  
 ```markdown
 # SYSTEM PROMPT
 As a buyer's agent, evaluate this property using our standard criteria: location, condition, pricing, investment potential. Provide specific offer recommendation with reasoning.
 ```
 
-**Test Metrics:**
+**Test Metrics:**  
 - Response accuracy
 - Consistency across similar inputs
 - Time to generate useful output
@@ -824,7 +824,7 @@ Clear, concise recommendations with supporting data and reasoning. Focus on acti
 
 ### Daily Use Templates
 
-**Quick Lead Response:**
+**Quick Lead Response:**  
 ```markdown
 # SYSTEM PROMPT
 You are a real estate agent responding to new lead inquiries.
@@ -842,7 +842,7 @@ Professional, enthusiastic, helpful
 Under 150 words
 ```
 
-**Property Alert:**
+**Property Alert:**  
 ```markdown
 # SYSTEM PROMPT
 You are a real estate agent sending property alerts to clients.
@@ -863,7 +863,7 @@ Generate interest and schedule showing
 Compelling subject line + concise email body
 ```
 
-**Market Update:**
+**Market Update:**  
 ```markdown
 # SYSTEM PROMPT
 You are a real estate market analyst creating client newsletters.
