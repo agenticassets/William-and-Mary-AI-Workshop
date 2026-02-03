@@ -1,6 +1,6 @@
 # William & Mary AI Workshop Module
 ## Most Critical Rule
-All content must be **publicly shareable and standalone**; never include private credentials or client-specific secrets in JSON templates or markdown files.
+All content must be **publicly shareable and standalone**; never include private credentials or client-specific secrets in JSON templates or markdown files. 
 
 ## Naming Patterns
 - **Workflows**: JSON templates should be named by function (e.g., `Redfin_Market_Expert.json`).
