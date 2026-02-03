@@ -8,9 +8,9 @@
 **Time:** 3 hours total  
 **Format:** Virtual Training via Zoom  
 **Platform:** n8n Cloud Platform  
-**Target Audience:** Real estate executives, investment professionals, and business leaders  
+**Target Audience:** Business professionals
 
-This focused workshop introduces you to AI agents and their practical applications in real estate. You'll move from foundational concepts directly to hands-on agent building, culminating in deploying a working Real Estate Market Expert Agent powered by live market data.
+This focused workshop introduces you to AI agents and their practical applications in business. You'll move from foundational concepts directly to hands-on agent building, culminating in deploying a working Real Estate Market Expert Agent powered by live market data.
 
 ---
 
@@ -24,7 +24,7 @@ This focused workshop introduces you to AI agents and their practical applicatio
 *Assistant Professor of Finance and Real Estate, The University of Tulsa*  
 📧 **Contact:** cayman@agenticassets.ai
 
-Specializing in AI transformation for real estate and finance industries, with expertise in multi-agent systems, automation, and strategic AI implementation. Dr. Seagraves brings both academic rigor and practical industry experience to help real estate professionals leverage cutting-edge AI technology for competitive advantage.
+Specializing in AI and AI agents for real estate and finance industries, with expertise in multi-agent systems, automation, and strategic AI implementation. Dr. Seagraves brings both academic rigor and practical industry experience to help business professionals leverage cutting-edge AI technology for competitive advantage.
 
 [Academic Profile & Research](https://www.caymanseagraves.com/) | [Agentic Assets](https://www.agenticassets.ai/)
 
@@ -39,11 +39,11 @@ By the end of this intensive 3-hour workshop, you will:
 **Understand AI Agents**
 - Grasp the critical difference between AI agents and basic AI tools
 - Learn how AI agents autonomously complete multi-step workflows
-- Understand real estate-specific agent use cases and ROI impact
+- Understand business-specific agent use cases and ROI impact
 
 **Build Working Agents**
 - Deploy your first functional AI agent within the hands-on session
-- Master the core patterns of agent architecture in n8n
+- Understand the core patterns of agent architecture in n8n
 - Create a Real Estate Market Expert Agent that pulls live Redfin data
 
 **Gain Competitive Advantage**
@@ -113,7 +113,7 @@ By the end of this intensive 3-hour workshop, you will:
 ### Session 1: AI Agents Overview & Context (30 min)
 - Welcome and introduction to AI agents
 - Understanding AI agents vs. basic AI tools (key conceptual differences)
-- Real estate transformation opportunities and ROI impact
+- business transformation opportunities and ROI impact
 - Overview of n8n platform and visual workflow building
 
 ### Session 2: Hands-On Agent Examples Demo (45 min)
@@ -158,9 +158,6 @@ By the end of this intensive 3-hour workshop, you will:
 
 ## 📖 Course Materials
 
-### Presentation
-- **"AI Agents: The Real Estate Revolution"** - Comprehensive 15-slide presentation covering AI fundamentals, agent architecture, real estate use cases, and ROI frameworks
-
 ### Resource Library
 **All resources are available in the [Resources folder](Resources/):**  
 
@@ -177,12 +174,12 @@ By the end of this intensive 3-hour workshop, you will:
 
 ### What You'll Accomplish
 - ✅ Understand the fundamentals of AI agents and their business impact
-- ✅ Build and deploy a working Real Estate Market Expert Agent
+- ✅ Build and deploy a handful of AI agents
 - ✅ Gain hands-on experience with n8n visual workflow building
 - ✅ Develop a framework for identifying agent opportunities in your business
 
 ### After the Workshop
-- 🚀 Deploy your Market Expert Agent immediately for market research and competitive intelligence
+- 🚀 Deploy your own agents immediately
 - 🔄 Apply learned patterns to other business processes
 - 📈 Measure efficiency gains and document ROI
 - 💬 Access ongoing resources and community support
@@ -201,19 +198,6 @@ By the end of this intensive 3-hour workshop, you will:
 ### Instructor & Resources
 - **Agentic Assets Website:** [https://www.agenticassets.ai/](https://www.agenticassets.ai/)
 - **Dr. Seagraves Academic Profile:** [https://www.caymanseagraves.com/](https://www.caymanseagraves.com/)
-
----
-
-## 🚀 Beyond the Workshop
-
-After completing this workshop, you'll have the foundational knowledge and working examples to expand AI agents across your organization.
-
-### Ongoing Support & Collaboration
-**I'm available for additional assistance** to help you expand and optimize your AI agent implementations. Whether you need help with advanced workflows, custom agent development, or strategic AI planning for your business, I'm here to support your continued success.
-
-**Open to Partnership & Innovation:** I welcome opportunities to collaborate on new AI projects and real estate technology ventures. If you have ideas for improving real estate processes through AI, let's explore them together.  
-
-**Flexible Engagement Options:** From quick consulting calls to comprehensive business transformations, I offer a variety of support options tailored to your specific needs and goals.  
 
 ---
 
@@ -242,6 +226,6 @@ For questions or technical support before the workshop:
 
 ---
 
-*This intensive workshop is designed to launch your AI agent journey. You'll leave with working agents, proven patterns, and the confidence to expand AI across your real estate business.*
+*This workshop is designed to launch your AI agent journey. You'll leave with working agents, proven patterns, and the confidence to expand AI across your business.*
 
-© 2025 Agentic Assets LLC. All rights reserved.
+© 2026 Agentic Assets LLC. All rights reserved.
