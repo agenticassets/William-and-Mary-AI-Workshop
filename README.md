@@ -1,4 +1,4 @@
-# AI Agents for Real Estate Professionals: William & Mary Executive Education Program
+# AI Agents for Business Professionals
 
 ---
 
