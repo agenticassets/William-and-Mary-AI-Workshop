@@ -37,10 +37,10 @@
 - [ ] **$5+ credits added** to account (recommended for workshop)
 - [ ] **API key added to n8n** credentials and tested
 
-**Firecrawl (Web Scraping) - REQUIRED**
-- [ ] **Account created** at [firecrawl.dev](https://www.firecrawl.dev/)
+**Firecrawl and Tavily (Web Scraping) - REQUIRED**
+- [ ] **Account created** at [firecrawl.dev](https://www.firecrawl.dev/) and [tavily.com](https://tavily.com/)
 - [ ] **API key obtained** from dashboard
-- [ ] **Free tier verified** (500 scrapes/month)
+- [ ] **Free tiers verified**
 - [ ] **API key added to n8n** credentials and tested
 
 **Google Cloud Platform (Optional but Recommended)**
