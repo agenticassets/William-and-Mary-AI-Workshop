@@ -207,7 +207,7 @@ By the end of this intensive 3-hour workshop, you will:
 - [ ] Create n8n cloud account ([https://app.n8n.cloud/register](https://app.n8n.cloud/register))
 - [ ] Create dedicated "W&M Workshop" project in n8n
 - [ ] Obtain OpenRouter API key and add to credentials
-- [ ] Obtain Firecrawl API key and add to credentials
+- [ ] Obtain Firecrawl and Tavily API keys and add to credentials
 - [ ] (Optional) Set up Google Cloud APIs for email/spreadsheet integration
 - [ ] Test all API credentials in n8n
 - [ ] Download and install Zoom
