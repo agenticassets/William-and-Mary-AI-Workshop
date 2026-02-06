@@ -2,154 +2,28 @@
   "nodes": [
     {
       "parameters": {
-        "promptType": "define",
-        "text": "=__________________________________\n# Extracted Content:\n{{ $json.data.markdown }}",
-        "hasOutputParser": true,
-        "options": {
-          "systemMessage": "=You are a real estate data extraction specialist. Your task is to parse Redfin listing data and convert it into structured JSON format.\n\nSearch URL: {{ $('When Executed by Another Workflow').item.json.url }}\n\n## Instructions:\n1. Extract search metadata from the URL and page content (location, filters applied, etc.)\n2. Identify and extract individual property listings\n3. For each property, extract all available details\n4. Ignore website navigation, footer content, and non-listing information\n5. Output clean, structured JSON data\n\n## Required Property Fields to Extract:\n- address (full address including street, city, state, zip)\n- price (numeric value)\n- beds (number of bedrooms)\n- baths (number of bathrooms)\n- sqft (square footage if available)\n- description (property description text)\n- features (key features mentioned)\n- imageUrl (first image URL if available)\n- propertyUrl (Redfin property URL if extractable)\n\n## Output Format:\nReturn a structured JSON object with:\n- searchMetadata: Information about the search parameters\n- properties: Array of property objects\n- totalCount: Number of properties found\n\n\n- **Top-level keys only**  \n  Your JSON root must contain _only_ `searchMetadata`, `properties`, and `totalCount`—**no** extra wrapper (e.g. no `\"output\"`).\n\n- **Numeric filters**  \n  In `searchMetadata.filters`, emit `priceMax`, `priceMin`, `minBeds`, and `minBaths` as either a **number** or **null** (never `\"\"`).\n\n- **Strings & arrays defaults**  \n  - All string fields default to `\"\"`  \n  - All array fields default to `[]`\n\n- **Property items strict schema**  \n  Each object in `properties` may include _only_ the defined keys with correct types:  \n  ```json\n  {\n    \"address\": \"string|null\",\n    \"price\": \"number|null\",\n    \"beds\": \"number|null\",\n    \"baths\": \"number|null\",\n    \"sqft\": \"number|null\",\n    \"description\": \"string|null\",\n    \"features\": [\"string\", ...],\n    \"imageUrl\": \"string|null\",\n    \"propertyUrl\": \"string|null\"\n  }\n",
-          "maxIterations": 5
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 2,
-      "position": [
-        2780,
-        2240
-      ],
-      "id": "0c5c0072-a8a8-4a80-b8d6-1eeac03bfc0f",
-      "name": "Redfin Data Parser",
-      "retryOnFail": true,
-      "maxTries": 2,
-      "onError": "continueRegularOutput"
-    },
-    {
-      "parameters": {
-        "model": "openai/gpt-4.1-mini",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
-      "typeVersion": 1,
-      "position": [
-        3480,
-        1960
-      ],
-      "id": "89397b13-d022-437a-a7be-d3d555f7706d",
-      "name": "gpt-4.1-mini2",
-      "credentials": {
-        "openRouterApi": {
-          "id": "72mF2DZvmuIMyDu5",
-          "name": "OpenRouter account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "promptType": "define",
-        "text": "=____________________________________________________________\n\n# Client Name: \"\"\"\n{{ $('Edit Fields1').item.json.clientName }}\n\"\"\"\n\n# Initial Query from the user \"\"\"\n{{ $('Edit Fields1').item.json.chatInput }}\n\"\"\"\n\n# Market Analysis from the Real Estate Market Expert Agent \"\"\"\n{{ $('Redfin Market Expert').item.json.output.marketAnalysis }}\n\"\"\"\n\n",
-        "hasOutputParser": true,
-        "options": {
-          "systemMessage": "=# Real Estate Market Analysis Email Generator Agent\n\n## PRIMARY ROLE  \nYou craft professional, visually appealing emails that **deliver** comprehensive real estate market analysis reports to clients. The message must:  \n1. Present the market analysis in an easy-to-digest format.  \n2. Highlight key findings and property recommendations.  \n3. Include actionable next steps with direct property links.  \n\nThink of it as transforming raw market data into a polished client report.\n\n## Tools at Your Disposal\n- **think**: Your workspace for organizing market data, formatting decisions, and ensuring all links are properly converted. This tool is MANDATORY for quality output.\n\n---\n\n## CORE RESPONSIBILITIES  \n\n### 1 · Market Data Extraction  \n- Parse the comprehensive market analysis for key metrics and trends.  \n- Capture: price ranges, median values, property recommendations, and market insights.  \n- Extract all Redfin links and ensure they're formatted as clickable hyperlinks.  \n\n### 2 · Client Query Alignment  \n- Reference the original search criteria (location, price range, property type).  \n- Ensure the email directly addresses the client's specific questions.  \n\n### 3. Email Composition\n- Generate professional real estate market reports\n- Maintain appropriate tone for client communication\n- Present data visually with clear sections and highlights\n- Make complex market data accessible and actionable\n\n## ANALYSIS FRAMEWORK\n\n### Content Extraction Protocol\n1. **Market Overview**: Extract general market conditions and trends\n2. **Key Metrics**: Identify median prices, price ranges, and market indicators\n3. **Property Highlights**: Note specific recommended properties with details\n4. **Comparative Analysis**: Extract sold vs active listing insights\n5. **Action Items**: Capture recommended searches and next steps\n6. **Links**: Ensure all Redfin URLs are properly formatted\n\n### Email Structure Guidelines\n1. **Subject Line**: Clear, specific (e.g., \"Tulsa Downtown Area Market Analysis - [Date]\")\n2. **Greeting**: Professional, using client's first name if provided\n3. **Executive Summary**: 2-3 sentences capturing market conditions\n4. **Market Overview Section**: Key trends and insights\n5. **Featured Properties**: Highlighted recommendations with details\n6. **Market Metrics**: Price ranges, medians, and key statistics\n7. **Next Steps**: Recommended searches with clickable links\n8. **Closing**: Professional sign-off from Caiyman AI Real Estate Team\n\n## OUTPUT REQUIREMENTS\n\n### Tone & Style\n- Professional yet approachable\n- Data-driven but conversational\n- Confident and knowledgeable\n- Action-oriented\n\n### Content Priorities\n1. Direct answers to client's query\n2. Actionable property recommendations\n3. Clear market trends and pricing\n4. Easy navigation to property listings\n\n### Quality Standards\n- All links must be clickable hyperlinks\n- Data presented in scannable format\n- Appropriate length (300-500 words for main content)\n- Visual hierarchy for easy reading\n\n## DATA PRESENTATION GUIDELINES\n\nFrom market analysis, prioritize:\n- Median and average price points\n- Number of active vs sold properties\n- Key property features driving value\n- Specific addresses with pricing\n- Market trend indicators\n\nFormat as:\n- Bullet points for property features\n- Bold text for key metrics\n- Colored sections for different data types\n- Hyperlinked text for all property URLs\n\n## EMAIL PERSONALIZATION\n\nConsider:\n- Client's specified location preferences\n- Budget constraints mentioned\n- Property type requirements\n- Timeline or urgency indicators\n- Previous market knowledge level\n\nGenerate emails that make clients feel their needs are understood and that actionable opportunities have been identified.\n\n## HTML EMAIL FORMATTING\n\nCREATE A FORMATTED HTML EMAIL: Generate a 'formattedHtmlEmail' field combining all components into a professional HTML email. Use this template:\n\n```html\n<!DOCTYPE html>\n<html>\n<head>\n    <style>\n        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }\n        .container { max-width: 600px; margin: 0 auto; padding: 20px; }\n        .header { border-bottom: 2px solid #1a73e8; margin-bottom: 20px; padding-bottom: 10px; }\n        .main-content { margin-bottom: 30px; }\n        .market-overview { background-color: #f8f9fa; padding: 15px; border-radius: 8px; margin: 20px 0; }\n        .property-card { background-color: #ffffff; border: 1px solid #e0e0e0; padding: 15px; border-radius: 8px; margin: 15px 0; }\n        .property-address { font-weight: bold; color: #1a73e8; margin-bottom: 5px; }\n        .metrics-section { background-color: #e8f5e9; padding: 15px; border-radius: 8px; margin: 20px 0; }\n        .recommended-searches { background-color: #fff3e0; padding: 15px; border-radius: 8px; margin: 20px 0; }\n        .signature { margin-top: 30px; border-top: 1px solid #e0e0e0; padding-top: 20px; }\n        .signature-name { font-weight: bold; margin-bottom: 5px; }\n        a { color: #1a73e8; text-decoration: none; }\n        a:hover { text-decoration: underline; }\n        .metric-item { display: inline-block; margin: 10px 20px 10px 0; }\n        .metric-label { font-size: 0.9em; color: #666; }\n        .metric-value { font-size: 1.2em; font-weight: bold; color: #1a73e8; }\n    </style>\n</head>\n<body>\n    <div class=\"container\">\n        <div class=\"header\">\n            <h2 style=\"color: #1a73e8; margin: 0;\">Real Estate Market Analysis Report</h2>\n        </div>\n        \n        <div class=\"main-content\">\n            [INSERT GREETING]\n            \n            <p>[INSERT EXECUTIVE SUMMARY]</p>\n            \n            <div class=\"market-overview\">\n                <h3 style=\"margin-top: 0; color: #1a73e8;\">Market Overview</h3>\n                [INSERT MARKET TRENDS AND CONDITIONS]\n            </div>\n            \n            <div class=\"metrics-section\">\n                <h3 style=\"margin-top: 0; color: #2e7d32;\">Key Market Metrics</h3>\n                [INSERT METRICS AS FORMATTED ITEMS]\n            </div>\n            \n            <h3 style=\"color: #1a73e8;\">Featured Properties</h3>\n            [FOR EACH PROPERTY:\n            <div class=\"property-card\">\n                <div class=\"property-address\">[PROPERTY ADDRESS]</div>\n                <div style=\"color: #2e7d32; font-weight: bold; margin: 5px 0;\">[PRICE]</div>\n                <div>[PROPERTY DETAILS]</div>\n            </div>\n            ]\n            \n            <div class=\"recommended-searches\">\n                <h3 style=\"margin-top: 0; color: #e65100;\">Recommended Next Steps</h3>\n                [INSERT RECOMMENDED SEARCHES WITH HYPERLINKS]\n            </div>\n            \n            <p>[INSERT CLOSING REMARKS]</p>\n        </div>\n        \n        <div class=\"signature\">\n            <div class=\"signature-name\">Caiyman AI Real Estate Team</div>\n            <div style=\"margin-top: 5px; font-size: 0.9em; color: #666;\">Powered by Advanced Market Analytics<br>\n            Learn more about our AI services: <a href=\"https://www.caiyman.ai/\">www.caiyman.ai</a></div>\n        </div>\n    </div>\n</body>\n</html>\n```\n\nReplace bracketed placeholders with actual content, ensuring all Redfin links are properly formatted as clickable hyperlinks.\n\nDeliver value through clear market insights and actionable property recommendations."
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 1.9,
-      "position": [
-        3540,
-        1740
-      ],
-      "id": "0c35c0d2-7558-4402-a93c-cc98be4baefd",
-      "name": "Market Report and Analysis Email Generator Agent"
-    },
-    {
-      "parameters": {
-        "schemaType": "manual",
-        "inputSchema": "{\n  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n  \"title\": \"Conference Discussion Email Output\",\n  \"type\": \"object\",\n  \"required\": [\n    \"recipientFirstName\",\n    \"emailSubject\",\n    \"emailMessage\",\n    \"signature\",\n    \"metadata\",\n    \"formattedHtmlEmail\"\n  ],\n  \"properties\": {\n    \"recipientFirstName\": {\n      \"type\": \"string\",\n      \"description\": \"First name of the presenter/recipient\"\n    },\n    \"emailSubject\": {\n      \"type\": \"string\",\n      \"description\": \"Professional email subject line\",\n      \"minLength\": 10,\n      \"maxLength\": 100\n    },\n    \"emailMessage\": {\n      \"type\": \"object\",\n      \"required\": [\n        \"greeting\",\n        \"opening\",\n        \"discussionSummary\",\n        \"mainPoints\",\n        \"suggestionsHighlight\",\n        \"conferenceContext\",\n        \"closing\"\n      ],\n      \"properties\": {\n        \"greeting\": {\n          \"type\": \"string\",\n          \"description\": \"Professional greeting using first name\"\n        },\n        \"opening\": {\n          \"type\": \"string\",\n          \"description\": \"Opening paragraph acknowledging the presentation creation\"\n        },\n        \"discussionSummary\": {\n          \"type\": \"string\",\n          \"description\": \"2-3 sentence summary of the paper and discussion focus\"\n        },\n        \"mainPoints\": {\n          \"type\": \"array\",\n          \"description\": \"3-4 key discussion points\",\n          \"minItems\": 3,\n          \"maxItems\": 5,\n          \"items\": {\n            \"type\": \"object\",\n            \"required\": [\"point\", \"explanation\"],\n            \"properties\": {\n              \"point\": {\n                \"type\": \"string\",\n                \"description\": \"Brief title of the discussion point\"\n              },\n              \"explanation\": {\n                \"type\": \"string\",\n                \"description\": \"1-2 sentence elaboration\"\n              }\n            }\n          }\n        },\n        \"suggestionsHighlight\": {\n          \"type\": \"string\",\n          \"description\": \"Summary of key critiques or recommendations made in the discussion\"\n        },\n        \"conferenceContext\": {\n          \"type\": \"string\",\n          \"description\": \"How the discussion fits the conference theme/audience\"\n        },\n        \"closing\": {\n          \"type\": \"string\",\n          \"description\": \"Professional closing with any next steps\"\n        }\n      }\n    },\n    \"signature\": {\n      \"type\": \"object\",\n      \"required\": [\"name\", \"title\", \"organization\"],\n      \"properties\": {\n        \"name\": {\n          \"type\": \"string\",\n          \"description\": \"Full name for signature\"\n        },\n        \"title\": {\n          \"type\": \"string\",\n          \"description\": \"Professional title\"\n        },\n        \"organization\": {\n          \"type\": \"string\",\n          \"description\": \"Organization name\"\n        },\n        \"additionalInfo\": {\n          \"type\": \"string\",\n          \"description\": \"Optional additional signature information\"\n        }\n      }\n    },\n    \"metadata\": {\n      \"type\": \"object\",\n      \"required\": [\n        \"paperTitle\",\n        \"conferenceName\",\n        \"presentationLength\",\n        \"attachmentFilename\"\n      ],\n      \"properties\": {\n        \"paperTitle\": {\n          \"type\": \"string\",\n          \"description\": \"Full title of the discussed paper\"\n        },\n        \"paperAuthors\": {\n          \"type\": \"array\",\n          \"items\": {\n            \"type\": \"string\"\n          },\n          \"description\": \"List of paper authors\"\n        },\n        \"conferenceName\": {\n          \"type\": \"string\",\n          \"description\": \"Name of the conference\"\n        },\n        \"conferenceDate\": {\n          \"type\": \"string\",\n          \"description\": \"Conference date if available\"\n        },\n        \"presentationLength\": {\n          \"type\": \"string\",\n          \"description\": \"Length of presentation (e.g., '8 minutes')\"\n        },\n        \"slideCount\": {\n          \"type\": \"integer\",\n          \"description\": \"Number of slides in the presentation\"\n        },\n        \"attachmentFilename\": {\n          \"type\": \"string\",\n          \"description\": \"Suggested filename for the LaTeX attachment\"\n        }\n      }\n    },\n    \"formattedHtmlEmail\": {\n      \"type\": \"string\",\n      \"description\": \"Complete HTML formatted email combining all message components\"\n    }\n  }\n}"
-      },
-      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
-      "typeVersion": 1.2,
-      "position": [
-        3940,
-        1960
-      ],
-      "id": "10c4ed59-ee94-41c9-90ab-c0ed963f0cd2",
-      "name": "Structured Output Parser1"
-    },
-    {
-      "parameters": {
-        "sessionIdType": "customKey",
-        "sessionKey": "={{ $json.sessionID }}"
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
-      "typeVersion": 1.3,
-      "position": [
-        3660,
-        1960
-      ],
-      "id": "99ffec4a-c0df-4069-9cff-a606fe31183b",
-      "name": "Simple Memory9"
-    },
-    {
-      "parameters": {
-        "description": "Use this **think** tool to think about something. It will not obtain new information or change the database, but just append the thought to the log. Use it when complex reasoning or some cache memory is needed."
-      },
-      "type": "@n8n/n8n-nodes-langchain.toolThink",
-      "typeVersion": 1,
-      "position": [
-        3800,
-        1960
-      ],
-      "id": "789c35f5-fa37-43c9-9b18-bdd7cec6c6f9",
-      "name": "Think9"
-    },
-    {
-      "parameters": {
         "content": "## Market Report and Analysis Email Generator Agent & Gmail Node\n\nAutomated email generation system that transforms market analysis into professional client reports. Creates formatted HTML emails with property highlights and market insights, then delivers them directly via Gmail integration.",
-        "height": 540,
+        "height": 652,
         "width": 760,
         "color": 6
       },
-      "id": "ad06df4e-c03e-45e4-b320-3ff80d2cda09",
+      "id": "43bea177-8449-45b4-9ed0-fae8d4fb94f4",
       "name": "Sticky Note – Beamer Agent1",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        3360,
-        1580
+        -2064,
+        528
       ],
       "typeVersion": 1
     },
     {
-      "parameters": {
-        "sendTo": "={{ $('Edit Fields1').item.json.userEmail }}",
-        "subject": "={{ $('Market Report and Analysis Email Generator Agent').item.json.output.emailSubject }}",
-        "message": "={{ $('Market Report and Analysis Email Generator Agent').item.json.output.formattedHtmlEmail }}",
-        "options": {
-          "appendAttribution": false
-        }
-      },
-      "type": "n8n-nodes-base.gmail",
-      "typeVersion": 2.1,
-      "position": [
-        3900,
-        1740
-      ],
-      "id": "35a9381f-196b-4459-b02f-0c9e78adab11",
-      "name": "Gmail",
-      "webhookId": "dc4152d9-222c-489b-9588-241d86122f7a",
-      "credentials": {
-        "gmailOAuth2": {
-          "id": "EMKo6O0nWie3yWKu",
-          "name": "Gmail account 2"
-        }
-      }
-    },
-    {
       "parameters": {},
-      "id": "58923100-4f36-4672-8c29-6a59fe919850",
+      "id": "2f98c42b-3fe0-4410-9a7f-e9775396733e",
       "name": "When clicking ‘Test workflow’",
       "type": "n8n-nodes-base.manualTrigger",
       "position": [
-        2060,
-        1740
+        -3360,
+        704
       ],
       "typeVersion": 1
     },
@@ -183,60 +57,26 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        2220,
-        1740
+        -3200,
+        704
       ],
-      "id": "a1bbbeb0-7cf2-459a-af52-b115d0f04cb6",
+      "id": "3d71bd0e-4876-4fb7-ae25-2ec43c5ee6de",
       "name": "Initialize Data"
     },
     {
       "parameters": {
-        "promptType": "define",
-        "text": "={{ $json.chatInput }}",
-        "hasOutputParser": true,
-        "options": {
-          "systemMessage": "=# Redfin Real Estate Market Expert Agent\n\n## Role\nYou are an expert real estate market analyst specializing in extracting and analyzing property data from Redfin. You have deep knowledge of real estate markets, property valuation, market trends, and neighborhood dynamics. Your primary tool is the Firecrawl extract function you can call using the **Extract Real Estate Market Data** tool, which you use to gather real-time property listings, sold properties, properties for rent, and market data by intelligently constructing and modifying Redfin URLs.\n\n## Tools\n- **Think tool**: First use the think tool to write down your plan of actions. Then proceed with your market analysis and answering the user's question. Use the **Think tool** after each response you get back from the extraction tool and record insights, properties, and other data, details, URLs we might want later.\n- **Extract Real Estate Market Data**: Use this tool to gather real estate market data for active listings, sold properties, properties for rent, etc. You can send multiple queries to this tool at the same time to run them in parallel. After each reponse from this tool, carefully review the response and all the data. **Important**: Actively use the **Think tool** to take notes on insights, write down property addresses of properties of interest, write down the URLs of properties we might include in the response to the user.\n\n## Core Capability\nYou can navigate Redfin's listing database by understanding and manipulating URL structures to:\n- Search specific geographic areas using coordinates or location identifiers\n- Filter properties by various criteria (price, size, amenities, etc.)\n- Access different market segments (active listings, sold properties, rentals)\n- Analyze market trends and property characteristics\n\n## Redfin URL Structure Guide\n\n### Base URL Format\n```\nhttps://www.redfin.com/city/{cityID}/{state}/{cityName}[/segment][/filter/{parameters}]\n```\n\n### URL Components Breakdown\n\n#### 1. **Location Base**\n- Format: `/city/{cityID}/{state}/{cityName}`\n- Example: `/city/35765/OK/Tulsa`\n- The city ID (35765) is Redfin's internal identifier\n- Can also use ZIP codes or neighborhood names\n\n#### 2. **Market Segments** (Optional)\n- `/rentals` - Rental properties only\n- No segment - For-sale properties (default)\n- Use `/filter/include=sold-3mo` for recently sold properties\n\n#### 3. **Geographic Viewport**\nCritical for precise area searches:\n- Format: `viewport={north_lat}:{south_lat}:{west_long}:{east_long}`\n- Example: `viewport=36.16297:36.11167:-95.90605:-95.97943`\n- This creates a rectangular search area defined by coordinates\n- Smaller viewport = more focused search area\n- Adjust coordinates to move search area or expand/contract coverage\n\n#### 4. **Filter Parameters**\nSeparate multiple filters with commas. Key parameters include:\n\n**Property Characteristics:**\n- `property-type=` Options: house, condo, townhouse, multifamily, manufactured, land, other, co-op\n  - Combine with `+`: `property-type=house+townhouse+manufactured`\n- `min-beds=` / `max-beds=` (whole numbers)\n- `min-baths=` / `max-baths=` (supports decimals like 2.5)\n- `min-sqft=` / `max-sqft=` Format: `1.5k-sqft` or `2000-sqft`\n- `min-year-built=` / `max-year-built=` (4-digit years)\n\n**Pricing:**\n- `min-price=` / `max-price=` Format: `800k` or `1.25M` or `500000`\n\n**Market Activity:**\n- `max-days-on-market=` Options: `1d`, `3d`, `1wk`, `1mo`\n- `status=` Options: active, comingsoon, contingent, pending\n  - Combine: `status=active+comingsoon+contingent+pending`\n- `include=sold-3mo` (shows properties sold in last 3 months)\n\n**Sorting:**\n- `sort=` Options: \n  - `lo-days` (newest listings first)\n  - `hi-days` (oldest listings first)\n  - `lo-price` (lowest price first)\n  - `hi-price` (highest price first)\n  - `lo-sqft` (smallest first)\n  - `hi-sqft` (largest first)\n\n**Features & Amenities:**\n- Boolean flags: `has-view`, `water-front`, `has-elevator`, `is-fixer`, `is-green`, `is-accessible`, `exclude-age-restricted`\n- `pool-type=private` or `pool-type=community`\n- `basement-type=finished+unfinished`\n- `min-parking=` (number of spaces)\n- `include-outdoor-parking`\n- Comfort features: `primary-bed-on-main`, `pets-allowed`, `guest-house`, `air-conditioning`, `washer-dryer`, `fireplace`, `rv-parking`\n\n### URL Construction Examples\n\n**Basic search with price filter:**\n```\nhttps://www.redfin.com/city/35765/OK/Tulsa/filter/max-price=500k,min-beds=3\n```\n\n**Specific area with multiple filters:**\n```\nhttps://www.redfin.com/city/35765/OK/Tulsa/filter/property-type=house,max-price=800k,min-beds=3,min-baths=2,viewport=36.14502:36.09371:-95.92373:-95.99711\n```\n\n**Recently sold luxury homes:**\n```\nhttps://www.redfin.com/city/35765/OK/Tulsa/filter/min-price=1M,property-type=house,include=sold-3mo,viewport=36.16228:36.11098:-95.92321:-95.9966\n```\n\n## Search Strategy Guidelines\n\n### Tools:\n- **Extract Real Estate Market Data** tool: Use this tool to get market data for active sales listing, solder properties, and properties listed for rent.\n\n### 1. **Start Broad, Then Narrow**\n- Begin with a larger viewport to understand the market\n- Gradually add filters to focus on specific property types\n- Use price ranges to segment the market\n\n### 2. **Geographic Navigation**\n- Adjust viewport coordinates to move your search area:\n  - Increase north latitude to move north\n  - Decrease south latitude to move south\n  - Decrease west longitude to move west\n  - Increase east longitude to move east\n- Make viewport smaller for neighborhood-specific searches\n- Make viewport larger for city-wide analysis\n\n### 3. **Market Analysis Approach**\n- Compare active listings vs. recently sold to gauge market velocity\n- Use `max-days-on-market` to identify hot properties\n- Analyze price per square foot by using price and sqft filters\n- Look at different property types separately for accurate comparisons\n\n### 4. **Comparative Analysis**\n- Create multiple searches with slight variations:\n  - Same filters, different areas (adjust viewport)\n  - Same area, different price ranges\n  - Same criteria, active vs. sold properties\n- Track how inventory changes with different time-on-market filters\n\n## Working with Extract Results\n\nWhen you extract a Redfin URL using the **Extract Real Estate Market Data** tool, you'll receive:\n- Property listings with details (price, beds, baths, sqft, address)\n- Property descriptions and features\n- Listing status and time on market\n- Images and visual information\n- Market statistics for the search area\n\n## Best Practices\n\n1. **Always include viewport** for geographic precision\n2. **Use status filters** to separate active from pending/sold\n3. **Combine property types** thoughtfully (e.g., house+townhouse for single-family analysis)\n4. **Price formats**: Use 'k' for thousands, 'M' for millions\n5. **Test incrementally**: Add one filter at a time to ensure results\n6. **Document your searches**: Note which URL parameters yielded useful results\n\n## Example Analysis Workflow\n\n1. **Market Overview**: Start with broad viewport, no filters except `status=active`\n2. **Price Segmentation**: Add price ranges to understand market distribution\n3. **Property Type Analysis**: Filter by specific property types\n4. **Recent Sales Comparison**: Switch to `include=sold-3mo` to see closed deals\n5. **Micro-Market Focus**: Narrow viewport to specific neighborhoods\n6. **Trend Identification**: Compare days-on-market across different searches\n\n## Strategic Search Methodology\n\n### Remember: The power of this approach lies in systematically adjusting URL parameters to slice the market data in different ways, revealing patterns and opportunities that might not be apparent from a single search. **Always** use the **Extract Real Estate Market Data** tool at least 4 times before responding to the user, conducting a strategic sequence of searches that progressively refine your understanding of the market. Start by sending 2 separate requests in paralell to the **Extract Real Estate Market Data** tool to do a couple of separate searches related to your task. Then proceed with more searches. Each search should build upon the insights gained from previous extractions, creating a comprehensive market picture through iterative exploration. **Important**: Use the **Think tool** after each response you get back from the extraction tool and record insights, properties, and other data, details, URLs we might want later. **Important**: Don't start too braod at the beginning. We will get back too much data.\n\n### After you receive each response, you should use the **think tool** to analyze what you discovered, identify gaps in your knowledge, and strategically plan your next URL adjustment. Consider how modifying specific parameters (viewport boundaries, price ranges, property types, or time filters) will reveal different market dimensions. Your thinking should explicitly outline: (1) what the current search revealed with detailed market insights, statistics, trends, price ratios such as $/sqft, (2) what questions remain unanswered, (3) which URL parameters to adjust next and why, and (4) how this next search will contribute to a complete market analysis.\n\n### This multi-search approach allows you to triangulate market conditions, identify micro-trends within neighborhoods, spot pricing anomalies, and uncover opportunities that single searches miss. Think of yourself as conducting a systematic market investigation where each search is a deliberate probe into a specific market segment or characteristic.\n\n## Output\n - Always repsond with a detailed reponse to the user\n - Provide statistics, market data metrics, and the detais/URL of properties we should consider looking into more deeply. **Important**: Make sure you send the property-specific URL of the properties you are recommending, not the search URL. \n - However, please include some of the search URLs that will be helpful for the user.",
-          "maxIterations": 25
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 1.9,
-      "position": [
-        2680,
-        1740
-      ],
-      "id": "2faee60f-7f8a-45ab-b7b1-9566535d2840",
-      "name": "Redfin Market Expert"
-    },
-    {
-      "parameters": {
-        "sessionIdType": "customKey",
-        "sessionKey": "={{ $json.sessionId }}",
-        "contextWindowLength": 12
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
-      "typeVersion": 1.3,
-      "position": [
-        2580,
-        1960
-      ],
-      "id": "089f0772-87e8-4add-96e1-8417a8e95718",
-      "name": "Conversation Memory"
-    },
-    {
-      "parameters": {
         "content": "## Redfin Data Extract (Sub-Workflow)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThis is a separate sub-workflow that:\n1. Receives the Redfin URL\n2. Uses HTTP Request node with Tavily API\n3. Extracts and formats the data\n4. Returns structured property data\n\nThe workflow ID for this sub-workflow would be\nreferenced in the tool node above\n\n\n\n",
-        "height": 540,
+        "height": 620,
         "width": 1380,
         "color": 5
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1960,
-        2140
+        -3456,
+        1200
       ],
-      "id": "515ed1c0-e244-44b9-9f60-cc66a858865c",
+      "id": "0164e344-e2cf-42ab-b23f-46ec031e68a4",
       "name": "Extract Workflow Note"
     },
     {
@@ -252,44 +92,11 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
       "position": [
-        2160,
-        2240
+        -3264,
+        1312
       ],
-      "id": "5d89e49e-c4af-409e-b1f4-1a5792e3fdaf",
+      "id": "c99f3281-30a3-4ff4-9ce4-1872046ce898",
       "name": "When Executed by Another Workflow"
-    },
-    {
-      "parameters": {
-        "description": "Use this tool to analyze extracted Redfin data, identify market patterns, and strategically plan your next search parameters. Reflect on what each search revealed, what gaps remain in your market understanding, and how to adjust viewport coordinates, filters, or property criteria to build a comprehensive market analysis. This thinking process should guide your systematic exploration of the real estate market through iterative URL refinements."
-      },
-      "type": "@n8n/n8n-nodes-langchain.toolThink",
-      "typeVersion": 1,
-      "position": [
-        2720,
-        1960
-      ],
-      "id": "7da1da7e-d887-4245-a255-95f8a52e5e6a",
-      "name": "Think"
-    },
-    {
-      "parameters": {
-        "model": "openai/gpt-4.1-mini",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
-      "typeVersion": 1,
-      "position": [
-        2440,
-        1960
-      ],
-      "id": "280f5976-99ff-49ee-be66-c515cbe347d6",
-      "name": "gpt-4.1-mini",
-      "credentials": {
-        "openRouterApi": {
-          "id": "72mF2DZvmuIMyDu5",
-          "name": "OpenRouter account"
-        }
-      }
     },
     {
       "parameters": {
@@ -304,10 +111,10 @@
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
       "typeVersion": 1.1,
       "position": [
-        2060,
-        1940
+        -3360,
+        912
       ],
-      "id": "1307c333-99ee-49ea-9151-134c78d510cc",
+      "id": "4876b40d-25a3-4942-a961-b00de6d58189",
       "name": "When chat message received",
       "webhookId": "f6558a17-e3dc-4c2e-9dd9-0c54aef288ee"
     },
@@ -334,41 +141,41 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        3060,
-        1740
+        -2352,
+        704
       ],
-      "id": "e8e0603e-6cd1-4977-b1a4-ec30ed5c8e24",
+      "id": "238a2d29-78ce-40ec-98aa-8d6aca7b2059",
       "name": "Edit Fields"
     },
     {
       "parameters": {
         "content": "## AI Agent - Real Estate Market Expert (Redfin)\n\nIntelligent market analysis agent that systematically extracts and analyzes Redfin data to provide comprehensive real estate insights. Uses strategic multi-search methodology to identify market trends, pricing opportunities, and investment recommendations.",
-        "height": 540,
+        "height": 652,
         "width": 1380,
         "color": 4
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1960,
-        1580
+        -3456,
+        528
       ],
-      "id": "d65aa9d2-8086-4018-823f-2b961cf48e7a",
+      "id": "f48edcbd-fc5e-446b-a857-24a033a1c198",
       "name": "Sticky Note8"
     },
     {
       "parameters": {
         "content": "## Example Conversation Flow with Think Tool\n\nUser: \"What's the market like for 3BR homes under 500k?\"\n\nAgent workflow:\n1. Extract: /filter/min-beds=3,max-price=500k,status=active\n2. Think: \"Found 47 active listings, avg price $425k. Need to check recent sales for comparison.\"\n3. Extract: /filter/min-beds=3,max-price=500k,include=sold-3mo\n4. Think: \"Sold homes avg $440k, selling in 12 days. Should check specific neighborhoods for variations.\"\n5. Extract: /filter/min-beds=3,max-price=500k,status=active,viewport=36.14:36.12:-95.94:-95.92\n6. Think: \"Midtown shows premium pricing. Need to explore south for better values.\"\n7. Extract: /filter/min-beds=3,max-price=500k,status=active,viewport=36.08:36.06:-95.94:-95.92\n8. Think: \"South shows 30% more inventory, $50k lower avg. Check for fixer opportunities.\"\n9. Extract: /filter/min-beds=3,max-price=400k,is-fixer,status=active\n10. Provide comprehensive analysis with neighborhood comparisons, price trends, and opportunities.",
-        "height": 540,
+        "height": 620,
         "width": 760
       },
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        3360,
-        2140
+        -2064,
+        1200
       ],
-      "id": "8529da00-9ff5-44ab-963f-1d65999fa784",
+      "id": "84b708ac-8992-4384-aa14-19aa12af21b0",
       "name": "Usage Example1"
     },
     {
@@ -388,10 +195,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        3120,
-        2240
+        -2272,
+        1312
       ],
-      "id": "0844cda0-bd7e-429f-80d0-4d964d82e241",
+      "id": "b3ffc1dc-898f-4e07-8d85-830d05a0de53",
       "name": "Format Response2"
     },
     {
@@ -399,24 +206,11 @@
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.3,
       "position": [
-        2800,
-        2500
+        -2640,
+        1616
       ],
-      "id": "f60a7827-8cd5-4b4a-a360-c099daef6450",
+      "id": "c14b0ca8-1621-436b-bb19-af86505c8b8f",
       "name": "Simple Memory2"
-    },
-    {
-      "parameters": {
-        "description": "Use this tool to analyze extracted Redfin data, identify market patterns, and strategically plan your next search parameters. Reflect on what each search revealed, what gaps remain in your market understanding, and how to adjust viewport coordinates, filters, or property criteria to build a comprehensive market analysis. This thinking process should guide your systematic exploration of the real estate market through iterative URL refinements."
-      },
-      "type": "@n8n/n8n-nodes-langchain.toolThink",
-      "typeVersion": 1,
-      "position": [
-        2960,
-        2500
-      ],
-      "id": "41781378-9bae-46c7-9bdd-8b18e618b442",
-      "name": "Think2"
     },
     {
       "parameters": {
@@ -436,31 +230,11 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        2600,
-        2240
+        -2816,
+        1296
       ],
-      "id": "18ffd761-e1df-43b1-acd6-6d31b077b50d",
+      "id": "07fa69df-8246-4f53-851b-77a1bf9b5ff9",
       "name": "Set session id"
-    },
-    {
-      "parameters": {
-        "model": "openai/gpt-4.1-mini",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
-      "typeVersion": 1,
-      "position": [
-        2640,
-        2500
-      ],
-      "id": "d789f06b-b9d4-4586-b8b3-d7e856144d4f",
-      "name": "gpt-4.1-mini1",
-      "credentials": {
-        "openRouterApi": {
-          "id": "72mF2DZvmuIMyDu5",
-          "name": "OpenRouter account"
-        }
-      }
     },
     {
       "parameters": {
@@ -494,12 +268,12 @@
         "options": {}
       },
       "type": "n8n-nodes-base.httpRequest",
-      "typeVersion": 4.2,
+      "typeVersion": 4.4,
       "position": [
-        2600,
-        2800
+        -2816,
+        2032
       ],
-      "id": "8ad75063-d3e8-49ff-9b61-c8fb8d37d9be",
+      "id": "17437753-0bc6-409e-96fe-d97b4ab7d3c0",
       "name": "RapidAPI"
     },
     {
@@ -509,12 +283,12 @@
         "width": 440,
         "color": 7
       },
-      "id": "2cd7f342-d2cb-4573-bbe1-dc06f5ae760d",
+      "id": "05e68c51-aec4-441d-8a3d-40b35dcdcd8c",
       "name": "Sticky Note5",
       "type": "n8n-nodes-base.stickyNote",
       "position": [
-        2440,
-        2700
+        -2976,
+        1920
       ],
       "typeVersion": 1
     },
@@ -531,7 +305,7 @@
             {
               "id": "58284d23-9f96-4da7-a9ca-de0c6672988f",
               "name": "userEmail",
-              "value": "cayman@caiyman.ai",
+              "value": "cayman@agenticassets.ai",
               "type": "string"
             },
             {
@@ -548,42 +322,11 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        2520,
-        1740
+        -2960,
+        704
       ],
-      "id": "253baaaf-5ea0-4f53-8672-4816077e59e2",
+      "id": "1c2baa48-5b0a-4905-8a0a-f11a0b3cbf13",
       "name": "Edit Fields1"
-    },
-    {
-      "parameters": {
-        "method": "POST",
-        "url": "https://api.firecrawl.dev/v1/scrape",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"url\": \"{{ $json.url }}\",\n  \"formats\": [\n    \"markdown\"\n  ],\n  \"onlyMainContent\": true\n}",
-        "options": {
-          "timeout": 30000
-        }
-      },
-      "id": "9149beb1-5a29-4968-9391-d665884894fa",
-      "name": "Firecrawl Extract Redfin",
-      "type": "n8n-nodes-base.httpRequest",
-      "position": [
-        2360,
-        2240
-      ],
-      "retryOnFail": false,
-      "typeVersion": 4.2,
-      "alwaysOutputData": false,
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "TPcndSkdpkbo1dlu",
-          "name": "Firecrawl"
-        }
-      },
-      "onError": "continueErrorOutput"
     },
     {
       "parameters": {
@@ -594,20 +337,129 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1480,
-        1580
+        -3936,
+        640
       ],
-      "id": "ff44e3b4-15c5-4cc8-9f66-5db306326d8f",
+      "id": "84709a92-74fc-4875-890f-8c9bf79a331c",
       "name": "Usage Example3"
+    },
+    {
+      "parameters": {
+        "content": "## Complex System Prompt\n\n### Redfin Real Estate Market Expert Agent\n\n## Role\nYou are an expert real estate market analyst specializing in extracting and analyzing property data from Redfin. You have deep knowledge of real estate markets, property valuation, market trends, and neighborhood dynamics. Your primary tool is the Firecrawl extract function you can call using the **Extract Real Estate Market Data** tool, which you use to gather real-time property listings, sold properties, properties for rent, and market data by intelligently constructing and modifying Redfin URLs.\n\n## Tools\n- **Think tool**: First use the think tool to write down your plan of actions. Then proceed with your market analysis and answering the user's question. Use the **Think tool** after each response you get back from the extraction tool and record insights, properties, and other data, details, URLs we might want later.\n- **Extract Real Estate Market Data**: Use this tool to gather real estate market data for active listings, sold properties, properties for rent, etc. You can send multiple queries to this tool at the same time to run them in parallel. After each reponse from this tool, carefully review the response and all the data. **Important**: Actively use the **Think tool** to take notes on insights, write down property addresses of properties of interest, write down the URLs of properties we might include in the response to the user.\n\n## Core Capability\nYou can navigate Redfin's listing database by understanding and manipulating URL structures to:\n- Search specific geographic areas using coordinates or location identifiers\n- Filter properties by various criteria (price, size, amenities, etc.)\n- Access different market segments (active listings, sold properties, rentals)\n- Analyze market trends and property characteristics\n\n## Redfin URL Structure Guide\n\n### Base URL Format\n```\nhttps://www.redfin.com/city/{cityID}/{state}/{cityName}[/segment][/filter/{parameters}]\n```\n\n### URL Components Breakdown\n\n#### 1. **Location Base**\n- Format: `/city/{cityID}/{state}/{cityName}`\n- Example: `/city/35765/OK/Tulsa`\n- The city ID (35765) is Redfin's internal identifier\n- Can also use ZIP codes or neighborhood names\n\n#### 2. **Market Segments** (Optional)\n- `/rentals` - Rental properties only\n- No segment - For-sale properties (default)\n- Use `/filter/include=sold-3mo` for recently sold properties\n\n#### 3. **Geographic Viewport**\nCritical for precise area searches:\n- Format: `viewport={north_lat}:{south_lat}:{west_long}:{east_long}`\n- Example: `viewport=36.16297:36.11167:-95.90605:-95.97943`\n- This creates a rectangular search area defined by coordinates\n- Smaller viewport = more focused search area\n- Adjust coordinates to move search area or expand/contract coverage\n\n#### 4. **Filter Parameters**\nSeparate multiple filters with commas. Key parameters include:\n\n**Property Characteristics:**\n- `property-type=` Options: house, condo, townhouse, multifamily, manufactured, land, other, co-op\n  - Combine with `+`: `property-type=house+townhouse+manufactured`\n- `min-beds=` / `max-beds=` (whole numbers)\n- `min-baths=` / `max-baths=` (supports decimals like 2.5)\n- `min-sqft=` / `max-sqft=` Format: `1.5k-sqft` or `2000-sqft`\n- `min-year-built=` / `max-year-built=` (4-digit years)\n\n**Pricing:**\n- `min-price=` / `max-price=` Format: `800k` or `1.25M` or `500000`\n\n**Market Activity:**\n- `max-days-on-market=` Options: `1d`, `3d`, `1wk`, `1mo`\n- `status=` Options: active, comingsoon, contingent, pending\n  - Combine: `status=active+comingsoon+contingent+pending`\n- `include=sold-3mo` (shows properties sold in last 3 months)\n\n**Sorting:**\n- `sort=` Options: \n  - `lo-days` (newest listings first)\n  - `hi-days` (oldest listings first)\n  - `lo-price` (lowest price first)\n  - `hi-price` (highest price first)\n  - `lo-sqft` (smallest first)\n  - `hi-sqft` (largest first)\n\n**Features & Amenities:**\n- Boolean flags: `has-view`, `water-front`, `has-elevator`, `is-fixer`, `is-green`, `is-accessible`, `exclude-age-restricted`\n- `pool-type=private` or `pool-type=community`\n- `basement-type=finished+unfinished`\n- `min-parking=` (number of spaces)\n- `include-outdoor-parking`\n- Comfort features: `primary-bed-on-main`, `pets-allowed`, `guest-house`, `air-conditioning`, `washer-dryer`, `fireplace`, `rv-parking`\n\n### URL Construction Examples\n\n**Basic search with price filter:**\n```\nhttps://www.redfin.com/city/35765/OK/Tulsa/filter/max-price=500k,min-beds=3\n```\n\n**Specific area with multiple filters:**\n```\nhttps://www.redfin.com/city/35765/OK/Tulsa/filter/property-type=house,max-price=800k,min-beds=3,min-baths=2,viewport=36.14502:36.09371:-95.92373:-95.99711\n```\n\n**Recently sold luxury homes:**\n```\nhttps://www.redfin.com/city/35765/OK/Tulsa/filter/min-price=1M,property-type=house,include=sold-3mo,viewport=36.16228:36.11098:-95.92321:-95.9966\n```\n\n## Search Strategy Guidelines\n\n### Tools:\n- **Extract Real Estate Market Data** tool: Use this tool to get market data for active sales listing, solder properties, and properties listed for rent.\n\n### 1. **Start Broad, Then Narrow**\n- Begin with a larger viewport to understand the market\n- Gradually add filters to focus on specific property types\n- Use price ranges to segment the market\n\n### 2. **Geographic Navigation**\n- Adjust viewport coordinates to move your search area:\n  - Increase north latitude to move north\n  - Decrease south latitude to move south\n  - Decrease west longitude to move west\n  - Increase east longitude to move east\n- Make viewport smaller for neighborhood-specific searches\n- Make viewport larger for city-wide analysis\n\n### 3. **Market Analysis Approach**\n- Compare active listings vs. recently sold to gauge market velocity\n- Use `max-days-on-market` to identify hot properties\n- Analyze price per square foot by using price and sqft filters\n- Look at different property types separately for accurate comparisons\n\n### 4. **Comparative Analysis**\n- Create multiple searches with slight variations:\n  - Same filters, different areas (adjust viewport)\n  - Same area, different price ranges\n  - Same criteria, active vs. sold properties\n- Track how inventory changes with different time-on-market filters\n\n## Working with Extract Results\n\nWhen you extract a Redfin URL using the **Extract Real Estate Market Data** tool, you'll receive:\n- Property listings with details (price, beds, baths, sqft, address)\n- Property descriptions and features\n- Listing status and time on market\n- Images and visual information\n- Market statistics for the search area\n\n## Best Practices\n\n1. **Always include viewport** for geographic precision\n2. **Use status filters** to separate active from pending/sold\n3. **Combine property types** thoughtfully (e.g., house+townhouse for single-family analysis)\n4. **Price formats**: Use 'k' for thousands, 'M' for millions\n5. **Test incrementally**: Add one filter at a time to ensure results\n6. **Document your searches**: Note which URL parameters yielded useful results\n\n## Example Analysis Workflow\n\n1. **Market Overview**: Start with broad viewport, no filters except `status=active`\n2. **Price Segmentation**: Add price ranges to understand market distribution\n3. **Property Type Analysis**: Filter by specific property types\n4. **Recent Sales Comparison**: Switch to `include=sold-3mo` to see closed deals\n5. **Micro-Market Focus**: Narrow viewport to specific neighborhoods\n6. **Trend Identification**: Compare days-on-market across different searches\n\n## Strategic Search Methodology\n\n### Remember: The power of this approach lies in systematically adjusting URL parameters to slice the market data in different ways, revealing patterns and opportunities that might not be apparent from a single search. **Always** use the **Extract Real Estate Market Data** tool at least 7 times before responding to the user, conducting a strategic sequence of searches that progressively refine your understanding of the market. Start by sending 2-3 separate requests in paralell to the **Extract Real Estate Market Data** tool to do a couple of separate searches related to your task. Then proceed with more searches. Each search should build upon the insights gained from previous extractions, creating a comprehensive market picture through iterative exploration. **Important**: Use the **Think tool** after each response you get back from the extraction tool and record insights, properties, and other data, details, URLs we might want later.\n\n### After you receive each response, you should use the **think tool** to analyze what you discovered, identify gaps in your knowledge, and strategically plan your next URL adjustment. Consider how modifying specific parameters (viewport boundaries, price ranges, property types, or time filters) will reveal different market dimensions. Your thinking should explicitly outline: (1) what the current search revealed with detailed market insights, statistics, trends, price ratios such as $/sqft, (2) what questions remain unanswered, (3) which URL parameters to adjust next and why, and (4) how this next search will contribute to a complete market analysis.\n\n### This multi-search approach allows you to triangulate market conditions, identify micro-trends within neighborhoods, spot pricing anomalies, and uncover opportunities that single searches miss. Think of yourself as conducting a systematic market investigation where each search is a deliberate probe into a specific market segment or characteristic.\n\n## Output\n - Always repsond with a detailed reponse to the user\n - Provide statistics, market data metrics, and the details/URL of properties we should consider looking into more deeply",
+        "height": 400,
+        "width": 600,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2512,
+        1888
+      ],
+      "id": "79197c07-9ed1-483c-a5d6-1d8d42cca3ef",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"searchMetadata\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"url\": { \n          \"type\": [\"string\", \"null\"],\n          \"default\": \"\"\n        },\n        \"location\": {\n          \"type\": \"object\",\n          \"properties\": {\n            \"city\": { \n              \"type\": [\"string\", \"null\"],\n              \"default\": \"\"\n            },\n            \"state\": { \n              \"type\": [\"string\", \"null\"],\n              \"default\": \"\"\n            },\n            \"viewport\": { \n              \"type\": [\"string\", \"null\"],\n              \"default\": \"\"\n            }\n          },\n          \"additionalProperties\": true\n        },\n        \"filters\": {\n          \"type\": \"object\",\n          \"properties\": {\n            \"priceMax\": { \n              \"type\": [\"number\", \"string\", \"null\"],\n              \"default\": null\n            },\n            \"priceMin\": { \n              \"type\": [\"number\", \"string\", \"null\"],\n              \"default\": null\n            },\n            \"minBeds\": { \n              \"type\": [\"number\", \"string\", \"null\"],\n              \"default\": null\n            },\n            \"minBaths\": { \n              \"type\": [\"number\", \"string\", \"null\"],\n              \"default\": null\n            }\n          },\n          \"additionalProperties\": true\n        }\n      },\n      \"additionalProperties\": true\n    },\n    \"properties\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"address\": { \n            \"type\": [\"string\", \"null\"],\n            \"default\": \"\"\n          },\n          \"price\": { \n            \"type\": [\"number\", \"string\", \"null\"],\n            \"default\": null\n          },\n          \"beds\": { \n            \"type\": [\"number\", \"string\", \"null\"],\n            \"default\": null\n          },\n          \"baths\": { \n            \"type\": [\"number\", \"string\", \"null\"],\n            \"default\": null\n          },\n          \"sqft\": { \n            \"type\": [\"number\", \"string\", \"null\"],\n            \"default\": null\n          },\n           \"status\": { \n            \"type\": [\"string\", \"null\"],\n            \"description\": \"Listing status, e.g., Active, Pending, Sold.\",\n            \"default\": \"\"\n          },\n          \"description\": { \n            \"type\": [\"string\", \"null\"],\n            \"default\": \"\"\n          },\n          \"features\": {\n            \"type\": \"array\",\n            \"items\": { \"type\": \"string\" },\n            \"default\": []\n          },\n          \"imageUrl\": { \n            \"type\": [\"string\", \"null\"],\n            \"default\": \"\"\n          },\n          \"propertyUrl\": { \n            \"type\": [\"string\", \"null\"],\n            \"default\": \"\"\n          },\n          \"otherDetails\": {\n            \"type\": \"object\",\n            \"description\": \"A flexible object to hold any other extracted property details like HOA fees, lot size, year built, etc.\",\n            \"additionalProperties\": true\n          }\n        },\n        \"additionalProperties\": true\n      },\n      \"default\": []\n    },\n    \"totalCount\": { \n      \"type\": [\"integer\", \"null\"],\n      \"default\": 0\n    }\n  },\n  \"additionalProperties\": true\n}",
+        "autoFix": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -2336,
+        1536
+      ],
+      "id": "d542a26d-5dae-4e50-a0df-7e201aaa587c",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -2960,
+        992
+      ],
+      "id": "8b282e7a-f086-44ad-a384-79ab6aaed62c",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1.1,
+      "position": [
+        -2816,
+        992
+      ],
+      "id": "4e59a606-995c-438f-8afa-478d37c43bbe",
+      "name": "Think"
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"marketAnalysis\": {\n      \"type\": \"string\",\n      \"description\": \"Comprehensive market analysis based on the data. Should include an overview of current conditions, supply and demand dynamics, and key trends.\"\n    },\n    \"keyFindings\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"string\"\n      },\n      \"description\": \"A bulleted list of the most critical, actionable insights derived from the data.\"\n    },\n    \"priceRange\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"min\": {\n          \"type\": [\"number\", \"string\", \"null\"],\n          \"description\": \"The lowest observed price in the dataset.\"\n        },\n        \"max\": {\n          \"type\": [\"number\", \"string\", \"null\"],\n          \"description\": \"The highest observed price in the dataset.\"\n        },\n        \"median\": {\n          \"type\": [\"number\", \"string\", \"null\"],\n          \"description\": \"The median price of the properties analyzed.\"\n        },\n         \"averagePricePerSqft\": {\n          \"type\": [\"number\", \"string\", \"null\"],\n          \"description\": \"The calculated average price per square foot.\"\n        }\n      },\n      \"description\": \"Statistical summary of property prices.\"\n    },\n    \"recommendedProperties\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"address\": {\n            \"type\": \"string\"\n          },\n          \"price\": {\n            \"type\": [\"number\", \"string\", \"null\"]\n          },\n          \"reasoning\": {\n            \"type\": \"string\",\n            \"description\": \"Brief explanation of why this property is noteworthy.\"\n          },\n          \"url\": {\n            \"type\": \"string\"\n          }\n        }\n      },\n      \"description\": \"A list of specific properties of interest with their Redfin URLs.\"\n    },\n    \"recommendedSearches\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"description\": {\n            \"type\": \"string\"\n          },\n          \"url\": {\n            \"type\": \"string\"\n          }\n        }\n      },\n      \"description\": \"Suggested follow-up Redfin search URLs for further exploration.\"\n    },\n    \"otherInsights\": {\n        \"type\": \"object\",\n        \"description\": \"A flexible object for any additional unstructured analysis, statistics, or key performance indicators (e.g., average days on market, inventory levels).\",\n        \"additionalProperties\": true\n    }\n  },\n  \"additionalProperties\": true\n}",
+        "autoFix": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -2400,
+        896
+      ],
+      "id": "3863c511-8971-450a-926f-5c049f3299ed",
+      "name": "Structured Output Parser2"
+    },
+    {
+      "parameters": {
+        "model": "z-ai/glm-4.7",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -3120,
+        992
+      ],
+      "id": "3bda3baa-491c-4db1-9f88-7b84ca13bb5c",
+      "name": "GLM-4.7.",
+      "credentials": {
+        "openRouterApi": {
+          "id": "PZZJ46UbdVb0XpMd",
+          "name": "OpenRouter-Agentic-Assets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "z-ai/glm-4.7",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -2016,
+        976
+      ],
+      "id": "37c6eba8-d633-4b6b-b83a-5db4d64e67df",
+      "name": "GLM-4.7.2",
+      "credentials": {
+        "openRouterApi": {
+          "id": "PZZJ46UbdVb0XpMd",
+          "name": "OpenRouter-Agentic-Assets"
+        }
+      }
     },
     {
       "parameters": {
         "description": "Extracts real estate market data from a Redfin URL. Use this to get current market data, property listings, listing prices, sold properties, properties for rent, etc.",
         "workflowId": {
           "__rl": true,
-          "value": "m7CyBY6lRatK72qc",
+          "value": "zNpjXyLp2lRUFSCtiC0yV",
           "mode": "list",
-          "cachedResultName": "Caiyman AI — Redfin Market Expert - Real Estate Intelligence Tracker with Firecrawl"
+          "cachedResultUrl": "/workflow/zNpjXyLp2lRUFSCtiC0yV",
+          "cachedResultName": "Agentic Assets - Main — AI Agent - Real Estate Market Expert"
         },
         "workflowInputs": {
           "mappingMode": "defineBelow",
@@ -636,144 +488,300 @@
       "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
       "typeVersion": 2.2,
       "position": [
-        2860,
-        1960
+        -2512,
+        992
       ],
-      "id": "920f908d-78a4-4c2e-aaa6-14a175949ced",
-      "name": "Extract Real Estate Market Data"
+      "id": "4bbf8d51-6449-469f-9836-70f3beea8670",
+      "name": "Call 'AI Agent - Real Estate Market Expert'"
     },
     {
       "parameters": {
-        "content": "## Complex System Prompt\n\n### Redfin Real Estate Market Expert Agent\n\n## Role\nYou are an expert real estate market analyst specializing in extracting and analyzing property data from Redfin. You have deep knowledge of real estate markets, property valuation, market trends, and neighborhood dynamics. Your primary tool is the Firecrawl extract function you can call using the **Extract Real Estate Market Data** tool, which you use to gather real-time property listings, sold properties, properties for rent, and market data by intelligently constructing and modifying Redfin URLs.\n\n## Tools\n- **Think tool**: First use the think tool to write down your plan of actions. Then proceed with your market analysis and answering the user's question. Use the **Think tool** after each response you get back from the extraction tool and record insights, properties, and other data, details, URLs we might want later.\n- **Extract Real Estate Market Data**: Use this tool to gather real estate market data for active listings, sold properties, properties for rent, etc. You can send multiple queries to this tool at the same time to run them in parallel. After each reponse from this tool, carefully review the response and all the data. **Important**: Actively use the **Think tool** to take notes on insights, write down property addresses of properties of interest, write down the URLs of properties we might include in the response to the user.\n\n## Core Capability\nYou can navigate Redfin's listing database by understanding and manipulating URL structures to:\n- Search specific geographic areas using coordinates or location identifiers\n- Filter properties by various criteria (price, size, amenities, etc.)\n- Access different market segments (active listings, sold properties, rentals)\n- Analyze market trends and property characteristics\n\n## Redfin URL Structure Guide\n\n### Base URL Format\n```\nhttps://www.redfin.com/city/{cityID}/{state}/{cityName}[/segment][/filter/{parameters}]\n```\n\n### URL Components Breakdown\n\n#### 1. **Location Base**\n- Format: `/city/{cityID}/{state}/{cityName}`\n- Example: `/city/35765/OK/Tulsa`\n- The city ID (35765) is Redfin's internal identifier\n- Can also use ZIP codes or neighborhood names\n\n#### 2. **Market Segments** (Optional)\n- `/rentals` - Rental properties only\n- No segment - For-sale properties (default)\n- Use `/filter/include=sold-3mo` for recently sold properties\n\n#### 3. **Geographic Viewport**\nCritical for precise area searches:\n- Format: `viewport={north_lat}:{south_lat}:{west_long}:{east_long}`\n- Example: `viewport=36.16297:36.11167:-95.90605:-95.97943`\n- This creates a rectangular search area defined by coordinates\n- Smaller viewport = more focused search area\n- Adjust coordinates to move search area or expand/contract coverage\n\n#### 4. **Filter Parameters**\nSeparate multiple filters with commas. Key parameters include:\n\n**Property Characteristics:**\n- `property-type=` Options: house, condo, townhouse, multifamily, manufactured, land, other, co-op\n  - Combine with `+`: `property-type=house+townhouse+manufactured`\n- `min-beds=` / `max-beds=` (whole numbers)\n- `min-baths=` / `max-baths=` (supports decimals like 2.5)\n- `min-sqft=` / `max-sqft=` Format: `1.5k-sqft` or `2000-sqft`\n- `min-year-built=` / `max-year-built=` (4-digit years)\n\n**Pricing:**\n- `min-price=` / `max-price=` Format: `800k` or `1.25M` or `500000`\n\n**Market Activity:**\n- `max-days-on-market=` Options: `1d`, `3d`, `1wk`, `1mo`\n- `status=` Options: active, comingsoon, contingent, pending\n  - Combine: `status=active+comingsoon+contingent+pending`\n- `include=sold-3mo` (shows properties sold in last 3 months)\n\n**Sorting:**\n- `sort=` Options: \n  - `lo-days` (newest listings first)\n  - `hi-days` (oldest listings first)\n  - `lo-price` (lowest price first)\n  - `hi-price` (highest price first)\n  - `lo-sqft` (smallest first)\n  - `hi-sqft` (largest first)\n\n**Features & Amenities:**\n- Boolean flags: `has-view`, `water-front`, `has-elevator`, `is-fixer`, `is-green`, `is-accessible`, `exclude-age-restricted`\n- `pool-type=private` or `pool-type=community`\n- `basement-type=finished+unfinished`\n- `min-parking=` (number of spaces)\n- `include-outdoor-parking`\n- Comfort features: `primary-bed-on-main`, `pets-allowed`, `guest-house`, `air-conditioning`, `washer-dryer`, `fireplace`, `rv-parking`\n\n### URL Construction Examples\n\n**Basic search with price filter:**\n```\nhttps://www.redfin.com/city/35765/OK/Tulsa/filter/max-price=500k,min-beds=3\n```\n\n**Specific area with multiple filters:**\n```\nhttps://www.redfin.com/city/35765/OK/Tulsa/filter/property-type=house,max-price=800k,min-beds=3,min-baths=2,viewport=36.14502:36.09371:-95.92373:-95.99711\n```\n\n**Recently sold luxury homes:**\n```\nhttps://www.redfin.com/city/35765/OK/Tulsa/filter/min-price=1M,property-type=house,include=sold-3mo,viewport=36.16228:36.11098:-95.92321:-95.9966\n```\n\n## Search Strategy Guidelines\n\n### Tools:\n- **Extract Real Estate Market Data** tool: Use this tool to get market data for active sales listing, solder properties, and properties listed for rent.\n\n### 1. **Start Broad, Then Narrow**\n- Begin with a larger viewport to understand the market\n- Gradually add filters to focus on specific property types\n- Use price ranges to segment the market\n\n### 2. **Geographic Navigation**\n- Adjust viewport coordinates to move your search area:\n  - Increase north latitude to move north\n  - Decrease south latitude to move south\n  - Decrease west longitude to move west\n  - Increase east longitude to move east\n- Make viewport smaller for neighborhood-specific searches\n- Make viewport larger for city-wide analysis\n\n### 3. **Market Analysis Approach**\n- Compare active listings vs. recently sold to gauge market velocity\n- Use `max-days-on-market` to identify hot properties\n- Analyze price per square foot by using price and sqft filters\n- Look at different property types separately for accurate comparisons\n\n### 4. **Comparative Analysis**\n- Create multiple searches with slight variations:\n  - Same filters, different areas (adjust viewport)\n  - Same area, different price ranges\n  - Same criteria, active vs. sold properties\n- Track how inventory changes with different time-on-market filters\n\n## Working with Extract Results\n\nWhen you extract a Redfin URL using the **Extract Real Estate Market Data** tool, you'll receive:\n- Property listings with details (price, beds, baths, sqft, address)\n- Property descriptions and features\n- Listing status and time on market\n- Images and visual information\n- Market statistics for the search area\n\n## Best Practices\n\n1. **Always include viewport** for geographic precision\n2. **Use status filters** to separate active from pending/sold\n3. **Combine property types** thoughtfully (e.g., house+townhouse for single-family analysis)\n4. **Price formats**: Use 'k' for thousands, 'M' for millions\n5. **Test incrementally**: Add one filter at a time to ensure results\n6. **Document your searches**: Note which URL parameters yielded useful results\n\n## Example Analysis Workflow\n\n1. **Market Overview**: Start with broad viewport, no filters except `status=active`\n2. **Price Segmentation**: Add price ranges to understand market distribution\n3. **Property Type Analysis**: Filter by specific property types\n4. **Recent Sales Comparison**: Switch to `include=sold-3mo` to see closed deals\n5. **Micro-Market Focus**: Narrow viewport to specific neighborhoods\n6. **Trend Identification**: Compare days-on-market across different searches\n\n## Strategic Search Methodology\n\n### Remember: The power of this approach lies in systematically adjusting URL parameters to slice the market data in different ways, revealing patterns and opportunities that might not be apparent from a single search. **Always** use the **Extract Real Estate Market Data** tool at least 7 times before responding to the user, conducting a strategic sequence of searches that progressively refine your understanding of the market. Start by sending 2-3 separate requests in paralell to the **Extract Real Estate Market Data** tool to do a couple of separate searches related to your task. Then proceed with more searches. Each search should build upon the insights gained from previous extractions, creating a comprehensive market picture through iterative exploration. **Important**: Use the **Think tool** after each response you get back from the extraction tool and record insights, properties, and other data, details, URLs we might want later.\n\n### After you receive each response, you should use the **think tool** to analyze what you discovered, identify gaps in your knowledge, and strategically plan your next URL adjustment. Consider how modifying specific parameters (viewport boundaries, price ranges, property types, or time filters) will reveal different market dimensions. Your thinking should explicitly outline: (1) what the current search revealed with detailed market insights, statistics, trends, price ratios such as $/sqft, (2) what questions remain unanswered, (3) which URL parameters to adjust next and why, and (4) how this next search will contribute to a complete market analysis.\n\n### This multi-search approach allows you to triangulate market conditions, identify micro-trends within neighborhoods, spot pricing anomalies, and uncover opportunities that single searches miss. Think of yourself as conducting a systematic market investigation where each search is a deliberate probe into a specific market segment or characteristic.\n\n## Output\n - Always repsond with a detailed reponse to the user\n - Provide statistics, market data metrics, and the details/URL of properties we should consider looking into more deeply",
-        "height": 400,
-        "width": 600,
-        "color": 4
+        "promptType": "define",
+        "text": "=____________________________________________________________\n\n# Client Name: \"\"\"\n{{ $('Edit Fields1').item.json.clientName }}\n\"\"\"\n\n# Initial Query from the user \"\"\"\n{{ $('Edit Fields1').item.json.chatInput }}\n\"\"\"\n\n# Market Analysis from the Real Estate Market Expert Agent \"\"\"\n{{ $('Redfin Market Expert').item.json.output.marketAnalysis }}\n\"\"\"\n\n",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "# Real Estate Market Analysis Email Generator Agent\n\n## PRIMARY ROLE  \nYou craft professional, visually appealing emails that **deliver** comprehensive real estate market analysis reports to clients. The message must:  \n1. Present the market analysis in an easy-to-digest format.  \n2. Highlight key findings and property recommendations.  \n3. Include actionable next steps with direct property links.  \n\nThink of it as transforming raw market data into a polished client report.\n\n## Tools at Your Disposal\n- **think**: Your workspace for organizing market data, formatting decisions, and ensuring all links are properly converted. This tool is MANDATORY for quality output.\n\n---\n\n## CORE RESPONSIBILITIES  \n\n### 1 · Market Data Extraction  \n- Parse the comprehensive market analysis for key metrics and trends.  \n- Capture: price ranges, median values, property recommendations, and market insights.  \n- Extract all Redfin links and ensure they're formatted as clickable hyperlinks.  \n\n### 2 · Client Query Alignment  \n- Reference the original search criteria (location, price range, property type).  \n- Ensure the email directly addresses the client's specific questions.  \n\n### 3. Email Composition\n- Generate professional real estate market reports\n- Maintain appropriate tone for client communication\n- Present data visually with clear sections and highlights\n- Make complex market data accessible and actionable\n\n## ANALYSIS FRAMEWORK\n\n### Content Extraction Protocol\n1. **Market Overview**: Extract general market conditions and trends\n2. **Key Metrics**: Identify median prices, price ranges, and market indicators\n3. **Property Highlights**: Note specific recommended properties with details\n4. **Comparative Analysis**: Extract sold vs active listing insights\n5. **Action Items**: Capture recommended searches and next steps\n6. **Links**: Ensure all Redfin URLs are properly formatted\n\n### Email Structure Guidelines\n1. **Subject Line**: Clear, specific (e.g., \"Tulsa Downtown Area Market Analysis - [Date]\")\n2. **Greeting**: Professional, using client's first name if provided\n3. **Executive Summary**: 2-3 sentences capturing market conditions\n4. **Market Overview Section**: Key trends and insights\n5. **Featured Properties**: Highlighted recommendations with details\n6. **Market Metrics**: Price ranges, medians, and key statistics\n7. **Next Steps**: Recommended searches with clickable links\n8. **Closing**: Professional sign-off from Caiyman AI Real Estate Team\n\n## OUTPUT REQUIREMENTS\n\n### Tone & Style\n- Professional yet approachable\n- Data-driven but conversational\n- Confident and knowledgeable\n- Action-oriented\n\n### Content Priorities\n1. Direct answers to client's query\n2. Actionable property recommendations\n3. Clear market trends and pricing\n4. Easy navigation to property listings\n\n### Quality Standards\n- All links must be clickable hyperlinks\n- Data presented in scannable format\n- Appropriate length (300-500 words for main content)\n- Visual hierarchy for easy reading\n\n## DATA PRESENTATION GUIDELINES\n\nFrom market analysis, prioritize:\n- Median and average price points\n- Number of active vs sold properties\n- Key property features driving value\n- Specific addresses with pricing\n- Market trend indicators\n\nFormat as:\n- Bullet points for property features\n- Bold text for key metrics\n- Colored sections for different data types\n- Hyperlinked text for all property URLs\n\n## EMAIL PERSONALIZATION\n\nConsider:\n- Client's specified location preferences\n- Budget constraints mentioned\n- Property type requirements\n- Timeline or urgency indicators\n- Previous market knowledge level\n\nGenerate emails that make clients feel their needs are understood and that actionable opportunities have been identified.\n\n## HTML EMAIL FORMATTING\n\nCREATE A FORMATTED HTML EMAIL: Generate a 'formattedHtmlEmail' field combining all components into a professional HTML email. Use this template:\n\n```html\n<!DOCTYPE html>\n<html>\n<head>\n    <style>\n        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }\n        .container { max-width: 600px; margin: 0 auto; padding: 20px; }\n        .header { border-bottom: 2px solid #1a73e8; margin-bottom: 20px; padding-bottom: 10px; }\n        .main-content { margin-bottom: 30px; }\n        .market-overview { background-color: #f8f9fa; padding: 15px; border-radius: 8px; margin: 20px 0; }\n        .property-card { background-color: #ffffff; border: 1px solid #e0e0e0; padding: 15px; border-radius: 8px; margin: 15px 0; }\n        .property-address { font-weight: bold; color: #1a73e8; margin-bottom: 5px; }\n        .metrics-section { background-color: #e8f5e9; padding: 15px; border-radius: 8px; margin: 20px 0; }\n        .recommended-searches { background-color: #fff3e0; padding: 15px; border-radius: 8px; margin: 20px 0; }\n        .signature { margin-top: 30px; border-top: 1px solid #e0e0e0; padding-top: 20px; }\n        .signature-name { font-weight: bold; margin-bottom: 5px; }\n        a { color: #1a73e8; text-decoration: none; }\n        a:hover { text-decoration: underline; }\n        .metric-item { display: inline-block; margin: 10px 20px 10px 0; }\n        .metric-label { font-size: 0.9em; color: #666; }\n        .metric-value { font-size: 1.2em; font-weight: bold; color: #1a73e8; }\n    </style>\n</head>\n<body>\n    <div class=\"container\">\n        <div class=\"header\">\n            <h2 style=\"color: #1a73e8; margin: 0;\">Real Estate Market Analysis Report</h2>\n        </div>\n        \n        <div class=\"main-content\">\n            [INSERT GREETING]\n            \n            <p>[INSERT EXECUTIVE SUMMARY]</p>\n            \n            <div class=\"market-overview\">\n                <h3 style=\"margin-top: 0; color: #1a73e8;\">Market Overview</h3>\n                [INSERT MARKET TRENDS AND CONDITIONS]\n            </div>\n            \n            <div class=\"metrics-section\">\n                <h3 style=\"margin-top: 0; color: #2e7d32;\">Key Market Metrics</h3>\n                [INSERT METRICS AS FORMATTED ITEMS]\n            </div>\n            \n            <h3 style=\"color: #1a73e8;\">Featured Properties</h3>\n            [FOR EACH PROPERTY:\n            <div class=\"property-card\">\n                <div class=\"property-address\">[PROPERTY ADDRESS]</div>\n                <div style=\"color: #2e7d32; font-weight: bold; margin: 5px 0;\">[PRICE]</div>\n                <div>[PROPERTY DETAILS]</div>\n            </div>\n            ]\n            \n            <div class=\"recommended-searches\">\n                <h3 style=\"margin-top: 0; color: #e65100;\">Recommended Next Steps</h3>\n                [INSERT RECOMMENDED SEARCHES WITH HYPERLINKS]\n            </div>\n            \n            <p>[INSERT CLOSING REMARKS]</p>\n        </div>\n        \n        <div class=\"signature\">\n            <div class=\"signature-name\">Caiyman AI Real Estate Team</div>\n            <div style=\"margin-top: 5px; font-size: 0.9em; color: #666;\">Powered by Advanced Market Analytics<br>\n            Learn more about our AI services: <a href=\"https://www.caiyman.ai/\">www.caiyman.ai</a></div>\n        </div>\n    </div>\n</body>\n</html>\n```\n\nReplace bracketed placeholders with actual content, ensuring all Redfin links are properly formatted as clickable hyperlinks.\n\nDeliver value through clear market insights and actionable property recommendations."
+        }
       },
-      "type": "n8n-nodes-base.stickyNote",
-      "typeVersion": 1,
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
       "position": [
-        2900,
-        2700
+        -1840,
+        704
       ],
-      "id": "8da2b659-02fe-48e4-92d1-0124357e4f56",
-      "name": "Sticky Note"
+      "id": "a67bb742-6407-4f93-be6c-de693481027f",
+      "name": "Market Report and Analysis Email Generator Agent"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1.1,
+      "position": [
+        -1696,
+        976
+      ],
+      "id": "7208634a-a8d0-4967-98e7-3a8353125d56",
+      "name": "Think1"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -1856,
+        976
+      ],
+      "id": "dc68fd9c-30df-4c7a-9abf-c6ada6ff232b",
+      "name": "Simple Memory1"
     },
     {
       "parameters": {
-        "model": "google/gemini-2.5-pro-preview",
+        "schemaType": "manual",
+        "inputSchema": "{\n  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n  \"title\": \"Conference Discussion Email Output\",\n  \"type\": \"object\",\n  \"required\": [\n    \"recipientFirstName\",\n    \"emailSubject\",\n    \"emailMessage\",\n    \"signature\",\n    \"metadata\",\n    \"formattedHtmlEmail\"\n  ],\n  \"properties\": {\n    \"recipientFirstName\": {\n      \"type\": \"string\",\n      \"description\": \"First name of the presenter/recipient\"\n    },\n    \"emailSubject\": {\n      \"type\": \"string\",\n      \"description\": \"Professional email subject line\",\n      \"minLength\": 10,\n      \"maxLength\": 100\n    },\n    \"emailMessage\": {\n      \"type\": \"object\",\n      \"required\": [\n        \"greeting\",\n        \"opening\",\n        \"discussionSummary\",\n        \"mainPoints\",\n        \"suggestionsHighlight\",\n        \"conferenceContext\",\n        \"closing\"\n      ],\n      \"properties\": {\n        \"greeting\": {\n          \"type\": \"string\",\n          \"description\": \"Professional greeting using first name\"\n        },\n        \"opening\": {\n          \"type\": \"string\",\n          \"description\": \"Opening paragraph acknowledging the presentation creation\"\n        },\n        \"discussionSummary\": {\n          \"type\": \"string\",\n          \"description\": \"2-3 sentence summary of the paper and discussion focus\"\n        },\n        \"mainPoints\": {\n          \"type\": \"array\",\n          \"description\": \"3-4 key discussion points\",\n          \"minItems\": 3,\n          \"maxItems\": 5,\n          \"items\": {\n            \"type\": \"object\",\n            \"required\": [\"point\", \"explanation\"],\n            \"properties\": {\n              \"point\": {\n                \"type\": \"string\",\n                \"description\": \"Brief title of the discussion point\"\n              },\n              \"explanation\": {\n                \"type\": \"string\",\n                \"description\": \"1-2 sentence elaboration\"\n              }\n            }\n          }\n        },\n        \"suggestionsHighlight\": {\n          \"type\": \"string\",\n          \"description\": \"Summary of key critiques or recommendations made in the discussion\"\n        },\n        \"conferenceContext\": {\n          \"type\": \"string\",\n          \"description\": \"How the discussion fits the conference theme/audience\"\n        },\n        \"closing\": {\n          \"type\": \"string\",\n          \"description\": \"Professional closing with any next steps\"\n        }\n      }\n    },\n    \"signature\": {\n      \"type\": \"object\",\n      \"required\": [\"name\", \"title\", \"organization\"],\n      \"properties\": {\n        \"name\": {\n          \"type\": \"string\",\n          \"description\": \"Full name for signature\"\n        },\n        \"title\": {\n          \"type\": \"string\",\n          \"description\": \"Professional title\"\n        },\n        \"organization\": {\n          \"type\": \"string\",\n          \"description\": \"Organization name\"\n        },\n        \"additionalInfo\": {\n          \"type\": \"string\",\n          \"description\": \"Optional additional signature information\"\n        }\n      }\n    },\n    \"metadata\": {\n      \"type\": \"object\",\n      \"required\": [\n        \"paperTitle\",\n        \"conferenceName\",\n        \"presentationLength\",\n        \"attachmentFilename\"\n      ],\n      \"properties\": {\n        \"paperTitle\": {\n          \"type\": \"string\",\n          \"description\": \"Full title of the discussed paper\"\n        },\n        \"paperAuthors\": {\n          \"type\": \"array\",\n          \"items\": {\n            \"type\": \"string\"\n          },\n          \"description\": \"List of paper authors\"\n        },\n        \"conferenceName\": {\n          \"type\": \"string\",\n          \"description\": \"Name of the conference\"\n        },\n        \"conferenceDate\": {\n          \"type\": \"string\",\n          \"description\": \"Conference date if available\"\n        },\n        \"presentationLength\": {\n          \"type\": \"string\",\n          \"description\": \"Length of presentation (e.g., '8 minutes')\"\n        },\n        \"slideCount\": {\n          \"type\": \"integer\",\n          \"description\": \"Number of slides in the presentation\"\n        },\n        \"attachmentFilename\": {\n          \"type\": \"string\",\n          \"description\": \"Suggested filename for the LaTeX attachment\"\n        }\n      }\n    },\n    \"formattedHtmlEmail\": {\n      \"type\": \"string\",\n      \"description\": \"Complete HTML formatted email combining all message components\"\n    }\n  }\n}",
+        "autoFix": true
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        -1568,
+        928
+      ],
+      "id": "ae8d026c-4e5f-48b7-a895-4b9f062d23a1",
+      "name": "Structured Output Parser1"
+    },
+    {
+      "parameters": {
+        "model": "z-ai/glm-4.7-flash",
         "options": {}
       },
       "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
       "typeVersion": 1,
       "position": [
-        2500,
-        2500
+        -2320,
+        1056
       ],
-      "id": "8714de81-a2ee-41fe-942f-7e93f36c555c",
-      "name": "2.5 pro1",
+      "id": "2902e20a-87aa-44c6-89a2-66fd0a0996c4",
+      "name": "GLM-4.7. flash",
       "credentials": {
         "openRouterApi": {
-          "id": "72mF2DZvmuIMyDu5",
-          "name": "OpenRouter account"
+          "id": "PZZJ46UbdVb0XpMd",
+          "name": "OpenRouter-Agentic-Assets"
         }
       }
     },
     {
       "parameters": {
-        "schemaType": "manual",
-        "inputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"searchMetadata\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"url\": { \n          \"type\": [\"string\", \"null\"],\n          \"default\": \"\"\n        },\n        \"location\": {\n          \"type\": \"object\",\n          \"properties\": {\n            \"city\": { \n              \"type\": [\"string\", \"null\"],\n              \"default\": \"\"\n            },\n            \"state\": { \n              \"type\": [\"string\", \"null\"],\n              \"default\": \"\"\n            },\n            \"viewport\": { \n              \"type\": [\"string\", \"null\"],\n              \"default\": \"\"\n            }\n          },\n          \"additionalProperties\": true\n        },\n        \"filters\": {\n          \"type\": \"object\",\n          \"properties\": {\n            \"priceMax\": { \n              \"type\": [\"number\", \"string\", \"null\"],\n              \"default\": null\n            },\n            \"priceMin\": { \n              \"type\": [\"number\", \"string\", \"null\"],\n              \"default\": null\n            },\n            \"minBeds\": { \n              \"type\": [\"number\", \"string\", \"null\"],\n              \"default\": null\n            },\n            \"minBaths\": { \n              \"type\": [\"number\", \"string\", \"null\"],\n              \"default\": null\n            }\n          },\n          \"additionalProperties\": true\n        }\n      },\n      \"additionalProperties\": true\n    },\n    \"properties\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"address\": { \n            \"type\": [\"string\", \"null\"],\n            \"default\": \"\"\n          },\n          \"price\": { \n            \"type\": [\"number\", \"string\", \"null\"],\n            \"default\": null\n          },\n          \"beds\": { \n            \"type\": [\"number\", \"string\", \"null\"],\n            \"default\": null\n          },\n          \"baths\": { \n            \"type\": [\"number\", \"string\", \"null\"],\n            \"default\": null\n          },\n          \"sqft\": { \n            \"type\": [\"number\", \"string\", \"null\"],\n            \"default\": null\n          },\n           \"status\": { \n            \"type\": [\"string\", \"null\"],\n            \"description\": \"Listing status, e.g., Active, Pending, Sold.\",\n            \"default\": \"\"\n          },\n          \"description\": { \n            \"type\": [\"string\", \"null\"],\n            \"default\": \"\"\n          },\n          \"features\": {\n            \"type\": \"array\",\n            \"items\": { \"type\": \"string\" },\n            \"default\": []\n          },\n          \"imageUrl\": { \n            \"type\": [\"string\", \"null\"],\n            \"default\": \"\"\n          },\n          \"propertyUrl\": { \n            \"type\": [\"string\", \"null\"],\n            \"default\": \"\"\n          },\n          \"otherDetails\": {\n            \"type\": \"object\",\n            \"description\": \"A flexible object to hold any other extracted property details like HOA fees, lot size, year built, etc.\",\n            \"additionalProperties\": true\n          }\n        },\n        \"additionalProperties\": true\n      },\n      \"default\": []\n    },\n    \"totalCount\": { \n      \"type\": [\"integer\", \"null\"],\n      \"default\": 0\n    }\n  },\n  \"additionalProperties\": true\n}"
+        "model": "z-ai/glm-4.7-flash",
+        "options": {}
       },
-      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
-      "typeVersion": 1.2,
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
       "position": [
-        3120,
-        2500
+        -1504,
+        1056
       ],
-      "id": "7dbaf450-c763-4bab-8aa9-383f6d86aafa",
-      "name": "Structured Output Parser"
+      "id": "ea866079-7a0b-43d3-a008-4f91360513c4",
+      "name": "GLM-4.7. flash1",
+      "credentials": {
+        "openRouterApi": {
+          "id": "PZZJ46UbdVb0XpMd",
+          "name": "OpenRouter-Agentic-Assets"
+        }
+      }
     },
     {
       "parameters": {
-        "schemaType": "manual",
-        "inputSchema": "{\n  \"type\": \"object\",\n  \"properties\": {\n    \"marketAnalysis\": {\n      \"type\": \"string\",\n      \"description\": \"Comprehensive market analysis based on the data. Should include an overview of current conditions, supply and demand dynamics, and key trends.\"\n    },\n    \"keyFindings\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"string\"\n      },\n      \"description\": \"A bulleted list of the most critical, actionable insights derived from the data.\"\n    },\n    \"priceRange\": {\n      \"type\": \"object\",\n      \"properties\": {\n        \"min\": {\n          \"type\": [\"number\", \"string\", \"null\"],\n          \"description\": \"The lowest observed price in the dataset.\"\n        },\n        \"max\": {\n          \"type\": [\"number\", \"string\", \"null\"],\n          \"description\": \"The highest observed price in the dataset.\"\n        },\n        \"median\": {\n          \"type\": [\"number\", \"string\", \"null\"],\n          \"description\": \"The median price of the properties analyzed.\"\n        },\n         \"averagePricePerSqft\": {\n          \"type\": [\"number\", \"string\", \"null\"],\n          \"description\": \"The calculated average price per square foot.\"\n        }\n      },\n      \"description\": \"Statistical summary of property prices.\"\n    },\n    \"recommendedProperties\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"address\": {\n            \"type\": \"string\"\n          },\n          \"price\": {\n            \"type\": [\"number\", \"string\", \"null\"]\n          },\n          \"reasoning\": {\n            \"type\": \"string\",\n            \"description\": \"Brief explanation of why this property is noteworthy.\"\n          },\n          \"url\": {\n            \"type\": \"string\"\n          }\n        }\n      },\n      \"description\": \"A list of specific properties of interest with their Redfin URLs.\"\n    },\n    \"recommendedSearches\": {\n      \"type\": \"array\",\n      \"items\": {\n        \"type\": \"object\",\n        \"properties\": {\n          \"description\": {\n            \"type\": \"string\"\n          },\n          \"url\": {\n            \"type\": \"string\"\n          }\n        }\n      },\n      \"description\": \"Suggested follow-up Redfin search URLs for further exploration.\"\n    },\n    \"otherInsights\": {\n        \"type\": \"object\",\n        \"description\": \"A flexible object for any additional unstructured analysis, statistics, or key performance indicators (e.g., average days on market, inventory levels).\",\n        \"additionalProperties\": true\n    }\n  },\n  \"additionalProperties\": true\n}"
+        "sendTo": "={{ $('Edit Fields1').item.json.userEmail }}",
+        "subject": "={{ $('Market Report and Analysis Email Generator Agent').item.json.output.emailSubject }}",
+        "message": "={{ $('Market Report and Analysis Email Generator Agent').item.json.output.formattedHtmlEmail }}",
+        "options": {
+          "appendAttribution": false
+        }
       },
-      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
-      "typeVersion": 1.2,
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
       "position": [
-        3020,
-        1960
+        -1536,
+        704
       ],
-      "id": "dc56ff64-80ed-4653-9b5b-b2205b201595",
-      "name": "Structured Output1"
+      "id": "0c9002c7-7bad-44d3-8378-3f776e2ceac8",
+      "name": "Send a message",
+      "webhookId": "b5e410c6-7500-4e44-9c2e-24be1f119e66",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "XwUViorwOgC82hyD",
+          "name": "Gmail account - Cayman"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "scrape",
+        "url": "={{ $json.url }}",
+        "scrapeOptions": {
+          "options": {
+            "formats": {
+              "format": [
+                {}
+              ]
+            },
+            "headers": {}
+          }
+        },
+        "requestOptions": {}
+      },
+      "type": "@mendable/n8n-nodes-firecrawl.firecrawl",
+      "typeVersion": 1,
+      "position": [
+        -3056,
+        1312
+      ],
+      "id": "d477e55e-15bc-4d7f-9a42-99d582fcaa83",
+      "name": "Scrape a URL and get content as markdown or other formats",
+      "retryOnFail": false,
+      "credentials": {
+        "firecrawlApi": {
+          "id": "JcONokjvJ6SMx9vL",
+          "name": "Firecrawl - Caiyman"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.data.markdown }}",
+        "hasOutputParser": true,
+        "needsFallback": true,
+        "options": {
+          "systemMessage": "You are a real estate data extraction specialist. Your task is to parse Redfin listing data and convert it into structured JSON format.\n\nSearch URL: {{ $('When Executed by Another Workflow').item.json.url }}\n\n## Instructions:\n1. Extract search metadata from the URL and page content (location, filters applied, etc.)\n2. Identify and extract individual property listings\n3. For each property, extract all available details\n4. Ignore website navigation, footer content, and non-listing information\n5. Output clean, structured JSON data\n\n## Required Property Fields to Extract:\n- address (full address including street, city, state, zip)\n- price (numeric value)\n- beds (number of bedrooms)\n- baths (number of bathrooms)\n- sqft (square footage if available)\n- description (property description text)\n- features (key features mentioned)\n- imageUrl (first image URL if available)\n- propertyUrl (Redfin property URL if extractable)\n\n## Output Format:\nReturn a structured JSON object with:\n- searchMetadata: Information about the search parameters\n- properties: Array of property objects\n- totalCount: Number of properties found",
+          "maxIterations": 10
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -2640,
+        1312
+      ],
+      "id": "0bb4eeba-9841-43ff-b8f4-58aeb8f8a020",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "z-ai/glm-4.7",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -2816,
+        1616
+      ],
+      "id": "ddae062f-ca47-4e21-bc20-21ad0d9132ba",
+      "name": "GLM-4.7.1",
+      "credentials": {
+        "openRouterApi": {
+          "id": "PZZJ46UbdVb0XpMd",
+          "name": "OpenRouter-Agentic-Assets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "google/gemini-3-flash-preview",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -2960,
+        1616
+      ],
+      "id": "e4427f3e-a014-4d2e-a159-065a8aabf7bf",
+      "name": "gemini 3 flash",
+      "credentials": {
+        "openRouterApi": {
+          "id": "PZZJ46UbdVb0XpMd",
+          "name": "OpenRouter-Agentic-Assets"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1.1,
+      "position": [
+        -2480,
+        1600
+      ],
+      "id": "30958784-0877-439c-924e-e6609802e24e",
+      "name": "Think2"
+    },
+    {
+      "parameters": {
+        "model": "z-ai/glm-4.7-flash",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -2320,
+        1680
+      ],
+      "id": "68fb9a95-a911-4fa4-88c9-259f4b65b546",
+      "name": "GLM-4.7. flash2",
+      "credentials": {
+        "openRouterApi": {
+          "id": "PZZJ46UbdVb0XpMd",
+          "name": "OpenRouter-Agentic-Assets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "# Redfin Real Estate Market Expert Agent\n\n## Role\nYou are an expert real estate market analyst specializing in extracting and analyzing property data from Redfin. You have deep knowledge of real estate markets, property valuation, market trends, and neighborhood dynamics. Your primary tool is the Firecrawl extract function you can call using the **Extract Real Estate Market Data** tool, which you use to gather real-time property listings, sold properties, properties for rent, and market data by intelligently constructing and modifying Redfin URLs.\n\n## Tools\n- **Think tool**: First use the think tool to write down your plan of actions. Then proceed with your market analysis and answering the user's question. Use the **Think tool** after each response you get back from the extraction tool and record insights, properties, and other data, details, URLs we might want later.\n- **Extract Real Estate Market Data**: Use this tool to gather real estate market data for active listings, sold properties, properties for rent, etc. You can send multiple queries to this tool at the same time to run them in parallel. After each reponse from this tool, carefully review the response and all the data. **Important**: Actively use the **Think tool** to take notes on insights, write down property addresses of properties of interest, write down the URLs of properties we might include in the response to the user.\n\n## Core Capability\nYou can navigate Redfin's listing database by understanding and manipulating URL structures to:\n- Search specific geographic areas using coordinates or location identifiers\n- Filter properties by various criteria (price, size, amenities, etc.)\n- Access different market segments (active listings, sold properties, rentals)\n- Analyze market trends and property characteristics\n\n## Redfin URL Structure Guide\n\n### Base URL Format\n```\nhttps://www.redfin.com/city/{cityID}/{state}/{cityName}[/segment][/filter/{parameters}]\n```\n\n### URL Components Breakdown\n\n#### 1. **Location Base**\n- Format: `/city/{cityID}/{state}/{cityName}`\n- Example: `/city/35765/OK/Tulsa`\n- The city ID (35765) is Redfin's internal identifier\n- Can also use ZIP codes or neighborhood names\n\n#### 2. **Market Segments** (Optional)\n- `/rentals` - Rental properties only\n- No segment - For-sale properties (default)\n- Use `/filter/include=sold-3mo` for recently sold properties\n\n#### 3. **Geographic Viewport**\nCritical for precise area searches:\n- Format: `viewport={north_lat}:{south_lat}:{west_long}:{east_long}`\n- Example: `viewport=36.16297:36.11167:-95.90605:-95.97943`\n- This creates a rectangular search area defined by coordinates\n- Smaller viewport = more focused search area\n- Adjust coordinates to move search area or expand/contract coverage\n\n#### 4. **Filter Parameters**\nSeparate multiple filters with commas. Key parameters include:\n\n**Property Characteristics:**\n- `property-type=` Options: house, condo, townhouse, multifamily, manufactured, land, other, co-op\n  - Combine with `+`: `property-type=house+townhouse+manufactured`\n- `min-beds=` / `max-beds=` (whole numbers)\n- `min-baths=` / `max-baths=` (supports decimals like 2.5)\n- `min-sqft=` / `max-sqft=` Format: `1.5k-sqft` or `2000-sqft`\n- `min-year-built=` / `max-year-built=` (4-digit years)\n\n**Pricing:**\n- `min-price=` / `max-price=` Format: `800k` or `1.25M` or `500000`\n\n**Market Activity:**\n- `max-days-on-market=` Options: `1d`, `3d`, `1wk`, `1mo`\n- `status=` Options: active, comingsoon, contingent, pending\n  - Combine: `status=active+comingsoon+contingent+pending`\n- `include=sold-3mo` (shows properties sold in last 3 months)\n\n**Sorting:**\n- `sort=` Options: \n  - `lo-days` (newest listings first)\n  - `hi-days` (oldest listings first)\n  - `lo-price` (lowest price first)\n  - `hi-price` (highest price first)\n  - `lo-sqft` (smallest first)\n  - `hi-sqft` (largest first)\n\n**Features & Amenities:**\n- Boolean flags: `has-view`, `water-front`, `has-elevator`, `is-fixer`, `is-green`, `is-accessible`, `exclude-age-restricted`\n- `pool-type=private` or `pool-type=community`\n- `basement-type=finished+unfinished`\n- `min-parking=` (number of spaces)\n- `include-outdoor-parking`\n- Comfort features: `primary-bed-on-main`, `pets-allowed`, `guest-house`, `air-conditioning`, `washer-dryer`, `fireplace`, `rv-parking`\n\n### URL Construction Examples\n\n**Basic search with price filter:**\n```\nhttps://www.redfin.com/city/35765/OK/Tulsa/filter/max-price=500k,min-beds=3\n```\n\n**Specific area with multiple filters:**\n```\nhttps://www.redfin.com/city/35765/OK/Tulsa/filter/property-type=house,max-price=800k,min-beds=3,min-baths=2,viewport=36.14502:36.09371:-95.92373:-95.99711\n```\n\n**Recently sold luxury homes:**\n```\nhttps://www.redfin.com/city/35765/OK/Tulsa/filter/min-price=1M,property-type=house,include=sold-3mo,viewport=36.16228:36.11098:-95.92321:-95.9966\n```\n\n## Search Strategy Guidelines\n\n### Tools:\n- **Extract Real Estate Market Data** tool: Use this tool to get market data for active sales listing, solder properties, and properties listed for rent.\n\n### 1. **Start Broad, Then Narrow**\n- Begin with a larger viewport to understand the market\n- Gradually add filters to focus on specific property types\n- Use price ranges to segment the market\n\n### 2. **Geographic Navigation**\n- Adjust viewport coordinates to move your search area:\n  - Increase north latitude to move north\n  - Decrease south latitude to move south\n  - Decrease west longitude to move west\n  - Increase east longitude to move east\n- Make viewport smaller for neighborhood-specific searches\n- Make viewport larger for city-wide analysis\n\n### 3. **Market Analysis Approach**\n- Compare active listings vs. recently sold to gauge market velocity\n- Use `max-days-on-market` to identify hot properties\n- Analyze price per square foot by using price and sqft filters\n- Look at different property types separately for accurate comparisons\n\n### 4. **Comparative Analysis**\n- Create multiple searches with slight variations:\n  - Same filters, different areas (adjust viewport)\n  - Same area, different price ranges\n  - Same criteria, active vs. sold properties\n- Track how inventory changes with different time-on-market filters\n\n## Working with Extract Results\n\nWhen you extract a Redfin URL using the **Extract Real Estate Market Data** tool, you'll receive:\n- Property listings with details (price, beds, baths, sqft, address)\n- Property descriptions and features\n- Listing status and time on market\n- Images and visual information\n- Market statistics for the search area\n\n## Best Practices\n\n1. **Always include viewport** for geographic precision\n2. **Use status filters** to separate active from pending/sold\n3. **Combine property types** thoughtfully (e.g., house+townhouse for single-family analysis)\n4. **Price formats**: Use 'k' for thousands, 'M' for millions\n5. **Test incrementally**: Add one filter at a time to ensure results\n6. **Document your searches**: Note which URL parameters yielded useful results\n\n## Example Analysis Workflow\n\n1. **Market Overview**: Start with broad viewport, no filters except `status=active`\n2. **Price Segmentation**: Add price ranges to understand market distribution\n3. **Property Type Analysis**: Filter by specific property types\n4. **Recent Sales Comparison**: Switch to `include=sold-3mo` to see closed deals\n5. **Micro-Market Focus**: Narrow viewport to specific neighborhoods\n6. **Trend Identification**: Compare days-on-market across different searches\n\n## Strategic Search Methodology\n\n### Remember: The power of this approach lies in systematically adjusting URL parameters to slice the market data in different ways, revealing patterns and opportunities that might not be apparent from a single search. **Always** use the **Extract Real Estate Market Data** tool at least 4 times before responding to the user, conducting a strategic sequence of searches that progressively refine your understanding of the market. Start by sending 2 separate requests in paralell to the **Extract Real Estate Market Data** tool to do a couple of separate searches related to your task. Then proceed with more searches. Each search should build upon the insights gained from previous extractions, creating a comprehensive market picture through iterative exploration. **Important**: Use the **Think tool** after each response you get back from the extraction tool and record insights, properties, and other data, details, URLs we might want later. **Important**: Don't start too braod at the beginning. We will get back too much data.\n\n### After you receive each response, you should use the **think tool** to analyze what you discovered, identify gaps in your knowledge, and strategically plan your next URL adjustment. Consider how modifying specific parameters (viewport boundaries, price ranges, property types, or time filters) will reveal different market dimensions. Your thinking should explicitly outline: (1) what the current search revealed with detailed market insights, statistics, trends, price ratios such as $/sqft, (2) what questions remain unanswered, (3) which URL parameters to adjust next and why, and (4) how this next search will contribute to a complete market analysis.\n\n### This multi-search approach allows you to triangulate market conditions, identify micro-trends within neighborhoods, spot pricing anomalies, and uncover opportunities that single searches miss. Think of yourself as conducting a systematic market investigation where each search is a deliberate probe into a specific market segment or characteristic.\n\n## Output\n - Always repsond with a detailed reponse to the user\n - Provide statistics, market data metrics, and the detais/URL of properties we should consider looking into more deeply. **Important**: Make sure you send the property-specific URL of the properties you are recommending, not the search URL. \n - However, please include some of the search URLs that will be helpful for the user.",
+          "maxIterations": 10
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -2752,
+        704
+      ],
+      "id": "ab2b72b1-c5a2-4918-87fe-67f5e9de0f63",
+      "name": "Redfin Market Expert"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Search in Tavily to figure out the Redfin City ID for a city. A Redfin city ID is the numeric identifier Redfin uses internally to represent a specific city; it appears in Redfin city-page URLs immediately after /city/ (e.g., /city/35765/OK/Tulsa). To find a city’s ID with only web search, query site:redfin.com city <City Name> <State> (or Redfin <City Name> <State> city), open the matching city page, and extract the number after /city/ in the URL.",
+        "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Query', `Search Query. Use this to search and figure out the the Redfin city ID for a city. Explain that you want the Redfin City ID`, 'string') }}",
+        "options": {
+          "max_results": 3,
+          "include_answer": "basic"
+        }
+      },
+      "type": "@tavily/n8n-nodes-tavily.tavilyTool",
+      "typeVersion": 1,
+      "position": [
+        -2672,
+        992
+      ],
+      "id": "1de96926-4297-489b-9c3e-11a26af7be2e",
+      "name": "Search in Tavily",
+      "credentials": {
+        "tavilyApi": {
+          "id": "3NZHoP7NmtAUUZ51",
+          "name": "Tavily - Cayman AA"
+        }
+      }
     }
   ],
   "connections": {
-    "Redfin Data Parser": {
-      "main": [
-        [
-          {
-            "node": "Format Response2",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "gpt-4.1-mini2": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "Market Report and Analysis Email Generator Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Market Report and Analysis Email Generator Agent": {
-      "main": [
-        [
-          {
-            "node": "Gmail",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Structured Output Parser1": {
-      "ai_outputParser": [
-        [
-          {
-            "node": "Market Report and Analysis Email Generator Agent",
-            "type": "ai_outputParser",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Simple Memory9": {
-      "ai_memory": [
-        [
-          {
-            "node": "Market Report and Analysis Email Generator Agent",
-            "type": "ai_memory",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Think9": {
-      "ai_tool": [
-        [
-          {
-            "node": "Market Report and Analysis Email Generator Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "When clicking ‘Test workflow’": {
       "main": [
         [
@@ -796,56 +804,12 @@
         ]
       ]
     },
-    "Redfin Market Expert": {
-      "main": [
-        [
-          {
-            "node": "Edit Fields",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Conversation Memory": {
-      "ai_memory": [
-        [
-          {
-            "node": "Redfin Market Expert",
-            "type": "ai_memory",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "When Executed by Another Workflow": {
       "main": [
         [
           {
-            "node": "Firecrawl Extract Redfin",
+            "node": "Scrape a URL and get content as markdown or other formats",
             "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Think": {
-      "ai_tool": [
-        [
-          {
-            "node": "Redfin Market Expert",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "gpt-4.1-mini": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "Redfin Market Expert",
-            "type": "ai_languageModel",
             "index": 0
           }
         ]
@@ -877,19 +841,8 @@
       "ai_memory": [
         [
           {
-            "node": "Redfin Data Parser",
+            "node": "AI Agent",
             "type": "ai_memory",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Think2": {
-      "ai_tool": [
-        [
-          {
-            "node": "Redfin Data Parser",
-            "type": "ai_tool",
             "index": 0
           }
         ]
@@ -899,16 +852,11 @@
       "main": [
         [
           {
-            "node": "Redfin Data Parser",
+            "node": "AI Agent",
             "type": "main",
             "index": 0
           }
         ]
-      ]
-    },
-    "gpt-4.1-mini1": {
-      "ai_languageModel": [
-        []
       ]
     },
     "Edit Fields1": {
@@ -922,18 +870,29 @@
         ]
       ]
     },
-    "Firecrawl Extract Redfin": {
-      "main": [
+    "Structured Output Parser": {
+      "ai_outputParser": [
         [
           {
-            "node": "Set session id",
-            "type": "main",
+            "node": "AI Agent",
+            "type": "ai_outputParser",
             "index": 0
           }
         ]
       ]
     },
-    "Extract Real Estate Market Data": {
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Redfin Market Expert",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think": {
       "ai_tool": [
         [
           {
@@ -944,29 +903,7 @@
         ]
       ]
     },
-    "2.5 pro1": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "Redfin Data Parser",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Structured Output Parser": {
-      "ai_outputParser": [
-        [
-          {
-            "node": "Redfin Data Parser",
-            "type": "ai_outputParser",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Structured Output1": {
+    "Structured Output Parser2": {
       "ai_outputParser": [
         [
           {
@@ -976,12 +913,198 @@
           }
         ]
       ]
+    },
+    "GLM-4.7.": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Redfin Market Expert",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GLM-4.7.2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Market Report and Analysis Email Generator Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Call 'AI Agent - Real Estate Market Expert'": {
+      "ai_tool": [
+        [
+          {
+            "node": "Redfin Market Expert",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Market Report and Analysis Email Generator Agent": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think1": {
+      "ai_tool": [
+        [
+          {
+            "node": "Market Report and Analysis Email Generator Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory1": {
+      "ai_memory": [
+        [
+          {
+            "node": "Market Report and Analysis Email Generator Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser1": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Market Report and Analysis Email Generator Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GLM-4.7. flash": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Structured Output Parser2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GLM-4.7. flash1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Structured Output Parser1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Scrape a URL and get content as markdown or other formats": {
+      "main": [
+        [
+          {
+            "node": "Set session id",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Format Response2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GLM-4.7.1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "gemini 3 flash": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think2": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GLM-4.7. flash2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Structured Output Parser",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Redfin Market Expert": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search in Tavily": {
+      "ai_tool": [
+        [
+          {
+            "node": "Redfin Market Expert",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
     }
   },
   "pinData": {},
   "meta": {
-    "templateId": "4281",
     "templateCredsSetupCompleted": true,
-    "instanceId": "417b0a8b2a10d0a50938a93dd6b8dd01385b21d758ab43693102c5df3493c401"
+    "instanceId": "2bd918b407c290e8bb139d969f24518c6daf0a6ae9a8f56196275ae39545b380"
   }
 }
