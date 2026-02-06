@@ -2,7 +2,7 @@
   "nodes": [
     {
       "parameters": {
-        "content": "# Basic AI Agent Template\n\nThis is the simplest AI agent template with:\n- Workflow trigger for execution\n- Session ID generation\n- Window Buffer Memory for context retention\n- LLM integration (GPT-4.1-mini via OpenRouter)\n- Think tool for reasoning\n- AI Agent node with customizable system prompt\n\nIdeal for simple Q&A, basic decision-making, and single-purpose agents.",
+        "content": "## Basic AI Agent Template\n\nThis is the simplest AI agent template with:\n- Workflow trigger for execution\n- Session ID generation\n- Window Buffer Memory for context retention\n- LLM integration (GPT-4.1-mini via OpenRouter)\n- Think tool for reasoning\n- AI Agent node with customizable system prompt\n\nIdeal for simple Q&A, basic decision-making, and single-purpose agents.",
         "height": 496,
         "width": 329,
         "color": {}
@@ -11,23 +11,10 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1000,
-        20
+        448,
+        32
       ],
-      "id": "7f2b0e3a-fc83-4b5c-b667-f351a43a1ca1"
-    },
-    {
-      "parameters": {
-        "contextWindowLength": 20
-      },
-      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
-      "typeVersion": 1.3,
-      "position": [
-        440,
-        360
-      ],
-      "id": "5ee81cf6-38a5-4974-963c-4c2d9c82f190",
-      "name": "Window Buffer Memory"
+      "id": "f4abf41d-909b-47c4-892a-5b6807d8ec92"
     },
     {
       "parameters": {
@@ -42,24 +29,11 @@
       "type": "n8n-nodes-base.executeWorkflowTrigger",
       "typeVersion": 1.1,
       "position": [
-        -680,
-        1280
+        -1248,
+        1296
       ],
-      "id": "c8714963-09b8-4086-9bb5-2bd201c90899",
+      "id": "b0ffa70a-43a7-490a-a101-84b9b88c6aaf",
       "name": "When Executed by Another Workflow"
-    },
-    {
-      "parameters": {
-        "description": "Use the **think** tool to think about something. It will not obtain new information or change the database, but just append the thought to the log. Use it when complex reasoning or some cache memory is needed."
-      },
-      "type": "@n8n/n8n-nodes-langchain.toolThink",
-      "typeVersion": 1,
-      "position": [
-        600,
-        360
-      ],
-      "id": "bf14887b-3abe-4c45-8fc2-2ad7feca9f25",
-      "name": "Think"
     },
     {
       "parameters": {
@@ -79,52 +53,15 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        80,
-        140
+        -448,
+        128
       ],
-      "id": "09d28c21-cb46-4695-ac86-42775d1fc2bf",
+      "id": "caf74950-2967-42b0-941f-90d87f888ae6",
       "name": "Edit Fields"
     },
     {
       "parameters": {
-        "model": "openai/gpt-4.1-mini",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
-      "typeVersion": 1,
-      "position": [
-        260,
-        360
-      ],
-      "id": "c30bccd5-7119-4c40-98a0-6956340d4071",
-      "name": "gpt-4.1-mini",
-      "credentials": {
-        "openRouterApi": {
-          "id": "72mF2DZvmuIMyDu5",
-          "name": "OpenRouter account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "promptType": "define",
-        "text": "=________________________\n# Input Query:\n{{ $json.chatInput }}",
-        "options": {
-          "systemMessage": "=# System Prompt  >>>template - make sure to construct and write a robust system prompt here<<<\n\n## Role\nYou are a helpful assistant.\n\n\n## Tools:\n- **Think Tool**: Use this tool to think about something. It will not obtain new information or change the database, but just append the thought to the log. Use it when complex reasoning or some cache memory is needed.\n\n## Important:\nFirst step is to use the **think** tool to plan your steps. You should use your tools numerous times and iterate. \n\n\n## Final Reminders\nUse the **think** tool to think about something. Provide intelligent and coherent responses. They should be informative yet concise.\n"
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 1.7,
-      "position": [
-        340,
-        140
-      ],
-      "id": "cd18157c-706e-4e26-8c1f-4f12510d8a49",
-      "name": "AI Agent"
-    },
-    {
-      "parameters": {
-        "content": "# AI Agent with Structured Output\n\nBuilds on the basic template but adds structured output capabilities:\n- Same core components as basic template\n- Adds Output Parser node for structured JSON responses\n- Forces AI to return data in a specific schema format\n- Enables consistent, machine-readable outputs\n\nIdeal for data extraction, categorization tasks, and integration with other systems that expect structured data.",
+        "content": "## AI Agent with Structured Output\n\nBuilds on the basic template but adds structured output capabilities:\n- Same core components as basic template\n- Adds Output Parser node for structured JSON responses\n- Forces AI to return data in a specific schema format\n- Enables consistent, machine-readable outputs\n\nIdeal for data extraction, categorization tasks, and integration with other systems that expect structured data.",
         "height": 496,
         "width": 329,
         "color": "#4CAF50"
@@ -133,10 +70,10 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1000,
-        660
+        448,
+        672
       ],
-      "id": "c29dd97c-7f35-4a57-b166-5f71ed94ba37"
+      "id": "e7c82151-f0a3-4754-a3f1-52cfe211fdff"
     },
     {
       "parameters": {
@@ -145,24 +82,11 @@
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.3,
       "position": [
-        400,
-        1000
+        -160,
+        1024
       ],
-      "id": "47388bcc-4da7-49e6-9beb-7c4ce6c3dcaa",
+      "id": "f7c4fe48-9c35-4ff9-81bf-21e1a8465ff3",
       "name": "Window Buffer Memory 2"
-    },
-    {
-      "parameters": {
-        "description": "Use the **think** tool to think about something. It will not obtain new information or change the database, but just append the thought to the log. Use it when complex reasoning or some cache memory is needed."
-      },
-      "type": "@n8n/n8n-nodes-langchain.toolThink",
-      "typeVersion": 1,
-      "position": [
-        560,
-        1000
-      ],
-      "id": "0642b425-55ac-48c7-817c-53baf803a5e0",
-      "name": "Think 2"
     },
     {
       "parameters": {
@@ -182,65 +106,27 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        80,
-        780
+        -464,
+        752
       ],
-      "id": "f96331fe-d703-4c4e-a164-e873193edb38",
+      "id": "11fe1c03-fde1-4d11-9ea9-93af7d2b993b",
       "name": "Edit Fields 2"
     },
     {
       "parameters": {
-        "model": "openai/gpt-4.1-mini",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
-      "typeVersion": 1,
-      "position": [
-        240,
-        1000
-      ],
-      "id": "f3bdb080-c41c-46b2-8b19-ac4ed6871e44",
-      "name": "gpt-4.1-mini 2",
-      "credentials": {
-        "openRouterApi": {
-          "id": "72mF2DZvmuIMyDu5",
-          "name": "OpenRouter account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "promptType": "define",
-        "text": "=________________________\n# Input Query:\n{{ $json.chatInput }}",
-        "hasOutputParser": true,
-        "options": {
-          "systemMessage": "=# System Prompt  >>>template - make sure to construct and write a robust system prompt here<<<\n\n\n## Role\nYou are a helpful assistant.\n\n\n## Tools:\n- **Think Tool**: Use this tool to think about something. It will not obtain new information or change the database, but just append the thought to the log. Use it when complex reasoning or some cache memory is needed.\n\n## Important:\nFirst step is to use the **think** tool to plan your steps. You should use your tools numerous times and iterate. \n\n\n\n\n## Structed Output\nAlso structure your output like this example with the main message and then three main points regarding the main message:\n{\n\t\"message\": \"message\",\n\t\"three main points\": [\"point one\", \"point two\", \"point three\"]\n}\n\n\n\n## Final Reminders\nUse the **think** tool to think about something. Provide intelligent and coherent responses. They should be informative yet concise.\n"
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 1.7,
-      "position": [
-        400,
-        780
-      ],
-      "id": "8d940039-efc8-4a4e-9482-36edb310e4d4",
-      "name": "AI Agent 2"
-    },
-    {
-      "parameters": {
-        "content": "# Advanced AI Agent with HTTP Tools & Structured Output\n\nComprehensive agent template with external data access:\n- Core components from previous templates\n- Multiple HTTP request tools for external data access\n- Structured output for consistent data formatting\n- Tavily Search for web research\n- Firecrawl for web content extraction\n\nIdeal for research agents, content analysis, web data extraction, and complex decision-making workflows that require external information.",
-        "height": 496,
-        "width": 349,
+        "content": "## Advanced AI Agent with Search Tools & Structured Output\n\nComprehensive agent template with external data access:\n- Core components from previous templates\n- Multiple HTTP request tools for external data access\n- Structured output for consistent data formatting\n- Tavily Search for web research\n- Firecrawl for web content extraction\n\nIdeal for research agents, content analysis, web data extraction, and complex decision-making workflows that require external information.",
+        "height": 640,
+        "width": 333,
         "color": "#FF9800"
       },
       "name": "Advanced Agent with HTTP Tools Info",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        1000,
-        1320
+        656,
+        1344
       ],
-      "id": "657183a7-7ed1-44d0-be16-f08254af876e"
+      "id": "0a7ef067-4363-4605-bff6-ac2cc908b8e8"
     },
     {
       "parameters": {
@@ -249,24 +135,11 @@
       "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
       "typeVersion": 1.3,
       "position": [
-        220,
-        1640
+        -224,
+        1728
       ],
-      "id": "9674c275-bf6b-46d5-bd36-18012cdc11bf",
+      "id": "f4ff6ad8-92c6-4809-abf8-84d9720483eb",
       "name": "Window Buffer Memory 3"
-    },
-    {
-      "parameters": {
-        "description": "Use the **think** tool to think about something. It will not obtain new information or change the database, but just append the thought to the log. Use it when complex reasoning or some cache memory is needed."
-      },
-      "type": "@n8n/n8n-nodes-langchain.toolThink",
-      "typeVersion": 1,
-      "position": [
-        380,
-        1640
-      ],
-      "id": "ccb270fc-8b2a-4a21-9c47-2933814db72c",
-      "name": "Think 3"
     },
     {
       "parameters": {
@@ -286,86 +159,21 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        80,
-        1420
+        -480,
+        1440
       ],
-      "id": "211b5174-1a49-48fa-8e17-9ffe07f0914b",
+      "id": "b1b7e3c6-d632-43a6-8018-3afd88d47fce",
       "name": "Edit Fields 3"
-    },
-    {
-      "parameters": {
-        "toolDescription": "Extract the contents from a website URL using Firecrawl. Provide the URL to scrape and receive clean markdown content from the webpage.",
-        "method": "POST",
-        "url": "https://api.firecrawl.dev/v1/scrape",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "={\n  \"url\": \"{{ $fromAI('url', 'The URL to scrape and extract content from', 'string') }}\",\n  \"formats\": [\n    \"markdown\"\n  ],\n  \"onlyMainContent\": true\n}",
-        "options": {}
-      },
-      "type": "n8n-nodes-base.httpRequestTool",
-      "typeVersion": 4.2,
-      "position": [
-        700,
-        1640
-      ],
-      "id": "30fbcafd-a7e3-4099-b350-2efb22646016",
-      "name": "Extract with Firecrawl",
-      "credentials": {
-        "httpHeaderAuth": {
-          "id": "TPcndSkdpkbo1dlu",
-          "name": "Firecrawl"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "model": "openai/gpt-4.1-mini",
-        "options": {}
-      },
-      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
-      "typeVersion": 1,
-      "position": [
-        60,
-        1640
-      ],
-      "id": "db453282-7912-4e75-8132-a951823fe5b5",
-      "name": "gpt-4.1-mini 3",
-      "credentials": {
-        "openRouterApi": {
-          "id": "72mF2DZvmuIMyDu5",
-          "name": "OpenRouter account"
-        }
-      }
-    },
-    {
-      "parameters": {
-        "promptType": "define",
-        "text": "=________________________\n# Input Query:\n{{ $json.chatInput }}",
-        "hasOutputParser": true,
-        "options": {
-          "systemMessage": "=# System Prompt \n\n## Role\nYou are a helpful assistant\n\n\n## Tools:\n- **Tavily Search Tool**: Use this tool to search for a url and analyze information about AI resources\n- **Extract With Fire Crawl Tool**: Extract the contents from a website URL using Firecrawl. Provide the URL to scrape and receive clean markdown content from the webpage.\n- **Think Tool**: Use this tool to think about something. It will not obtain new information or change the database, but just append the thought to the log. Use it when complex reasoning or some cache memory is needed.\n\n## Important:\nFirst step is to use the **think** tool to plan your steps. You should use your tools numerous times and iterate. \n\n\n\n## Structed Output\nAlso structure your output like this example with the main message and then the URLs of three most relavent sources your cited for the main message:\n{\n\t\"message\": \"message\",\n\t\"three citations\": [\"URL one\", \"URL two\", \"URL three\"]\n}\n\n\n## Final Reminders\nUse the **think** tool to think about something. Provide intelligent and coherent responses. They should be informative yet concise.\n"
-        }
-      },
-      "type": "@n8n/n8n-nodes-langchain.agent",
-      "typeVersion": 1.7,
-      "position": [
-        400,
-        1420
-      ],
-      "id": "c4d0134e-2afd-47ee-b680-75cd07d96b75",
-      "name": "AI Agent 3"
     },
     {
       "parameters": {},
       "type": "n8n-nodes-base.manualTrigger",
       "typeVersion": 1,
       "position": [
-        -680,
-        500
+        -1248,
+        512
       ],
-      "id": "a7bf1b8f-771a-4943-b960-94e779f1d980",
+      "id": "d351a800-c58d-4127-99f0-6936ca2ba6f2",
       "name": "When clicking ‘Execute workflow’"
     },
     {
@@ -375,28 +183,28 @@
       "type": "@n8n/n8n-nodes-langchain.chatTrigger",
       "typeVersion": 1.1,
       "position": [
-        -680,
-        700
+        -1248,
+        720
       ],
-      "id": "7185b6ee-c924-4489-8fa2-617b9daec2aa",
+      "id": "eee1499f-2bca-4de6-ae06-ba5c8c2af57b",
       "name": "When chat message received",
       "webhookId": "96df91db-73d8-4a75-ad05-a4ef5dd865da"
     },
     {
       "parameters": {
         "content": "",
-        "height": 496,
-        "width": 989,
+        "height": 640,
+        "width": 1197,
         "color": 4
       },
       "name": "Basic Agent Template Info1",
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        0,
-        1320
+        -560,
+        1344
       ],
-      "id": "4a972eaa-6797-4743-bd23-dc6b9379564f"
+      "id": "3230d946-9fdb-4f7d-86e3-46d7dced4694"
     },
     {
       "parameters": {
@@ -409,10 +217,10 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        0,
-        660
+        -560,
+        672
       ],
-      "id": "fe94967e-4767-402a-b92c-44db09c2f708"
+      "id": "53dab02f-7b76-47c5-b4a6-eda9f11fa4bc"
     },
     {
       "parameters": {
@@ -425,10 +233,10 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        0,
-        20
+        -560,
+        32
       ],
-      "id": "5a112c94-87ed-4993-9bf9-fd3cbec6c006"
+      "id": "f04ce3e1-22fc-4d9f-a7d9-6bf28d19ed59"
     },
     {
       "parameters": {
@@ -441,10 +249,10 @@
       "type": "n8n-nodes-base.stickyNote",
       "typeVersion": 1,
       "position": [
-        -800,
-        380
+        -1360,
+        400
       ],
-      "id": "b00b8924-c17c-463f-a6da-b8d1f01a2b0a"
+      "id": "e8290750-c4dd-4111-83dd-87b812f8dbc6"
     },
     {
       "parameters": {
@@ -463,10 +271,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -480,
-        500
+        -1040,
+        512
       ],
-      "id": "060ae7c0-fdc6-4a8f-842b-2d8b8bd15bb4",
+      "id": "29128da1-d856-40ec-bccb-4bd0ef9154b2",
       "name": "Edit Fields1"
     },
     {
@@ -479,16 +287,16 @@
       "type": "n8n-nodes-base.telegramTrigger",
       "typeVersion": 1.2,
       "position": [
-        -680,
-        900
+        -1248,
+        912
       ],
-      "id": "352caac3-8db7-451c-91ac-36b6aefe498d",
+      "id": "5824124f-c9a4-420c-9b30-6ab6ab19e3e3",
       "name": "Telegram n8n-Agent-Training-Course-bot",
       "webhookId": "0450d874-a77f-4324-b850-a42a73203ba9",
       "credentials": {
         "telegramApi": {
-          "id": "CO8QzwHOtSt69sOG",
-          "name": "n8n-Agent-Training-Course-bot"
+          "id": "u0FzBTvwyHmnOTF8",
+          "name": "Telegram - Cayman AA Personal Assistant"
         }
       }
     },
@@ -509,10 +317,10 @@
       "type": "n8n-nodes-base.set",
       "typeVersion": 3.4,
       "position": [
-        -480,
-        900
+        -1040,
+        912
       ],
-      "id": "e2bacad3-ad6d-4327-9954-294861253c4a",
+      "id": "7db743a6-8863-4b1a-9514-d0b7715f48e1",
       "name": "Edit Fields2"
     },
     {
@@ -524,16 +332,16 @@
       "type": "n8n-nodes-base.telegram",
       "typeVersion": 1.2,
       "position": [
-        -480,
-        1100
+        -1040,
+        1120
       ],
-      "id": "77ef2bc1-f62e-49bc-a635-3ba21616a474",
+      "id": "b2618c9b-b2df-4373-be75-7435c224b8bd",
       "name": "Telegram",
       "webhookId": "7f6939c7-968d-4093-80e9-c1503bf8c33b",
       "credentials": {
         "telegramApi": {
-          "id": "CO8QzwHOtSt69sOG",
-          "name": "n8n-Agent-Training-Course-bot"
+          "id": "u0FzBTvwyHmnOTF8",
+          "name": "Telegram - Cayman AA Personal Assistant"
         }
       }
     },
@@ -542,12 +350,12 @@
         "jsonSchemaExample": "{\n\t\"message\": \"message\",\n\t\"three main points\": [\"point one\", \"point two\", \"point three\"]\n}"
       },
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
-      "typeVersion": 1.2,
+      "typeVersion": 1.3,
       "position": [
-        720,
-        1000
+        160,
+        1024
       ],
-      "id": "06e22bf4-284a-4dec-ab68-01220404f15f",
+      "id": "7cdf066a-d40b-4d24-8e94-200545aac501",
       "name": "Structured Output Parser"
     },
     {
@@ -555,115 +363,878 @@
         "jsonSchemaExample": "{\n\t\"message\": \"message\",\n\t\"three citations\": [\"URL one\", \"URL two\", \"URL three\"]\n}"
       },
       "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
-      "typeVersion": 1.2,
+      "typeVersion": 1.3,
       "position": [
-        840,
-        1640
+        480,
+        1728
       ],
-      "id": "7f465fe4-c108-49e2-8f64-010a5181b040",
+      "id": "06502f03-48af-433b-b57d-746a86cf9f02",
       "name": "Structured Output Parser1"
     },
     {
       "parameters": {
-        "toolDescription": "Use this tool to search for a url and analyze information about AI resources",
-        "method": "POST",
-        "url": "https://api.tavily.com/search",
-        "authentication": "genericCredentialType",
-        "genericAuthType": "httpHeaderAuth",
-        "sendHeaders": true,
-        "parametersHeaders": {
-          "values": [
+        "content": "## Tools\n",
+        "height": 544,
+        "width": 1357,
+        "color": 6
+      },
+      "name": "Basic Agent Template Info5",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -544,
+        2528
+      ],
+      "id": "2ec5088c-59bd-47f8-9114-28cda45da95e"
+    },
+    {
+      "parameters": {
+        "endpointUrl": "https://mcp.exa.ai/mcp?tools=web_search_exa",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.2,
+      "position": [
+        -464,
+        2800
+      ],
+      "id": "58c54f37-1d40-48da-805f-2d904a8866c0",
+      "name": "Exa MCP"
+    },
+    {
+      "parameters": {
+        "model": "sonar-reasoning",
+        "messages": {
+          "message": [
             {
-              "name": "Content-Type",
-              "valueProvider": "fieldValue",
-              "value": "application/json"
+              "content": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('message0_Text', `text`, 'string') }}"
             }
           ]
         },
-        "sendBody": true,
-        "specifyBody": "json",
-        "jsonBody": "{\n    \"query\": \"{searchTerm}\",\n    \"search_depth\": \"basic\",\n    \"include_answer\": true,\n    \"include_raw_content\": false,\n    \"max_results\": 5\n}",
-        "placeholderDefinitions": {
-          "values": [
-            {
-              "name": "searchTerm",
-              "description": "The URL or information about the AI resource to analyze",
-              "type": "string"
-            }
-          ]
-        }
+        "options": {},
+        "requestOptions": {}
       },
-      "type": "@n8n/n8n-nodes-langchain.toolHttpRequest",
+      "type": "n8n-nodes-base.perplexityTool",
+      "typeVersion": 1,
+      "position": [
+        -464,
+        2608
+      ],
+      "id": "ee4e3da6-554c-4ea3-937b-0d8fbf52ee17",
+      "name": "Message a model in Perplexity1",
+      "credentials": {
+        "perplexityApi": {
+          "id": "Pb6X1HfdnUQ9K4sk",
+          "name": "Perplexity-Agentic-Assets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "query": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Query', `Search Query`, 'string') }}",
+        "options": {}
+      },
+      "type": "@tavily/n8n-nodes-tavily.tavilyTool",
+      "typeVersion": 1,
+      "position": [
+        112,
+        1728
+      ],
+      "id": "2513aae5-0f1b-4b0d-8505-fefcbe5bb102",
+      "name": "Search in Tavily",
+      "credentials": {
+        "tavilyApi": {
+          "id": "3NZHoP7NmtAUUZ51",
+          "name": "Tavily - Cayman AA"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCode",
+      "typeVersion": 1.3,
+      "position": [
+        -288,
+        2608
+      ],
+      "id": "c9667bb8-ff9b-49d7-9624-66f1f3794334",
+      "name": "Code Tool"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 3,
+      "position": [
+        -112,
+        2608
+      ],
+      "id": "88062698-17ce-419c-9df6-da6a8d05da93",
+      "name": "AI Agent Tool"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatHitlTool",
       "typeVersion": 1.1,
       "position": [
-        540,
-        1640
+        -112,
+        2816
       ],
-      "id": "e6265ea0-4d43-4607-a79c-df5efc65ae49",
-      "name": "Tavily Search Tool1",
-      "credentials": {
-        "httpBearerAuth": {
-          "id": "FeDx4JX3eeKXVMM1",
-          "name": "Supabase Service Role Key - Caiyman.ai"
+      "id": "f93187db-ad56-4306-a09e-ac60e86559e0",
+      "name": "Chat",
+      "webhookId": "31f33fa2-2b7e-4400-bdc4-e51143820ad1"
+    },
+    {
+      "parameters": {
+        "operation": "scrape",
+        "url": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('URL', `URL to scrape`, 'string') }}",
+        "scrapeOptions": {
+          "options": {
+            "formats": {
+              "format": [
+                {}
+              ]
+            },
+            "headers": {}
+          }
         },
-        "httpHeaderAuth": {
-          "id": "IRV4S8FpLS3xIEpH",
-          "name": "Tavily"
+        "requestOptions": {}
+      },
+      "type": "@mendable/n8n-nodes-firecrawl.firecrawlTool",
+      "typeVersion": 1,
+      "position": [
+        288,
+        1728
+      ],
+      "id": "9ca287a5-e1a4-4e53-adb9-ba5e166c1d42",
+      "name": "Scrape a URL and get content as markdown or other formats in Firecrawl",
+      "credentials": {
+        "firecrawlApi": {
+          "id": "JcONokjvJ6SMx9vL",
+          "name": "Firecrawl - Caiyman"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "z-ai/glm-4.7",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -304,
+        352
+      ],
+      "id": "0a34028a-a0df-405d-bc74-17cd97d44270",
+      "name": "GLM-4.7.",
+      "credentials": {
+        "openRouterApi": {
+          "id": "PZZJ46UbdVb0XpMd",
+          "name": "OpenRouter-Agentic-Assets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "z-ai/glm-4.7",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -336,
+        1024
+      ],
+      "id": "47f4ba0d-9a4b-4231-b4b8-c2f10b709335",
+      "name": "GLM-4.7.1",
+      "credentials": {
+        "openRouterApi": {
+          "id": "PZZJ46UbdVb0XpMd",
+          "name": "OpenRouter-Agentic-Assets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "z-ai/glm-4.7",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -528,
+        1728
+      ],
+      "id": "60637e5d-2d68-40e6-9f79-722db648e9ca",
+      "name": "GLM-4.7.2",
+      "credentials": {
+        "openRouterApi": {
+          "id": "PZZJ46UbdVb0XpMd",
+          "name": "OpenRouter-Agentic-Assets"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1.1,
+      "position": [
+        -64,
+        1728
+      ],
+      "id": "27766335-f698-4823-ab92-c82823485c14",
+      "name": "Think1"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1.1,
+      "position": [
+        0,
+        1024
+      ],
+      "id": "e680f1d6-d0b2-40a7-8e25-710d72abcf1d",
+      "name": "Think2"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolThink",
+      "typeVersion": 1.1,
+      "position": [
+        96,
+        352
+      ],
+      "id": "c5235b11-b997-4f77-af36-0265619bd972",
+      "name": "Think"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -112,
+        352
+      ],
+      "id": "a75c00ee-657c-4d90-aab0-3ddb3f9186a0",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "model": "x-ai/grok-4.1-fast",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -368,
+        1728
+      ],
+      "id": "93fabc6d-b32a-40b3-8458-4f0e6d7fcf50",
+      "name": "Grok 4.1 Fast",
+      "credentials": {
+        "openRouterApi": {
+          "id": "PZZJ46UbdVb0XpMd",
+          "name": "OpenRouter-Agentic-Assets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=________________________\n# Input Query:\n{{ $json.chatInput }}",
+        "options": {
+          "systemMessage": "# System Prompt  >>>template - make sure to construct and write a robust system prompt here<<<\n\n## Role\nYou are a helpful assistant.\n\n\n## Tools:\n- **Think Tool**: Use this tool to think about something. It will not obtain new information or change the database, but just append the thought to the log. Use it when complex reasoning or some cache memory is needed.\n\n## Important:\nFirst step is to use the **think** tool to plan your steps. You should use your tools numerous times and iterate. \n\n\n## Final Reminders\nUse the **think** tool to think about something. Provide intelligent and coherent responses. They should be informative yet concise.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -192,
+        128
+      ],
+      "id": "2d2b41cf-33b3-44b2-a2af-e395c3c20511",
+      "name": "AI Agent 1"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=________________________\n# Input Query:\n{{ $json.chatInput }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "# System Prompt  \n\n\n## Role\nYou are a helpful assistant.\n\n\n## Tools:\n- **Think Tool**: Use this tool to think about something. It will not obtain new information or change the database, but just append the thought to the log. Use it when complex reasoning or some cache memory is needed.\n\n## Important:\nFirst step is to use the **think** tool to plan your steps. You should use your tools numerous times and iterate. \n\n\n\n\n## Structed Output\nAlso structure your output like this example with the main message and then three main points regarding the main message:\n{\n\t\"message\": \"message\",\n\t\"three main points\": [\"point one\", \"point two\", \"point three\"]\n}\n\n\n\n## Final Reminders\nUse the **think** tool to think about something. Provide intelligent and coherent responses. They should be informative yet concise.\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -192,
+        752
+      ],
+      "id": "e6b16612-2232-4146-a37f-1d71b223ce26",
+      "name": "AI Agent 2"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=________________________\n# Input Query:\n{{ $json.chatInput }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=# System Prompt \n\n## Role\nYou are a helpful assistant\n\n\n## Tools (4 max tool calls. Respond after 4):\n- **`Search in Tavily` Tool**: Use this tool to search for a url and analyze information about AI resources\n- `**Scrape a URL and get content as markdown or other formats in Firecrawl` Tool**: Extract the contents from a website URL using Firecrawl. Provide the URL to scrape and receive clean markdown content from the webpage.\n- **Think Tool**: Use this tool to think about something. It will not obtain new information or change the database, but just append the thought to the log. Use it when complex reasoning or some cache memory is needed.\n\n## Important:\nFirst step is to use the **think** tool to plan your steps. You should use your tools numerous times and iterate. \n\n\n\n## Structed Output\nAlso structure your output like this example with the main message and then the URLs of three most relavent sources your cited for the main message:\n{\n\t\"message\": \"message\",\n\t\"three citations\": [\"URL one\", \"URL two\", \"URL three\"]\n}\n\n\n## Final Reminders\nUse the **think** tool to think about something. Provide intelligent and coherent responses. They should be informative yet concise.\n",
+          "maxIterations": 10
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -160,
+        1440
+      ],
+      "id": "35de88e0-d6fb-4f43-af4b-b24aaa258c9a",
+      "name": "AI Agent 3",
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.dropboxTool",
+      "typeVersion": 1,
+      "position": [
+        224,
+        2816
+      ],
+      "id": "7d88eeee-29f4-489d-9f1b-0ab7a86d7864",
+      "name": "Upload a file in Dropbox"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "claude-haiku-4-5-20251001",
+          "mode": "list",
+          "cachedResultName": "claude-haiku-4-5-20251001"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('values0_Prompt', `The prompt to send the Anthropic subagent`, 'string') }}"
+            }
+          ]
+        },
+        "options": {
+          "codeExecution": false,
+          "webSearch": false,
+          "maxUses": 5,
+          "maxToolsIterations": 15
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.anthropicTool",
+      "typeVersion": 1,
+      "position": [
+        -288,
+        2800
+      ],
+      "id": "926811d3-406c-4ce6-9c21-0f06b4d150cf",
+      "name": "Message a model in Anthropic",
+      "credentials": {
+        "anthropicApi": {
+          "id": "5q8s0KWlt1wmXu5W",
+          "name": "Anthropic - Agentic Assets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "owner": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "repository": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "labels": [],
+        "assignees": []
+      },
+      "type": "n8n-nodes-base.githubTool",
+      "typeVersion": 1.1,
+      "position": [
+        384,
+        2816
+      ],
+      "id": "9c98422c-54e1-4053-b719-ae0d4ef76298",
+      "name": "Create an issue in GitHub",
+      "webhookId": "1a787702-bda7-47c5-adb5-9eea7fd3189a"
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "cayman@agenticassets.ai",
+          "mode": "list",
+          "cachedResultName": "cayman@agenticassets.ai"
+        },
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        560,
+        2816
+      ],
+      "id": "715cef5c-e0ea-4f59-889b-b46ef3001547",
+      "name": "Create an event in Google Calendar",
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "ZCiEfyiNy73Worwi",
+          "name": "Google Calendar - Cayman"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Calendar\n",
+        "height": 528,
+        "width": 445,
+        "color": 6
+      },
+      "name": "Basic Agent Template Info6",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        368,
+        3120
+      ],
+      "id": "ae5bf74f-e10f-4931-a237-4e86dff47974"
+    },
+    {
+      "parameters": {
+        "content": "## Email Nodes\n\nYour AI Agent will be able to search through your email inbox to find specific email content for you. Based on this records you can fetch information quickly and order to draft responses to review later.\n\n## Examples:\n\n- hey what were the last 5 emails sent to Jon from X corp? \n- Draft an email with these details to Jon sharing I can't make it today and propose a new time for 9AM tomorrow. ",
+        "height": 964,
+        "width": 860,
+        "color": 6
+      },
+      "id": "2dcaff1c-1d3a-4acd-8241-4fbc235db867",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        880,
+        2528
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "returnAll": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Return_All', `Place a number in this input. The number determines how many emails this tool will send back to you in one response. I higher number will provide more context and details about the email's in the user's inbox. **Important**: the maximum value is 15. Do not use a number greater than 15`, 'boolean') }}",
+        "filters": {
+          "q": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Search', `Your search query. Use the same format as in the Gmail search box.`, 'string') }}"
+        }
+      },
+      "id": "c73e87d6-56b4-438f-8e2e-f7117dc82ebb",
+      "name": "Find emails",
+      "type": "n8n-nodes-base.gmailTool",
+      "position": [
+        1472,
+        3152
+      ],
+      "webhookId": "0868165d-d04e-4217-adc5-87026a389862",
+      "typeVersion": 2.1,
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "XwUViorwOgC82hyD",
+          "name": "Gmail account - Cayman"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "draft",
+        "subject": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Subject', `The subject of the email. Make it relevant and concise.`, 'string') }}",
+        "message": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Message', `Sign off as \"\nBest,\nCayman\n\"`, 'string') }}",
+        "options": {
+          "sendTo": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('To_Email', `To email`, 'string') }}"
+        }
+      },
+      "id": "74e53667-901c-4854-9488-a6125a7d55e5",
+      "name": "Draft new email",
+      "type": "n8n-nodes-base.gmailTool",
+      "position": [
+        1616,
+        3152
+      ],
+      "webhookId": "79c91d71-ba58-4445-ac14-c21e6d75164c",
+      "typeVersion": 2.1,
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "XwUViorwOgC82hyD",
+          "name": "Gmail account - Cayman"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "messageId": "={{ $fromAI('email_id', 'The Gmail message ID to retrieve. Get this from Find_emails results.', 'string') }}",
+        "simple": false,
+        "options": {}
+      },
+      "id": "539eeb5a-8895-4d67-b6b8-748cfddd2b04",
+      "name": "Get_email_details",
+      "type": "n8n-nodes-base.gmailTool",
+      "position": [
+        1392,
+        3328
+      ],
+      "typeVersion": 2.1,
+      "webhookId": "c1eb7f00-b496-4065-ae6d-1e21b14da5dd",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "XwUViorwOgC82hyD",
+          "name": "Gmail account - Cayman"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $fromAI('email_id', 'The Gmail message ID to label. Get this from Find_emails results.', 'string') }}",
+        "labelIds": "={{ $fromAI('label_ids', 'The Gmail label IDs to apply. Common labels: STARRED, IMPORTANT, TRASH, SPAM. For custom labels, use the label ID string.', 'json') }}"
+      },
+      "id": "dc116484-415b-4891-bbef-d6f6016857b2",
+      "name": "Label_email",
+      "type": "n8n-nodes-base.gmailTool",
+      "position": [
+        1232,
+        3328
+      ],
+      "typeVersion": 2.1,
+      "webhookId": "6826ee3f-2c0f-4b62-9257-5ca10b3c37b9",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "XwUViorwOgC82hyD",
+          "name": "Gmail account - Cayman"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "messageId": "={{ $fromAI('email_id', 'The Gmail message ID to move to trash. Get this from Find_emails results. Always confirm with the user before trashing.', 'string') }}"
+      },
+      "id": "75f8009b-1826-4865-8465-cf94b573696b",
+      "name": "Trash_email",
+      "type": "n8n-nodes-base.gmailTool",
+      "position": [
+        992,
+        3296
+      ],
+      "typeVersion": 2.1,
+      "webhookId": "dcc7d9b2-fbf5-45e4-a2b7-6abf3e317363",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "XwUViorwOgC82hyD",
+          "name": "Gmail account - Cayman"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "returnAll": "={{ $fromAI('Return_All', 'Number of unread emails to return. Use a number between 1-15. Higher numbers give more context. Default to 10 for a good overview.', 'boolean') }}",
+        "filters": {
+          "labelIds": [
+            "INBOX"
+          ],
+          "q": "=is:unread {{ $fromAI('additional_filter', 'Optional additional Gmail search filter to narrow unread results. Examples: from:person@email.com, subject:meeting, after:2025/01/01, has:attachment. Leave empty for all unread.', 'string') }}"
+        }
+      },
+      "id": "a2cdeab0-a9c0-44bd-a436-ef5befbae82d",
+      "name": "Find_unread_emails",
+      "type": "n8n-nodes-base.gmailTool",
+      "position": [
+        1136,
+        3168
+      ],
+      "typeVersion": 2.1,
+      "webhookId": "f0e3f15f-5bd2-444b-bb64-dff79723299a",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "XwUViorwOgC82hyD",
+          "name": "Gmail account - Cayman"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "toolDescription": "The Gmail expert subagent. Use this subagent for any tasks related to Gmail/email",
+        "text": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Prompt__User_Message_', `Prompt`, 'string') }}",
+        "options": {
+          "systemMessage": "You're my Gmail expert. Help complete the task using the Gmail tools. Think carefully and intelligently choose the correct tools to use."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agentTool",
+      "typeVersion": 3,
+      "position": [
+        1056,
+        2880
+      ],
+      "id": "de72772f-4637-4f4d-8fb3-08fac5b3e05f",
+      "name": "AI Agent - Gmail"
+    },
+    {
+      "parameters": {
+        "model": "z-ai/glm-4.7",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        928,
+        3136
+      ],
+      "id": "6a7020e4-46a9-41c9-ba53-1a1c4a84884d",
+      "name": "GLM-4.7.3",
+      "credentials": {
+        "openRouterApi": {
+          "id": "PZZJ46UbdVb0XpMd",
+          "name": "OpenRouter-Agentic-Assets"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "value": "cayman@caiyman.ai",
+          "mode": "list",
+          "cachedResultName": "cayman@caiyman.ai"
+        },
+        "additionalFields": {}
+      },
+      "id": "d2132af2-9849-4943-b0e6-c22d8d3a4705",
+      "name": "Create event",
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "position": [
+        624,
+        3232
+      ],
+      "typeVersion": 1.3,
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "ZCiEfyiNy73Worwi",
+          "name": "Google Calendar - Cayman"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "calendar": {
+          "__rl": true,
+          "value": "cayman@caiyman.ai",
+          "mode": "list",
+          "cachedResultName": "cayman@caiyman.ai"
+        },
+        "eventId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Event_ID', ``, 'string') }}",
+        "updateFields": {}
+      },
+      "id": "8d164559-94bc-46fb-a632-85da477bf5ae",
+      "name": "Update event",
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "position": [
+        432,
+        3232
+      ],
+      "typeVersion": 1.3,
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "ZCiEfyiNy73Worwi",
+          "name": "Google Calendar - Cayman"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "calendar": {
+          "__rl": true,
+          "value": "cayman@caiyman.ai",
+          "mode": "list",
+          "cachedResultName": "cayman@caiyman.ai"
+        },
+        "eventId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Event_ID', ``, 'string') }}",
+        "options": {}
+      },
+      "id": "a686e4af-f781-4c7e-b24b-31252c875fba",
+      "name": "Find single event",
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "position": [
+        624,
+        3424
+      ],
+      "typeVersion": 1.3,
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "ZCiEfyiNy73Worwi",
+          "name": "Google Calendar - Cayman"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "calendar": {
+          "__rl": true,
+          "value": "cayman@caiyman.ai",
+          "mode": "list",
+          "cachedResultName": "cayman@caiyman.ai"
+        },
+        "returnAll": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Return_All', `Place a number in this input. The number determines how many events this tool will send back to you in one response. I higher number will provide more context and details about the user's calendar.`, 'boolean') }}",
+        "options": {}
+      },
+      "id": "32e78d41-0f51-4e2e-86ac-b542ab5d048f",
+      "name": "Find multiple events",
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "position": [
+        432,
+        3424
+      ],
+      "typeVersion": 1.3,
+      "credentials": {
+        "googleCalendarOAuth2Api": {
+          "id": "ZCiEfyiNy73Worwi",
+          "name": "Google Calendar - Cayman"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.googleSlidesTool",
+      "typeVersion": 2,
+      "position": [
+        208,
+        2656
+      ],
+      "id": "7b40cc87-b64c-418a-820f-c5669cf55d77",
+      "name": "Create a presentation in Google Slides"
+    },
+    {
+      "parameters": {
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.twitterTool",
+      "typeVersion": 2,
+      "position": [
+        368,
+        2672
+      ],
+      "id": "4c86c0ff-50cb-446f-b44a-74fc23ae65ee",
+      "name": "Create Tweet in X"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolWorkflow",
+      "typeVersion": 2.2,
+      "position": [
+        576,
+        2656
+      ],
+      "id": "74063214-22c1-4f0d-9c47-5a6b8c4c94b2",
+      "name": "Call n8n Workflow Tool"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1_LKQwBSTsp7Rx4D3J7N2znWnqAnu0aA6ESY4fhfqYxM",
+          "mode": "list",
+          "cachedResultName": "AI Agent Examples - Output",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_LKQwBSTsp7Rx4D3J7N2znWnqAnu0aA6ESY4fhfqYxM/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1_LKQwBSTsp7Rx4D3J7N2znWnqAnu0aA6ESY4fhfqYxM/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Response": "={{ $json.output.message }}",
+            "Citations": "={{ $json.output[\"three citations\"] }}",
+            "Query": "={{ $('Edit Fields 3').item.json.chatInput }}",
+            "SessionID": "={{ $('Edit Fields 3').item.json.sessionId }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "SessionID",
+              "displayName": "SessionID",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Query",
+              "displayName": "Query",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Response",
+              "displayName": "Response",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Citations",
+              "displayName": "Citations",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        224,
+        1408
+      ],
+      "id": "605f081d-f4b6-4f75-9e74-f96cb2dd57c5",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "ByIqU6NCiCgk7P0M",
+          "name": "Google Sheets - Cayman"
         }
       }
     }
   ],
   "connections": {
-    "Window Buffer Memory": {
-      "ai_memory": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_memory",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "When Executed by Another Workflow": {
-      "main": [
-        []
-      ]
-    },
-    "Think": {
-      "ai_tool": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Edit Fields": {
-      "main": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "gpt-4.1-mini": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "AI Agent",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "AI Agent": {
       "main": [
         []
       ]
@@ -674,17 +1245,6 @@
           {
             "node": "AI Agent 2",
             "type": "ai_memory",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Think 2": {
-      "ai_tool": [
-        [
-          {
-            "node": "AI Agent 2",
-            "type": "ai_tool",
             "index": 0
           }
         ]
@@ -701,17 +1261,6 @@
         ]
       ]
     },
-    "gpt-4.1-mini 2": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "AI Agent 2",
-            "type": "ai_languageModel",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Window Buffer Memory 3": {
       "ai_memory": [
         [
@@ -723,45 +1272,12 @@
         ]
       ]
     },
-    "Think 3": {
-      "ai_tool": [
-        [
-          {
-            "node": "AI Agent 3",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
     "Edit Fields 3": {
       "main": [
         [
           {
             "node": "AI Agent 3",
             "type": "main",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "Extract with Firecrawl": {
-      "ai_tool": [
-        [
-          {
-            "node": "AI Agent 3",
-            "type": "ai_tool",
-            "index": 0
-          }
-        ]
-      ]
-    },
-    "gpt-4.1-mini 3": {
-      "ai_languageModel": [
-        [
-          {
-            "node": "AI Agent 3",
-            "type": "ai_languageModel",
             "index": 0
           }
         ]
@@ -780,12 +1296,13 @@
     },
     "When chat message received": {
       "main": [
-        []
-      ]
-    },
-    "Edit Fields1": {
-      "main": [
-        []
+        [
+          {
+            "node": "Edit Fields 3",
+            "type": "main",
+            "index": 0
+          }
+        ]
       ]
     },
     "Telegram n8n-Agent-Training-Course-bot": {
@@ -799,34 +1316,70 @@
         ]
       ]
     },
-    "Edit Fields2": {
-      "main": [
-        []
-      ]
-    },
     "Structured Output Parser": {
       "ai_outputParser": [
-        [
-          {
-            "node": "AI Agent 2",
-            "type": "ai_outputParser",
-            "index": 0
-          }
-        ]
+        []
       ]
     },
     "Structured Output Parser1": {
       "ai_outputParser": [
+        []
+      ]
+    },
+    "Search in Tavily": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Code Tool": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Chat": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Scrape a URL and get content as markdown or other formats in Firecrawl": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "GLM-4.7.": {
+      "ai_languageModel": [
         [
           {
-            "node": "AI Agent 3",
-            "type": "ai_outputParser",
+            "node": "AI Agent 1",
+            "type": "ai_languageModel",
             "index": 0
           }
         ]
       ]
     },
-    "Tavily Search Tool1": {
+    "GLM-4.7.1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent 2",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GLM-4.7.2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent 3",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think1": {
       "ai_tool": [
         [
           {
@@ -836,11 +1389,149 @@
           }
         ]
       ]
+    },
+    "Think2": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent 2",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Think": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        []
+      ]
+    },
+    "AI Agent 3": {
+      "main": [
+        []
+      ]
+    },
+    "Upload a file in Dropbox": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Message a model in Anthropic": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Create an issue in GitHub": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Create an event in Google Calendar": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Find emails": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent - Gmail",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Draft new email": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent - Gmail",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get_email_details": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent - Gmail",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Label_email": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent - Gmail",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Trash_email": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent - Gmail",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find_unread_emails": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent - Gmail",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "GLM-4.7.3": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent - Gmail",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a presentation in Google Slides": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Create Tweet in X": {
+      "ai_tool": [
+        []
+      ]
+    },
+    "Call n8n Workflow Tool": {
+      "ai_tool": [
+        []
+      ]
     }
   },
   "pinData": {},
   "meta": {
     "templateCredsSetupCompleted": true,
-    "instanceId": "417b0a8b2a10d0a50938a93dd6b8dd01385b21d758ab43693102c5df3493c401"
+    "instanceId": "2bd918b407c290e8bb139d969f24518c6daf0a6ae9a8f56196275ae39545b380"
   }
 }
